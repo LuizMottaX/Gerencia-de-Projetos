@@ -1,0 +1,257 @@
+/* ═══════════════════════════════════════════════════════════════
+   Chiquinho Motors® — Estilos Globais
+   Responsivo para mobile, tablet e desktop.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Base */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-image: linear-gradient(rgb(255, 255, 255), rgb(195, 195, 195));
+  min-height: 100vh;
+  color: #333;
+}
+
+/* Tipografia */
+h1 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.5em;
+  color: #000;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+h2 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.2em;
+  color: #222;
+  text-align: center;
+  margin: 1rem 0 0.5rem;
+}
+
+h3 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1em;
+  color: #333;
+  text-align: center;
+}
+
+p {
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  font-family: 'Roboto', sans-serif;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #333;
+  margin: 0.75em 0;
+}
+
+/* ── Container principal ── */
+#container {
+  text-align: center;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ── Header / Navbar ── */
+header {
+  background-color: #f1f1f1;
+  padding: 10px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* ── Botão padrão (pill) ── */
+.btn {
+  display: inline-block;
+  padding: 0.7em 1.3em;
+  cursor: pointer;
+  background: linear-gradient(90deg, #5a5a5a 0%, #b4b4b4 100%);
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.1em;
+  color: #fff;
+  border-radius: 50px;
+  border: none;
+  font-family: 'Roboto', sans-serif;
+  vertical-align: middle;
+}
+
+/* ── Efeito zoom-shadow ── */
+.zoom-shadow {
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  transition-duration: 0.3s;
+  transition-property: box-shadow, transform;
+}
+
+.zoom-shadow:hover,
+.zoom-shadow:focus,
+.zoom-shadow:active {
+  box-shadow: 0 13px 8px -8px rgba(0, 0, 0, 0.5);
+  transform: scale(1.1);
+}
+
+/* ── Grid de cards (carros / notícias) ── */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (max-width: 900px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+    padding: 12px;
+    gap: 14px;
+  }
+}
+
+/* ── Card (item do grid) ── */
+.grid-item {
+  background-color: #f1f1f1;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+/* ── Zoom em imagens ── */
+.zoom {
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+
+.zoom img {
+  max-width: 100%;
+  transition: all 0.3s;
+}
+
+.zoom:hover {
+  transform: scale(1.05);
+}
+
+.zoom:hover img {
+  transform: scale(1.1);
+}
+
+/* ── Texto sob card ── */
+.text-item {
+  background-color: #f1f1f1;
+  padding: 10px;
+}
+
+/* ── Formulário de contato ── */
+form {
+  width: 100%;
+  max-width: 380px;
+  margin: 0 auto;
+  text-align: left;
+  padding: 0 1rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input[type='text'],
+input[type='email'],
+input[type='tel'],
+textarea {
+  width: 100%;
+  padding: 10px 8px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1em;
+}
+
+/* ── Footer ── */
+footer {
+  padding: 1.5rem;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+footer p {
+  font-size: 0.85em;
+  color: #555;
+  margin-top: 0.5rem;
+}
+
+/* ── Utilitários ── */
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 1.5rem; }
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.text-center { text-align: center; }
+
+/* ── Estado de carregamento / erro ── */
+.loading,
+.error-msg {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.1em;
+  color: #555;
+}
+.error-msg { color: #c0392b; }
+
+/* ══════════════════════════════════════
+   RESPONSIVIDADE GLOBAL — Mobile
+   ══════════════════════════════════════ */
+
+@media (max-width: 640px) {
+  h1 {
+    font-size: 1.2em;
+  }
+
+  h2 {
+    font-size: 1.05em;
+  }
+
+  .btn {
+    font-size: 0.95em;
+    padding: 0.6em 1em;
+  }
+
+  footer {
+    padding: 1rem;
+  }
+
+  footer .btn {
+    font-size: 0.8em;
+    padding: 0.5em 0.8em;
+    word-break: break-word;
+    white-space: normal;
+    text-align: center;
+  }
+}
