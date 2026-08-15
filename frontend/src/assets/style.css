@@ -1,184 +1,310 @@
 /* ═══════════════════════════════════════════════════════════════
-   Chiquinho Motors® — Estilos Globais
-   Responsivo para mobile, tablet e desktop.
+   Chiquinho Motors® — Design System Automotivo
+   Tema: Carbon & Racing Red
    ═══════════════════════════════════════════════════════════════ */
 
-/* Reset */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+
+/* ── Variáveis (tokens) ── */
+:root {
+  --color-carbon:    #111214;
+  --color-dark:      #1c1e22;
+  --color-surface:   #25282d;
+  --color-mid:       #3a3d44;
+  --color-silver:    #b0b4bc;
+  --color-light:     #e8eaed;
+  --color-white:     #ffffff;
+
+  --color-red:       #c0392b;
+  --color-red-light: #e74c3c;
+  --color-red-dim:   rgba(192, 57, 43, 0.15);
+
+  --color-bg-start:  #f5f5f5;
+  --color-bg-end:    #dcdcdc;
+
+  --radius-sm:  6px;
+  --radius-md:  12px;
+  --radius-lg:  20px;
+  --radius-pill: 50px;
+
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.12);
+  --shadow-hover: 0 10px 32px rgba(0, 0, 0, 0.2);
+  --shadow-red:  0 8px 24px rgba(192, 57, 43, 0.35);
+
+  --transition: 0.28s ease;
+}
+
+/* ── Reset ── */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-/* Base */
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
   font-family: 'Roboto', sans-serif;
-  background-image: linear-gradient(rgb(255, 255, 255), rgb(195, 195, 195));
+  background: linear-gradient(160deg, var(--color-bg-start) 0%, var(--color-bg-end) 100%);
   min-height: 100vh;
-  color: #333;
+  color: var(--color-dark);
 }
 
-/* Tipografia */
+/* ── Tipografia ── */
 h1 {
   font-family: 'Roboto', sans-serif;
-  font-size: 1.5em;
-  color: #000;
+  font-size: 1.7em;
+  font-weight: 700;
+  color: var(--color-carbon);
   text-align: center;
-  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.4rem;
 }
 
 h2 {
   font-family: 'Roboto', sans-serif;
-  font-size: 1.2em;
-  color: #222;
+  font-size: 1.15em;
+  font-weight: 700;
+  color: var(--color-carbon);
   text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
   margin: 1rem 0 0.5rem;
 }
 
 h3 {
   font-family: 'Roboto', sans-serif;
   font-size: 1em;
-  color: #333;
+  font-weight: 500;
+  color: var(--color-surface);
   text-align: center;
 }
 
 p {
   font-family: 'Roboto', sans-serif;
-  line-height: 1.6;
+  line-height: 1.7;
+  color: #444;
 }
 
 a {
   text-decoration: none;
-  color: #333;
-  font-weight: bold;
+  color: var(--color-dark);
+  font-weight: 500;
   font-family: 'Roboto', sans-serif;
 }
 
 hr {
   border: none;
-  border-top: 1px solid #333;
-  margin: 0.75em 0;
+  border-top: 2px solid var(--color-red);
+  margin: 0.5rem 0;
+  opacity: 0.8;
 }
 
-/* ── Container principal ── */
+/* ── Container ── */
 #container {
   text-align: center;
   margin: 0 auto;
   width: 100%;
 }
 
-/* ── Header / Navbar ── */
+/* ══════════════════════════════════════
+   HEADER
+   ══════════════════════════════════════ */
 header {
-  background-color: #f1f1f1;
-  padding: 10px;
+  background: var(--color-carbon);
+  padding: 12px 16px;
   position: sticky;
   top: 0;
   z-index: 100;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
+  border-bottom: 2px solid var(--color-red);
 }
 
-/* ── Botão padrão (pill) ── */
+header h1 {
+  color: var(--color-white);
+  font-size: 1.3em;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 0;
+}
+
+header h1 a {
+  color: var(--color-white);
+  font-weight: 900;
+}
+
+header h1 a:hover {
+  color: var(--color-red-light);
+  transition: color var(--transition);
+}
+
+/* ══════════════════════════════════════
+   BOTÕES
+   ══════════════════════════════════════ */
 .btn {
   display: inline-block;
-  padding: 0.7em 1.3em;
+  padding: 0.65em 1.4em;
   cursor: pointer;
-  background: linear-gradient(90deg, #5a5a5a 0%, #b4b4b4 100%);
+  background: linear-gradient(135deg, var(--color-carbon) 0%, var(--color-surface) 100%);
   text-decoration: none;
-  font-weight: bold;
-  font-size: 1.1em;
-  color: #fff;
-  border-radius: 50px;
+  font-weight: 700;
+  font-size: 0.95em;
+  color: var(--color-white);
+  border-radius: var(--radius-pill);
   border: none;
   font-family: 'Roboto', sans-serif;
   vertical-align: middle;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+
+.btn:hover {
+  background: linear-gradient(135deg, var(--color-red) 0%, var(--color-red-light) 100%);
+  color: var(--color-white);
+}
+
+/* Botão de destaque (vermelho) */
+.btn-red {
+  background: linear-gradient(135deg, var(--color-red) 0%, var(--color-red-light) 100%);
+  color: var(--color-white);
+}
+
+.btn-red:hover {
+  background: linear-gradient(135deg, #96281b 0%, var(--color-red) 100%);
+  box-shadow: var(--shadow-red);
 }
 
 /* ── Efeito zoom-shadow ── */
 .zoom-shadow {
   box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-  transition-duration: 0.3s;
-  transition-property: box-shadow, transform;
+  transition: box-shadow var(--transition), transform var(--transition);
 }
 
 .zoom-shadow:hover,
 .zoom-shadow:focus,
 .zoom-shadow:active {
-  box-shadow: 0 13px 8px -8px rgba(0, 0, 0, 0.5);
-  transform: scale(1.1);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.3);
+  transform: scale(1.06);
 }
 
-/* ── Grid de cards (carros / notícias) ── */
+/* ══════════════════════════════════════
+   SECTION TITLE BANNER
+   ══════════════════════════════════════ */
+.section-banner {
+  background: var(--color-carbon);
+  color: var(--color-white);
+  padding: 2rem 1rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.section-banner::before {
+  content: '';
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 100%; height: 3px;
+  background: linear-gradient(90deg, transparent, var(--color-red), transparent);
+}
+
+.section-banner h1 {
+  color: var(--color-white);
+  font-size: 2em;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0;
+}
+
+/* ══════════════════════════════════════
+   GRID DE CARDS
+   ══════════════════════════════════════ */
 .grid-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  padding: 20px;
+  gap: 24px;
+  padding: 24px;
   max-width: 1200px;
   margin: 0 auto;
 }
 
 @media (max-width: 900px) {
-  .grid-container {
-    grid-template-columns: repeat(2, 1fr);
-  }
+  .grid-container { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 600px) {
-  .grid-container {
-    grid-template-columns: 1fr;
-    padding: 12px;
-    gap: 14px;
-  }
+  .grid-container { grid-template-columns: 1fr; padding: 14px; gap: 16px; }
 }
 
-/* ── Card (item do grid) ── */
-.grid-item {
-  background-color: #f1f1f1;
-  padding: 20px;
-  border-radius: 8px;
+/* ── Card automotivo ── */
+.card {
+  background: var(--color-white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+  border: 2px solid transparent;
+  cursor: pointer;
 }
 
-/* ── Zoom em imagens ── */
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--color-red);
+}
+
+.card img {
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.card:hover img {
+  transform: scale(1.05);
+}
+
+.text-item {
+  padding: 14px 16px;
+  background: var(--color-white);
+}
+
+/* ── Efeito zoom genérico ── */
 .zoom {
   overflow: hidden;
-  transition: transform 0.2s;
+  border-radius: var(--radius-md);
 }
 
 .zoom img {
   max-width: 100%;
-  transition: all 0.3s;
-}
-
-.zoom:hover {
-  transform: scale(1.05);
+  transition: transform 0.35s ease;
 }
 
 .zoom:hover img {
-  transform: scale(1.1);
+  transform: scale(1.07);
 }
 
-/* ── Texto sob card ── */
-.text-item {
-  background-color: #f1f1f1;
-  padding: 10px;
-}
-
-/* ── Formulário de contato ── */
+/* ══════════════════════════════════════
+   FORMULÁRIO
+   ══════════════════════════════════════ */
 form {
   width: 100%;
-  max-width: 380px;
+  max-width: 420px;
   margin: 0 auto;
   text-align: left;
-  padding: 0 1rem;
 }
 
 label {
   display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
+  margin-bottom: 4px;
+  font-weight: 600;
+  font-size: 0.9em;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-carbon);
 }
 
 input[type='text'],
@@ -186,28 +312,71 @@ input[type='email'],
 input[type='tel'],
 textarea {
   width: 100%;
-  padding: 10px 8px;
-  margin-bottom: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  padding: 12px 14px;
+  margin-bottom: 14px;
+  border: 2px solid #ddd;
+  border-radius: var(--radius-sm);
   font-family: 'Roboto', sans-serif;
   font-size: 1em;
+  background: var(--color-white);
+  color: var(--color-carbon);
+  transition: border-color var(--transition), box-shadow var(--transition);
+  outline: none;
 }
 
-/* ── Footer ── */
+input[type='text']:focus,
+input[type='email']:focus,
+input[type='tel']:focus,
+textarea:focus {
+  border-color: var(--color-red);
+  box-shadow: 0 0 0 3px var(--color-red-dim);
+}
+
+/* ══════════════════════════════════════
+   FOOTER
+   ══════════════════════════════════════ */
 footer {
-  padding: 1.5rem;
+  background: var(--color-carbon);
+  padding: 2rem 1rem;
   text-align: center;
-  margin-top: 2rem;
+  margin-top: 3rem;
+  border-top: 3px solid var(--color-red);
+}
+
+footer .btn {
+  font-size: 0.85em;
+  background: transparent;
+  border: 1px solid var(--color-silver);
+  color: var(--color-silver);
+}
+
+footer .btn:hover {
+  border-color: var(--color-red);
+  color: var(--color-white);
+  background: var(--color-red);
 }
 
 footer p {
-  font-size: 0.85em;
-  color: #555;
-  margin-top: 0.5rem;
+  font-size: 0.82em;
+  color: var(--color-silver);
+  margin-top: 0.75rem;
 }
 
-/* ── Utilitários ── */
+/* ══════════════════════════════════════
+   ESTADOS
+   ══════════════════════════════════════ */
+.loading,
+.error-msg {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.1em;
+  color: #666;
+}
+.error-msg { color: var(--color-red); }
+
+/* ══════════════════════════════════════
+   UTILITÁRIOS
+   ══════════════════════════════════════ */
 .mt-1 { margin-top: 0.5rem; }
 .mt-2 { margin-top: 1rem; }
 .mt-3 { margin-top: 1.5rem; }
@@ -215,43 +384,28 @@ footer p {
 .mb-2 { margin-bottom: 1rem; }
 .text-center { text-align: center; }
 
-/* ── Estado de carregamento / erro ── */
-.loading,
-.error-msg {
-  text-align: center;
-  padding: 2rem;
-  font-size: 1.1em;
-  color: #555;
-}
-.error-msg { color: #c0392b; }
-
 /* ══════════════════════════════════════
-   RESPONSIVIDADE GLOBAL — Mobile
+   RESPONSIVIDADE GLOBAL — MOBILE
    ══════════════════════════════════════ */
-
 @media (max-width: 640px) {
-  h1 {
-    font-size: 1.2em;
-  }
-
-  h2 {
-    font-size: 1.05em;
-  }
+  h1 { font-size: 1.3em; }
+  h2 { font-size: 1em; }
 
   .btn {
-    font-size: 0.95em;
+    font-size: 0.85em;
     padding: 0.6em 1em;
   }
 
+  .section-banner h1 {
+    font-size: 1.4em;
+  }
+
   footer {
-    padding: 1rem;
+    padding: 1.5rem 1rem;
   }
 
   footer .btn {
-    font-size: 0.8em;
-    padding: 0.5em 0.8em;
-    word-break: break-word;
+    font-size: 0.75em;
     white-space: normal;
-    text-align: center;
   }
 }

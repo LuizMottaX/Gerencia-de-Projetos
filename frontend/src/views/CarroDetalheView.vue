@@ -4,58 +4,73 @@
     <p v-else-if="erro" class="error-msg">{{ erro }}</p>
 
     <template v-else-if="carro">
-      <h1>{{ carro.nome }}</h1>
+      <!-- Banner do veículo -->
+      <div class="veiculo-banner">
+        <RouterLink to="/carros" class="voltar-link">← Voltar</RouterLink>
+        <h1>{{ carro.nome }}</h1>
+        <p class="veiculo-preco">{{ carro.precoFormatado }}</p>
+      </div>
 
-      <!-- Galeria de imagens -->
-      <div class="galeria">
-        <div v-for="(img, i) in carro.imagens" :key="i" class="zoom">
-          <img :src="img" :alt="`${carro.nome} — foto ${i + 1}`" />
+      <div class="detalhe-inner">
+        <!-- Galeria -->
+        <div class="galeria">
+          <img
+            v-for="(img, i) in carro.imagens"
+            :key="i"
+            :src="img"
+            :alt="`${carro.nome} — foto ${i + 1}`"
+            :class="{ 'img-principal': i === 0 }"
+          />
         </div>
-      </div>
 
-      <!-- Informações -->
-      <div class="info-bloco">
-        <h2>Informações do veículo</h2>
-        <ul class="info-lista">
-          <li><strong>Modelo:</strong> {{ carro.modelo }}</li>
-          <li><strong>Tipo de carroceria:</strong> {{ carro.carroceria }}</li>
-          <li><strong>Ano:</strong> {{ carro.ano }}</li>
-          <li><strong>Quilometragem:</strong> {{ carro.quilometragem }}</li>
-          <li><strong>Cor:</strong> {{ carro.cor }}</li>
-          <li><strong>Combustível:</strong> {{ carro.combustivel }}</li>
-          <li><strong>Câmbio:</strong> {{ carro.cambio }}</li>
-          <li><strong>Portas:</strong> {{ carro.portas }}</li>
-          <li><strong>Final da placa:</strong> {{ carro.finalPlaca }}</li>
-          <li><strong>Localização:</strong> {{ carro.localizacao }}</li>
-        </ul>
-      </div>
+        <!-- Painel de informações -->
+        <aside class="painel">
 
-      <!-- Formas de pagamento -->
-      <div class="info-bloco">
-        <h2>Formas de pagamento</h2>
-        <ul class="info-lista">
-          <li v-for="forma in carro.formasPagamento" :key="forma">{{ forma }}</li>
-        </ul>
-      </div>
+          <!-- Ficha técnica -->
+          <div class="ficha">
+            <h2>Ficha Técnica</h2>
+            <ul class="ficha-lista">
+              <li><span class="ficha-label">Modelo</span><span>{{ carro.modelo }}</span></li>
+              <li><span class="ficha-label">Carroceria</span><span>{{ carro.carroceria }}</span></li>
+              <li><span class="ficha-label">Ano</span><span>{{ carro.ano }}</span></li>
+              <li><span class="ficha-label">Km</span><span>{{ carro.quilometragem }}</span></li>
+              <li><span class="ficha-label">Cor</span><span>{{ carro.cor }}</span></li>
+              <li><span class="ficha-label">Combustível</span><span>{{ carro.combustivel }}</span></li>
+              <li><span class="ficha-label">Câmbio</span><span>{{ carro.cambio }}</span></li>
+              <li><span class="ficha-label">Portas</span><span>{{ carro.portas }}</span></li>
+              <li><span class="ficha-label">Final placa</span><span>{{ carro.finalPlaca }}</span></li>
+              <li><span class="ficha-label">Localização</span><span>{{ carro.localizacao }}</span></li>
+            </ul>
+          </div>
 
-      <!-- CTA -->
-      <div class="cta-bloco">
-        <h2>Ficou interessado?</h2>
-        <h3>Entre em contato com a nossa equipe!</h3>
-        <a
-          href="https://wa.me/5566999896813?text=Chiquinho%20Motors/"
-          class="btn zoom-shadow"
-          title="WhatsApp"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          WhatsApp
-        </a>
-      </div>
+          <!-- Pagamento -->
+          <div class="ficha">
+            <h2>Formas de Pagamento</h2>
+            <ul class="pagamento-lista">
+              <li v-for="forma in carro.formasPagamento" :key="forma">
+                <span class="check">✓</span> {{ forma }}
+              </li>
+            </ul>
+          </div>
 
-      <RouterLink to="/carros" class="btn zoom-shadow voltar-btn">
-        ← Voltar aos Carros
-      </RouterLink>
+          <!-- CTA -->
+          <div class="cta-box">
+            <p class="cta-titulo">Ficou interessado?</p>
+            <a
+              href="https://wa.me/5566999896813?text=Chiquinho%20Motors/"
+              class="btn btn-red zoom-shadow cta-wa"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              💬 Falar no WhatsApp
+            </a>
+            <RouterLink to="/contato" class="btn zoom-shadow cta-email">
+              Formulário de Contato
+            </RouterLink>
+          </div>
+
+        </aside>
+      </div>
     </template>
   </section>
 </template>
@@ -89,70 +104,183 @@ watch(() => route.params.id, (novoId) => buscarCarro(novoId));
 
 <style scoped>
 .detalhe-page {
-  padding: 1.5rem 1rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
 }
 
+/* ── Banner do veículo ── */
+.veiculo-banner {
+  background: #1c1e22;
+  padding: 1.5rem 2rem;
+  text-align: center;
+  position: relative;
+  border-bottom: 3px solid #c0392b;
+}
+
+.voltar-link {
+  display: inline-block;
+  color: #c0392b;
+  font-size: 0.85em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+  transition: color 0.2s;
+}
+
+.voltar-link:hover { color: #e74c3c; }
+
+.veiculo-banner h1 {
+  color: #fff;
+  font-size: 1.6em;
+  margin-bottom: 0.3rem;
+}
+
+.veiculo-preco {
+  color: #c0392b;
+  font-size: 1.5em;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+}
+
+/* ── Layout de 2 colunas ── */
+.detalhe-inner {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 2rem;
+  padding: 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+  align-items: start;
+}
+
+/* ── Galeria ── */
 .galeria {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  width: 100%;
-  max-width: 700px;
+  gap: 12px;
 }
 
 .galeria img {
   width: 100%;
-  border-radius: 6px;
+  border-radius: 10px;
+  display: block;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
 }
 
-.info-bloco {
-  width: 100%;
-  max-width: 600px;
+.galeria img:hover { transform: scale(1.015); }
+
+/* ── Painel lateral ── */
+.painel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  position: sticky;
+  top: 90px;
 }
 
-.info-lista {
+.ficha {
+  background: #fff;
+  border-radius: 10px;
+  padding: 1.2rem 1.4rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  border-top: 3px solid #c0392b;
+}
+
+.ficha h2 {
+  font-size: 0.8em;
+  text-align: left;
+  margin-bottom: 0.75rem;
+  color: #888;
+  margin-top: 0;
+}
+
+.ficha-lista {
   list-style: none;
   padding: 0;
-  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
 
-.info-lista li {
-  padding: 0.35rem 0;
-  border-bottom: 1px solid #ddd;
+.ficha-lista li {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.45rem 0;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 0.92em;
+  color: #333;
+}
+
+.ficha-lista li:last-child { border-bottom: none; }
+
+.ficha-label {
+  color: #888;
+  font-weight: 500;
+}
+
+.pagamento-lista {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.pagamento-lista li {
+  font-size: 0.92em;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.check {
+  color: #27ae60;
+  font-weight: 900;
   font-size: 1em;
 }
 
-.cta-bloco {
+/* ── CTA Box ── */
+.cta-box {
+  background: #1c1e22;
+  border-radius: 10px;
+  padding: 1.4rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 0.75rem;
+  align-items: stretch;
+  text-align: center;
+  border-top: 3px solid #c0392b;
 }
 
-.voltar-btn {
-  margin-top: 0.5rem;
+.cta-titulo {
+  color: #fff;
+  font-weight: 700;
+  font-size: 1em;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
-@media (max-width: 640px) {
-  .detalhe-page {
-    padding: 1rem 0.75rem;
-    gap: 1rem;
+.cta-wa, .cta-email {
+  text-align: center;
+  font-size: 0.92em;
+}
+
+/* ── Responsivo ── */
+@media (max-width: 800px) {
+  .detalhe-inner {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+    gap: 1.2rem;
   }
 
-  .info-lista li {
-    font-size: 0.95em;
-    text-align: left;
-  }
+  .painel { position: static; }
 
-  .info-bloco h2,
-  .cta-bloco h2,
-  .cta-bloco h3 {
-    font-size: 1em;
-  }
+  .veiculo-banner { padding: 1.2rem 1rem; }
+  .veiculo-banner h1 { font-size: 1.2em; }
+  .veiculo-preco { font-size: 1.2em; }
 }
 </style>

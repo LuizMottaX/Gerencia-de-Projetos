@@ -1,18 +1,22 @@
 <template>
   <section class="noticias-page">
-    <h1>Notícias Automotivas</h1>
-    <h2>Fique por dentro de todas as novidades do mundo automotivo!</h2>
+    <div class="section-banner">
+      <h1>📰 Notícias Automotivas</h1>
+      <p class="banner-sub">Fique por dentro de todas as novidades do mundo automotivo!</p>
+    </div>
 
     <div class="grid-container">
-      <div v-for="noticia in noticias" :key="noticia.url" class="zoom card">
-        <a :href="noticia.url" target="_blank" rel="noopener noreferrer">
-          <img :src="noticia.imagem" :alt="noticia.titulo" />
+      <div v-for="noticia in noticias" :key="noticia.url" class="card noticia-card">
+        <a :href="noticia.url" target="_blank" rel="noopener noreferrer" class="card-link">
+          <div class="card-img-wrapper">
+            <img :src="noticia.imagem" :alt="noticia.titulo" />
+            <span class="card-badge">Leia mais →</span>
+          </div>
+          <div class="card-body text-item">
+            <span class="noticia-fonte">Fonte externa</span>
+            <p class="noticia-titulo">{{ noticia.titulo }}</p>
+          </div>
         </a>
-        <div class="text-item">
-          <a :href="noticia.url" target="_blank" rel="noopener noreferrer" class="card-titulo">
-            {{ noticia.titulo }}
-          </a>
-        </div>
       </div>
     </div>
   </section>
@@ -54,28 +58,80 @@ const noticias = [
 </script>
 
 <style scoped>
-.noticias-page {
-  padding: 1rem;
+.noticias-page { display: flex; flex-direction: column; }
+
+.banner-sub {
+  color: #b0b4bc;
+  font-size: 0.92em;
+  margin-top: 0.25rem;
 }
 
-.card img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 6px 6px 0 0;
-}
-
-.card-titulo {
+.card-link {
   display: block;
-  font-size: 0.95em;
-  color: #333;
-  margin-top: 0.4rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.card-img-wrapper {
+  position: relative;
+  overflow: hidden;
+  height: 180px;
+}
+
+.card-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.noticia-card:hover .card-img-wrapper img {
+  transform: scale(1.08);
+}
+
+.card-badge {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: linear-gradient(0deg, rgba(192,57,43,0.9) 0%, transparent 100%);
+  color: #fff;
+  font-size: 0.8em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  padding: 1rem 0.8rem 0.5rem;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.noticia-card:hover .card-badge {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.card-body {
+  padding: 12px 14px 14px;
+}
+
+.noticia-fonte {
+  display: block;
+  font-size: 0.7em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #c0392b;
+  margin-bottom: 0.4rem;
+}
+
+.noticia-titulo {
+  font-size: 0.9em;
+  font-weight: 600;
+  color: #1a1a1a;
   line-height: 1.4;
 }
 
 @media (max-width: 640px) {
-  .card img {
-    height: 140px;
-  }
+  .card-img-wrapper { height: 150px; }
 }
 </style>
