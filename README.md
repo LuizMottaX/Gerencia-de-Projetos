@@ -106,6 +106,45 @@ curl http://localhost:3001/api/carros/celta
 
 ---
 
+## 📋 Plano de Implementação
+
+O projeto passou por um processo de refatoração para modernizar a arquitetura e a interface:
+
+1. **Estruturação:** O site HTML legado foi convertido para uma Single Page Application (SPA) para navegação sem recarregamento de página. O código foi separado de forma clara em duas camadas: `frontend` e `backend`.
+2. **Backend (Node.js/Express):** Implementada uma API REST com dados dos veículos armazenados temporariamente em memória, substituindo os dados soltos nos antigos arquivos HTML. Foram criados os endpoints `/api/carros` e `/api/carros/:id`.
+3. **Frontend (Vue 3/Vite):** 
+   - Criação da SPA configurada com Vue Router (rotas dinâmicas para detalhes de carros).
+   - Componentização para evitar código duplicado (como em `AppHeader.vue` e `AppFooter.vue`).
+   - Redesign visual automotivo completo: adoção do tema *Carbon & Racing Red*, cartões modernos, micro-interações de hover e aprimoramento da responsividade, mantendo a essência da marca original.
+4. **Remoção de Legado:** O diretório antigo com as páginas HTML estáticas foi completamente descartado.
+
+---
+
+## 🔄 Ciclo de Vida e Organização do Projeto
+
+### Ciclo de Vida do Projeto e Relação com o Produto
+O ciclo de vida do **projeto** diz respeito apenas a esta iniciativa de refatoração e modernização do sistema. Ele tem um início e fim determinados, desde o planejamento da nova arquitetura até o lançamento (deploy).
+Por outro lado, o ciclo de vida do **produto** compreende toda a existência da plataforma digital da Chiquinho Motors. O produto iniciou em sua versão HTML básica, evoluiu com este projeto de modernização tecnológica e visual, e passará por fases contínuas de operação, suporte e aprimoramento (como a integração futura de um banco de dados real) até o fim de sua vida útil.
+
+### Fases do Projeto e Suas Relações
+O projeto percorreu as seguintes fases de forma sequencial e iterativa:
+1. **Iniciação e Planejamento:** Análise das limitações da arquitetura legada, levantamento dos requisitos e definição das stacks tecnológicas (Vue.js no frontend e Node.js no backend).
+2. **Execução:** 
+   - Desenvolvimento da API para fornecimento de dados.
+   - Construção dos componentes Vue.
+   - Aplicação de novo Design System automotivo.
+   - Implementação da responsividade.
+3. **Monitoramento e Controle:** Fases de testes validaram as rotas da SPA, retorno da API REST, adaptabilidade mobile do layout e responsividade de iframes.
+4. **Encerramento:** Exclusão do código legado, consolidação da documentação (este README) e deploy do código fonte no GitHub sob versionamento Git.
+
+### Estrutura Organizacional e Gerenciamento
+A estrutura organizacional voltada a este projeto seguiu um modelo ágil e enxuto. O desenvolvimento prioriza:
+- **Separação de Preocupações (SoC):** Equipes ou desenvolvedores podem trabalhar de forma independente no frontend e no backend.
+- **Flexibilidade e Adaptação:** A ausência de uma hierarquia rígida permitiu que decisões arquiteturais e de design (como o redesenho dinâmico para mobile) fossem tomadas e executadas de forma rápida.
+- **Preparação para Escala:** Embora os dados estejam atualmente em memória, o gerenciamento do projeto levou em conta o crescimento organizacional, estruturando a API de tal forma que a migração para um banco de dados relacional ou NoSQL possa ser feita sem impactar as visões do cliente no frontend.
+
+---
+
 ## 📝 Observações
 
 - O frontend usa o **proxy do Vite** para redirecionar chamadas `/api/*` ao backend em desenvolvimento — não é necessário configurar CORS manualmente.
@@ -114,4 +153,4 @@ curl http://localhost:3001/api/carros/celta
 ---
 
 Desenvolvido por **Francisco de Julio Faria**
-Revisa por **Luiz Henrique Mota**
+Revisado por **Luiz Henrique Mota**
