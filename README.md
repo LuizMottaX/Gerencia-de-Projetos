@@ -135,7 +135,6 @@ O projeto percorreu as seguintes fases de forma sequencial e iterativa:
    - Aplicação de novo Design System automotivo.
    - Implementação da responsividade.
 3. **Monitoramento e Controle:** Fases de testes validaram as rotas da SPA, retorno da API REST, adaptabilidade mobile do layout e responsividade de iframes.
-4. **Encerramento:** Exclusão do código legado, consolidação da documentação (este README) e deploy do código fonte no GitHub sob versionamento Git.
 
 ### Estrutura Organizacional e Gerenciamento
 A estrutura organizacional voltada a este projeto seguiu um modelo ágil e enxuto. O desenvolvimento prioriza:
