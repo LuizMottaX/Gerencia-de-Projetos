@@ -1,6 +1,12 @@
 # 🚗 Chiquinho Motors®
 
-Site da concessionária **Chiquinho Motors®**, desenvolvido com **Vue 3 + Vite** no frontend e **Node.js + Express** no backend.
+Site da concessionária **Chiquinho Motors®**, desenvolvido com **Vue 3 + Vite** no frontend e **Node.js + Express** no backend, utilizando banco de dados **PostgreSQL**.
+
+O sistema atua como um ecossistema completo abrangendo:
+- 🚗 **Veículos**
+- ⚙️ **Auto-peças**
+- 🏎️ **Acessórios**
+- 🔧 **Serviços de Manutenção**
 
 ---
 
@@ -9,14 +15,14 @@ Site da concessionária **Chiquinho Motors®**, desenvolvido com **Vue 3 + Vite*
 ```
 INVENTARIO-CONCESSIONARIA/
 ├── backend/                  # API REST Node.js
-│   ├── data/
-│   │   └── carros.js         # Dados dos veículos (in-memory)
+│   ├── prisma/               # Schema do banco de dados (Planejado)
+│   ├── data/                 # Dados legados em memória (fase de transição)
 │   ├── server.js             # Servidor Express
 │   └── package.json
 └── frontend/                 # SPA Vue 3
     ├── src/
 │   │   ├── assets/           # CSS global
-│   │   ├── components/       # AppHeader, AppFooter
+│   │   ├── components/       # Componentes reutilizáveis
 │   │   ├── router/           # Vue Router
 │   │   └── views/            # Páginas da aplicação
     ├── vite.config.js
@@ -29,6 +35,7 @@ INVENTARIO-CONCESSIONARIA/
 
 - [Node.js](https://nodejs.org/) v18 ou superior
 - npm v9 ou superior
+- [PostgreSQL](https://www.postgresql.org/) v14 ou superior
 
 ---
 
@@ -41,6 +48,7 @@ O projeto possui **dois servidores** que devem rodar simultaneamente: o backend 
 ```bash
 cd backend
 npm install
+# Futuramente com ORM: npx prisma migrate dev
 npm start
 ```
 
@@ -60,96 +68,50 @@ npm run dev
 
 ---
 
-## 🌐 Endpoints da API
+## 🌐 Endpoints da API (Atuais e Planejados)
 
-| Método | Rota               | Descrição                        |
-|--------|--------------------|----------------------------------|
-| GET    | `/api/carros`      | Lista todos os veículos          |
-| GET    | `/api/carros/:id`  | Retorna detalhes de um veículo   |
-
-**IDs disponíveis:** `celta`, `palio`, `opala`, `fusca`, `corolla`, `gol`
-
-### Exemplo
-
-```bash
-# Todos os carros
-curl http://localhost:3001/api/carros
-
-# Detalhe do Celta
-curl http://localhost:3001/api/carros/celta
-```
+| Método | Rota                  | Descrição                        |
+|--------|-----------------------|----------------------------------|
+| GET    | `/api/carros`         | Lista todos os veículos          |
+| GET    | `/api/carros/:id`     | Retorna detalhes de um veículo   |
+| GET    | `/api/pecas`          | Catálogo de auto-peças (Novo)    |
+| GET    | `/api/acessorios`     | Catálogo de acessórios (Novo)    |
+| GET    | `/api/servicos`       | Serviços de manutenção (Novo)    |
 
 ---
 
-## 📄 Páginas do Site
-
-| Rota            | Página                |
-|-----------------|-----------------------|
-| `/`             | Página inicial        |
-| `/carros`       | Carros disponíveis    |
-| `/carros/:id`   | Detalhe do veículo    |
-| `/dicas`        | Dicas automotivas     |
-| `/noticias`     | Notícias automotivas  |
-| `/contato`      | Contato               |
-| `/sobre`        | Quem somos            |
-
----
-
-## 🛠️ Tecnologias
+## 🛠️ Tecnologias Recomendadas e Utilizadas
 
 | Camada    | Tecnologia               |
 |-----------|--------------------------|
-| Frontend  | Vue 3, Vite, Vue Router 4 |
+| Frontend  | Vue 3, Vite, Vue Router, Pinia (Recomendado para estado do catálogo) |
 | Backend   | Node.js, Express         |
-| Estilo    | CSS Vanilla, Google Fonts (Roboto) |
-| Dados     | In-memory (sem banco de dados) |
+| Banco     | PostgreSQL, Prisma ORM (Recomendado) |
+| Estilo    | CSS Vanilla, Google Fonts|
 
 ---
 
-## 📋 Plano de Implementação
+## 📋 Plano de Implementação e Evolução
 
-O projeto passou por um processo de refatoração para modernizar a arquitetura e a interface:
+O projeto está expandindo de um simples inventário para uma solução robusta de gestão automotiva:
 
-1. **Estruturação:** O site HTML legado foi convertido para uma Single Page Application (SPA) para navegação sem recarregamento de página. O código foi separado de forma clara em duas camadas: `frontend` e `backend`.
-2. **Backend (Node.js/Express):** Implementada uma API REST com dados dos veículos armazenados temporariamente em memória, substituindo os dados soltos nos antigos arquivos HTML. Foram criados os endpoints `/api/carros` e `/api/carros/:id`.
-3. **Frontend (Vue 3/Vite):** 
-   - Criação da SPA configurada com Vue Router (rotas dinâmicas para detalhes de carros).
-   - Componentização para evitar código duplicado (como em `AppHeader.vue` e `AppFooter.vue`).
-   - Redesign visual automotivo completo: adoção do tema *Carbon & Racing Red*, cartões modernos, micro-interações de hover e aprimoramento da responsividade, mantendo a essência da marca original.
-4. **Remoção de Legado:** O diretório antigo com as páginas HTML estáticas foi completamente descartado.
-
----
-
-## 🔄 Ciclo de Vida e Organização do Projeto
-
-### Ciclo de Vida do Projeto e Relação com o Produto
-O ciclo de vida do **projeto** diz respeito apenas a esta iniciativa de refatoração e modernização do sistema. Ele tem um início e fim determinados, desde o planejamento da nova arquitetura até o lançamento (deploy).
-Por outro lado, o ciclo de vida do **produto** compreende toda a existência da plataforma digital da Chiquinho Motors. O produto iniciou em sua versão HTML básica, evoluiu com este projeto de modernização tecnológica e visual, e passará por fases contínuas de operação, suporte e aprimoramento (como a integração futura de um banco de dados real) até o fim de sua vida útil.
-
-### Fases do Projeto e Suas Relações
-O projeto percorreu as seguintes fases de forma sequencial e iterativa:
-1. **Iniciação e Planejamento:** Análise das limitações da arquitetura legada, levantamento dos requisitos e definição das stacks tecnológicas (Vue.js no frontend e Node.js no backend).
-2. **Execução:** 
-   - Desenvolvimento da API para fornecimento de dados.
-   - Construção dos componentes Vue.
-   - Aplicação de novo Design System automotivo.
-   - Implementação da responsividade.
-3. **Monitoramento e Controle:** Fases de testes validaram as rotas da SPA, retorno da API REST, adaptabilidade mobile do layout e responsividade de iframes.
-
-### Estrutura Organizacional e Gerenciamento
-A estrutura organizacional voltada a este projeto seguiu um modelo ágil e enxuto. O desenvolvimento prioriza:
-- **Separação de Preocupações (SoC):** Equipes ou desenvolvedores podem trabalhar de forma independente no frontend e no backend.
-- **Flexibilidade e Adaptação:** A ausência de uma hierarquia rígida permitiu que decisões arquiteturais e de design (como o redesenho dinâmico para mobile) fossem tomadas e executadas de forma rápida.
-- **Preparação para Escala:** Embora os dados estejam atualmente em memória, o gerenciamento do projeto levou em conta o crescimento organizacional, estruturando a API de tal forma que a migração para um banco de dados relacional ou NoSQL possa ser feita sem impactar as visões do cliente no frontend.
+1. **Estruturação Base (Concluída):** SPA isolada em camadas claras (`frontend` e `backend`).
+2. **Expansão de Domínio (Em Andamento):** Inclusão de novas entidades de negócios. O sistema não listará apenas veículos, mas também auto-peças, acessórios e a possibilidade de visualizar e agendar serviços de manutenção.
+3. **Migração para PostgreSQL (Planejado):**
+   - Substituição total do armazenamento de dados temporário e em memória (`backend/data/`).
+   - Adoção de um banco de dados relacional **PostgreSQL**, recomendada a utilização do **Prisma ORM** para garantir relacionamentos consistentes (por exemplo: validar quais peças são compatíveis com determinados modelos de carro).
+4. **Refinamento da Interface (Planejado):** Construção de novas views no Vue 3 focadas em carrinho de compras para peças e painel de agendamento de serviços.
 
 ---
 
 ## 📝 Observações
 
-- O frontend usa o **proxy do Vite** para redirecionar chamadas `/api/*` ao backend em desenvolvimento — não é necessário configurar CORS manualmente.
-- Os dados dos veículos estão em `backend/data/carros.js`. Para integrar um banco de dados futuramente, basta substituir esse arquivo por chamadas ao banco, sem alterar o frontend.
+- **🤖 Para Agentes de IA:** Leia obrigatoriamente o arquivo `AGENTS.md` na raiz do repositório antes de propor ou realizar qualquer modificação no código.
+- O frontend usa o **proxy do Vite** para redirecionar chamadas `/api/*` ao backend em desenvolvimento, evitando a necessidade de configuração manual de CORS.
+- Durante a fase atual de transição, os carros antigos ainda podem ser acessados em arquivos mocados, que serão descontinuados assim que o schema do PostgreSQL for consolidado.
 
 ---
 
 Desenvolvido por **Francisco de Julio Faria**
 Revisado por **Luiz Henrique Mota**
+Revisado por **Alex Pablo de Oliveira Moraes**

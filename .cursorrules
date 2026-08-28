@@ -1,0 +1,5 @@
+# Cursor Rules for Chiquinho Motors
+
+All Cursor agents must strictly adhere to the project rules and architectural guidelines defined in the `AGENTS.md` file located in the root of this repository.
+
+Please read `AGENTS.md` before making any code modifications.
