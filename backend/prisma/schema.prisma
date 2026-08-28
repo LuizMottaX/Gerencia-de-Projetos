@@ -1,0 +1,172 @@
+// Schema do banco — Chiquinho Motors®
+// F1: núcleo de veículos (Marca, Carro, CarroImagem).
+// F2: catálogo de peças e acessórios (Produto unificado + compatibilidade por modelo).
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─────────────────────────────  Veículos  ─────────────────────────────
+
+/// Fabricante do veículo (Chevrolet, Fiat, VW...).
+model Marca {
+  id           Int      @id @default(autoincrement())
+  nome         String   @unique
+  slug         String   @unique
+  carros       Carro[]
+  criadoEm     DateTime @default(now())
+  atualizadoEm DateTime @updatedAt
+}
+
+/// Situação do veículo no estoque.
+enum StatusCarro {
+  DISPONIVEL
+  RESERVADO
+  VENDIDO
+}
+
+/// Veículo à venda.
+model Carro {
+  id            Int         @id @default(autoincrement())
+  /// Identificador estável usado nas URLs do site (ex.: "celta").
+  slug          String      @unique
+  nome          String
+  modelo        String
+  ano           Int
+  /// Preço em centavos — evita imprecisão de ponto flutuante com dinheiro.
+  precoCentavos Int
+  /// Quilometragem em km, como número.
+  quilometragem Int
+  cor           String
+  /// Valor de exibição ("Flex", "Gasolina", "Álcool"...). Pode virar enum depois.
+  combustivel   String
+  portas        Int
+  /// Valor de exibição ("Manual", "Automático"...).
+  cambio        String
+  carroceria    String
+  finalPlaca    Int?
+  localizacao   String
+  status        StatusCarro @default(DISPONIVEL)
+  /// Formas de pagamento aceitas para este veículo.
+  formasPagamento String[]
+
+  marca   Marca @relation(fields: [marcaId], references: [id])
+  marcaId Int
+
+  /// Modelo normalizado — liga o veículo às peças compatíveis.
+  modeloVeiculo   ModeloVeiculo? @relation(fields: [modeloVeiculoId], references: [id])
+  modeloVeiculoId Int?
+
+  imagens CarroImagem[]
+
+  criadoEm     DateTime @default(now())
+  atualizadoEm DateTime @updatedAt
+
+  @@index([marcaId])
+  @@index([status])
+  @@index([modeloVeiculoId])
+}
+
+/// Foto de um veículo. A primeira (menor `ordem`, ou `capa = true`) é a capa.
+model CarroImagem {
+  id      Int     @id @default(autoincrement())
+  url     String
+  ordem   Int     @default(0)
+  capa    Boolean @default(false)
+  carro   Carro   @relation(fields: [carroId], references: [id], onDelete: Cascade)
+  carroId Int
+
+  @@index([carroId])
+}
+
+// ──────────────────────  Catálogo de peças e acessórios  ──────────────────────
+
+enum TipoProduto {
+  PECA
+  ACESSORIO
+}
+
+/// Modelo de veículo como referência de catálogo (independente do estoque).
+/// Usado para dizer quais peças servem em quais carros.
+model ModeloVeiculo {
+  id        Int    @id @default(autoincrement())
+  slug      String @unique
+  marca     String
+  modelo    String
+  anoInicio Int?
+  anoFim    Int?
+
+  carros           Carro[]
+  compatibilidades ProdutoCompatibilidade[]
+
+  @@unique([marca, modelo])
+}
+
+/// Categoria de um produto (Motor, Freios, Som e Multimídia...). É tipada:
+/// uma categoria de PECA não aparece para acessórios e vice-versa.
+model Categoria {
+  id       Int         @id @default(autoincrement())
+  nome     String
+  slug     String      @unique
+  tipo     TipoProduto
+  produtos Produto[]
+
+  @@index([tipo])
+}
+
+/// Item de catálogo — peça ou acessório. Unificado num só modelo porque
+/// compartilham quase todos os atributos e o mesmo fluxo de compra.
+model Produto {
+  id            Int         @id @default(autoincrement())
+  slug          String      @unique
+  nome          String
+  descricao     String
+  precoCentavos Int
+  estoque       Int         @default(0)
+  sku           String?     @unique
+  tipo          TipoProduto
+  imagemUrl     String?
+
+  categoria   Categoria @relation(fields: [categoriaId], references: [id])
+  categoriaId Int
+
+  compatibilidades ProdutoCompatibilidade[]
+
+  criadoEm     DateTime @default(now())
+  atualizadoEm DateTime @updatedAt
+
+  @@index([tipo])
+  @@index([categoriaId])
+}
+
+/// Junção N:N entre Produto e ModeloVeiculo — a relação central do catálogo:
+/// quais modelos de carro cada peça/acessório atende.
+model ProdutoCompatibilidade {
+  produto         Produto       @relation(fields: [produtoId], references: [id], onDelete: Cascade)
+  produtoId       Int
+  modeloVeiculo   ModeloVeiculo @relation(fields: [modeloVeiculoId], references: [id], onDelete: Cascade)
+  modeloVeiculoId Int
+
+  @@id([produtoId, modeloVeiculoId])
+  @@index([modeloVeiculoId])
+}
+
+// ─────────────────────────────  Contato  ─────────────────────────────
+
+/// Mensagem enviada pelo formulário de contato do site.
+model MensagemContato {
+  id       Int      @id @default(autoincrement())
+  nome     String
+  email    String
+  telefone String
+  mensagem String
+  lida     Boolean  @default(false)
+  criadoEm DateTime @default(now())
+
+  @@index([lida])
+}
