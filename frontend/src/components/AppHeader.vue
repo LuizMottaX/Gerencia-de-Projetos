@@ -2,7 +2,7 @@
   <header>
     <div class="header-top">
       <div class="brand">
-        <span class="brand-icon">🏎</span>
+        <Car class="brand-icon" :size="24" :stroke-width="2.25" />
         <h1>
           <RouterLink to="/">Chiquinho <span class="brand-accent">Motors</span>®</RouterLink>
         </h1>
@@ -28,7 +28,13 @@
         Página Inicial
       </RouterLink>
       <RouterLink to="/carros" class="nav-link nav-link--destaque" title="Carros Disponíveis" @click="fecharMenu">
-        🚗 Carros Disponíveis
+        <Car :size="15" :stroke-width="2.5" /> Carros Disponíveis
+      </RouterLink>
+      <RouterLink to="/pecas" class="nav-link" title="Auto-peças" @click="fecharMenu">
+        Auto-peças
+      </RouterLink>
+      <RouterLink to="/acessorios" class="nav-link" title="Acessórios" @click="fecharMenu">
+        Acessórios
       </RouterLink>
       <RouterLink to="/dicas" class="nav-link" title="Dicas Automotivas" @click="fecharMenu">
         Dicas Automotivas
@@ -48,6 +54,7 @@
 
 <script setup>
 import { ref } from 'vue';
+import { Car } from 'lucide-vue-next';
 
 const menuAberto = ref(false);
 function fecharMenu() { menuAberto.value = false; }
@@ -69,7 +76,7 @@ function fecharMenu() { menuAberto.value = false; }
 }
 
 .brand-icon {
-  font-size: 1.4em;
+  color: #c0392b;
 }
 
 .brand-accent {
@@ -92,7 +99,10 @@ nav {
 }
 
 .nav-link {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4em;
   padding: 0.45em 1em;
   color: #c0c4cc;
   font-size: 0.88em;

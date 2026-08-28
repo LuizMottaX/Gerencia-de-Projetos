@@ -1,55 +1,50 @@
 <template>
   <section class="dicas-page">
-    <h1>Dicas Automotivas</h1>
-
-    <!-- Vídeos -->
-    <div class="video-bloco">
-      <p class="dica-titulo">O porquê de pisar na embreagem ao dar partida:</p>
-      <div class="video-wrapper">
-        <iframe
-          src="https://www.youtube.com/embed/_pIUYoEl7rg"
-          title="Por que pisar na embreagem ao dar partida"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen
-        ></iframe>
-      </div>
+    <div class="section-banner">
+      <h1><Lightbulb :size="26" /> Dicas Automotivas</h1>
+      <p class="banner-sub">Vídeos e orientações para cuidar bem do seu veículo</p>
     </div>
 
-    <div class="video-bloco">
-      <p class="dica-titulo">O jeito correto de engatar marchas no trânsito:</p>
-      <div class="video-wrapper">
-        <iframe
-          src="https://www.youtube.com/embed/BWUU1EIlmjE"
-          title="Como engatar marchas corretamente no trânsito"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen
-        ></iframe>
+    <div class="dicas-inner">
+      <!-- Vídeos em 2 colunas -->
+      <div class="videos-grid">
+        <article v-for="v in videos" :key="v.id" class="video-bloco">
+          <p class="dica-titulo">{{ v.titulo }}</p>
+          <div class="video-wrapper">
+            <iframe
+              :src="`https://www.youtube.com/embed/${v.id}`"
+              :title="v.titulo"
+              loading="lazy"
+              referrerpolicy="strict-origin-when-cross-origin"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </article>
       </div>
-    </div>
 
-    <div class="video-bloco">
-      <p class="dica-titulo">Como conservar a pintura de seu veículo:</p>
-      <div class="video-wrapper">
-        <iframe
-          src="https://www.youtube.com/embed/mA42Nij5FX4"
-          title="Como conservar a pintura do carro"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen
-        ></iframe>
-      </div>
+      <!-- Dicas em texto -->
+      <h2>Boas práticas no dia a dia</h2>
+      <ul class="dicas-lista">
+        <li v-for="dica in dicas" :key="dica">{{ dica }}</li>
+      </ul>
     </div>
-
-    <!-- Dicas em texto -->
-    <ul class="dicas-lista">
-      <li v-for="dica in dicas" :key="dica">{{ dica }}</li>
-    </ul>
   </section>
 </template>
 
 <script setup>
+import { Lightbulb } from 'lucide-vue-next';
+
+const videos = [
+  { id: '_pIUYoEl7rg', titulo: 'Por que pisar na embreagem ao dar partida' },
+  { id: 'BWUU1EIlmjE', titulo: 'O jeito correto de engatar marchas no trânsito' },
+  { id: 'mA42Nij5FX4', titulo: 'Como conservar a pintura do veículo' },
+  { id: 'ineQ3iuwzsU', titulo: 'Como calibrar os pneus corretamente' },
+  { id: '0hZpcpX69j4', titulo: 'Como verificar o nível de óleo do motor' },
+  { id: 'CJcFRO-i5xo', titulo: 'Checklist do carro antes de viajar' },
+];
+
 const dicas = [
   'Mantenha seus pneus sempre calibrados de acordo com a recomendação do fabricante. Isso pode garantir uma maior durabilidade e melhor desempenho do veículo.',
   'Verifique o nível de óleo do motor regularmente e troque-o de acordo com o prazo estipulado pelo fabricante. Isso pode evitar danos ao motor e garantir uma vida útil maior para o veículo.',
@@ -64,58 +59,91 @@ const dicas = [
 
 <style scoped>
 .dicas-page {
-  padding: 1.5rem 1rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
-  max-width: 700px;
+}
+
+.banner-sub {
+  color: #b0b4bc;
+  font-size: 0.92em;
+  margin-top: 0.25rem;
+}
+
+.dicas-inner {
+  max-width: 1000px;
   margin: 0 auto;
+  padding: 0 1rem 1.5rem;
+  width: 100%;
+}
+
+/* ── Grade de vídeos: 2 colunas ── */
+.videos-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.75rem 1.5rem;
+  margin-bottom: 2.5rem;
 }
 
 .video-bloco {
-  width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
+  gap: 0.55rem;
 }
 
-/* Wrapper 16:9 responsivo para iframes */
+.dica-titulo {
+  font-weight: 700;
+  font-size: 1em;
+  text-align: left;
+  color: #1a1a1a;
+  line-height: 1.35;
+}
+
+/* Wrapper 16:9 responsivo */
 .video-wrapper {
   position: relative;
   width: 100%;
-  padding-bottom: 56.25%; /* 16:9 */
+  padding-bottom: 56.25%;
   height: 0;
-  border-radius: 6px;
+  border-radius: 8px;
   overflow: hidden;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
 }
 
 .video-wrapper iframe {
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
-  border-radius: 6px;
+  border: 0;
 }
 
-.dica-titulo {
-  font-weight: bold;
-  font-size: 1.05em;
+/* ── Lista de dicas ── */
+.dicas-inner h2 {
   text-align: left;
-  width: 100%;
+  font-size: 1.05em;
+  color: #c0392b;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 1rem;
 }
 
 .dicas-lista {
   list-style: disc;
   padding-left: 1.5rem;
   text-align: left;
-  width: 100%;
+  max-width: 720px;
 }
 
 .dicas-lista li {
   margin-bottom: 1rem;
   line-height: 1.6;
+}
+
+/* ── Responsivo ── */
+@media (max-width: 720px) {
+  .videos-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
 }
 </style>

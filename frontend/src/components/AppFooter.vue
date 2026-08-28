@@ -2,7 +2,9 @@
   <footer>
     <div class="footer-inner">
       <div class="footer-brand">
-        <span class="footer-logo">🏎 Chiquinho <span class="red">Motors</span>®</span>
+        <span class="footer-logo">
+          <Car :size="20" :stroke-width="2.25" /> Chiquinho <span class="red">Motors</span>®
+        </span>
         <p class="footer-tagline">Onde o seu bolso encontra a melhor opção.</p>
       </div>
 
@@ -20,6 +22,10 @@
     </div>
   </footer>
 </template>
+
+<script setup>
+import { Car } from 'lucide-vue-next';
+</script>
 
 <style scoped>
 footer {
@@ -45,6 +51,13 @@ footer {
   color: #fff;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.footer-logo .lucide {
+  color: #c0392b;
 }
 
 .red { color: #c0392b; }

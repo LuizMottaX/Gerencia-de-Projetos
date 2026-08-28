@@ -1,7 +1,7 @@
 <template>
   <section class="noticias-page">
     <div class="section-banner">
-      <h1>📰 Notícias Automotivas</h1>
+      <h1><Newspaper :size="28" /> Notícias Automotivas</h1>
       <p class="banner-sub">Fique por dentro de todas as novidades do mundo automotivo!</p>
     </div>
 
@@ -10,7 +10,7 @@
         <a :href="noticia.url" target="_blank" rel="noopener noreferrer" class="card-link">
           <div class="card-img-wrapper">
             <img :src="noticia.imagem" :alt="noticia.titulo" />
-            <span class="card-badge">Leia mais →</span>
+            <span class="card-badge">Leia mais <ArrowRight :size="13" /></span>
           </div>
           <div class="card-body text-item">
             <span class="noticia-fonte">Fonte externa</span>
@@ -23,6 +23,8 @@
 </template>
 
 <script setup>
+import { Newspaper, ArrowRight } from 'lucide-vue-next';
+
 const noticias = [
   {
     titulo: 'Chevrolet Silverado chega em outubro e será picape mais potente do Brasil',
@@ -93,6 +95,9 @@ const noticias = [
 .card-badge {
   position: absolute;
   bottom: 0; left: 0; right: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
   background: linear-gradient(0deg, rgba(192,57,43,0.9) 0%, transparent 100%);
   color: #fff;
   font-size: 0.8em;

@@ -143,7 +143,10 @@ header h1 a:hover {
    BOTÕES
    ══════════════════════════════════════ */
 .btn {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45em;
   padding: 0.65em 1.4em;
   cursor: pointer;
   background: linear-gradient(135deg, var(--color-carbon) 0%, var(--color-surface) 100%);
@@ -158,6 +161,12 @@ header h1 a:hover {
   letter-spacing: 0.03em;
   text-transform: uppercase;
   transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+
+/* Ícones (lucide) — alinhamento padrão em textos e botões */
+.lucide {
+  flex-shrink: 0;
+  vertical-align: middle;
 }
 
 .btn:hover {
@@ -216,6 +225,13 @@ header h1 a:hover {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.section-banner h1 .lucide {
+  color: var(--color-red);
 }
 
 /* ══════════════════════════════════════

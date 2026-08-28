@@ -2,7 +2,7 @@
   <section>
     <!-- Banner da seção -->
     <div class="section-banner">
-      <h1>🚗 Carros Disponíveis</h1>
+      <h1><Car :size="30" /> Carros Disponíveis</h1>
       <p class="banner-sub">Encontre o veículo ideal para você</p>
     </div>
 
@@ -14,7 +14,7 @@
         <RouterLink :to="`/carros/${carro.id}`" class="card-link">
           <div class="card-img-wrapper">
             <img :src="carro.imagemCapa" :alt="carro.nome" />
-            <span class="card-badge">Ver Detalhes →</span>
+            <span class="card-badge">Ver Detalhes <ArrowRight :size="14" /></span>
           </div>
           <div class="card-body text-item">
             <p class="card-nome">{{ carro.nome }}</p>
@@ -33,6 +33,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
+import { Car, ArrowRight } from 'lucide-vue-next';
 
 const carros = ref([]);
 const carregando = ref(true);
@@ -88,6 +89,9 @@ onMounted(async () => {
   bottom: 0;
   left: 0;
   right: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
   background: linear-gradient(0deg, rgba(192, 57, 43, 0.92) 0%, transparent 100%);
   color: #fff;
   font-size: 0.85em;

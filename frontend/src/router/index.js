@@ -21,6 +21,30 @@ const routes = [
     meta: { title: 'Detalhe do Veículo — Chiquinho Motors®' },
   },
   {
+    path: '/pecas',
+    name: 'pecas',
+    component: () => import('../views/PecasView.vue'),
+    meta: { title: 'Auto-peças — Chiquinho Motors®' },
+  },
+  {
+    path: '/pecas/:id',
+    name: 'peca-detalhe',
+    component: () => import('../views/ProdutoDetalheView.vue'),
+    meta: { title: 'Peça — Chiquinho Motors®', tipo: 'peca' },
+  },
+  {
+    path: '/acessorios',
+    name: 'acessorios',
+    component: () => import('../views/AcessoriosView.vue'),
+    meta: { title: 'Acessórios — Chiquinho Motors®' },
+  },
+  {
+    path: '/acessorios/:id',
+    name: 'acessorio-detalhe',
+    component: () => import('../views/ProdutoDetalheView.vue'),
+    meta: { title: 'Acessório — Chiquinho Motors®', tipo: 'acessorio' },
+  },
+  {
     path: '/dicas',
     name: 'dicas',
     component: () => import('../views/DicasView.vue'),
@@ -44,18 +68,22 @@ const routes = [
     component: () => import('../views/SobreNosView.vue'),
     meta: { title: 'Quem Somos — Chiquinho Motors®' },
   },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'nao-encontrado',
+    component: () => import('../views/NaoEncontradoView.vue'),
+    meta: { title: 'Página não encontrada — Chiquinho Motors®' },
+  },
 ];
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
   scrollBehavior() {
-    // Sempre volta ao topo ao mudar de página
     return { top: 0 };
   },
 });
 
-// Atualiza o <title> da página com base na rota
 router.afterEach((to) => {
   document.title = to.meta.title || 'Chiquinho Motors®';
 });

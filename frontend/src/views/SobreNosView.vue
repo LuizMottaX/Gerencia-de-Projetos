@@ -1,7 +1,7 @@
 <template>
   <section class="sobre-page">
     <div class="section-banner">
-      <h1>🏁 Quem Somos?</h1>
+      <h1><Flag :size="26" /> Quem Somos?</h1>
       <p class="banner-sub">Desde 1985 movidos pela paixão automotiva</p>
     </div>
 
@@ -48,7 +48,10 @@
             Nossa equipe é formada por profissionais altamente qualificados, que estão
             sempre prontos para atender você da melhor forma possível.
           </p>
-          <p class="destaque">Venha nos conhecer e fazer parte da nossa história! 🚗</p>
+          <p class="destaque">
+            Venha nos conhecer e fazer parte da nossa história!
+            <Car :size="18" class="destaque-icone" />
+          </p>
           <RouterLink to="/contato" class="btn btn-red zoom-shadow">
             Entrar em Contato
           </RouterLink>
@@ -59,6 +62,8 @@
 </template>
 
 <script setup>
+import { Flag, Car } from 'lucide-vue-next';
+
 const stats = [
   { valor: '1985', label: 'Ano de fundação' },
   { valor: '+40', label: 'Anos de experiência' },
@@ -135,6 +140,12 @@ const stats = [
 .destaque {
   font-weight: 700;
   color: #1a1a1a !important;
+}
+
+.destaque-icone {
+  color: #c0392b;
+  vertical-align: -3px;
+  margin-left: 0.3rem;
 }
 
 /* ── Stats ── */

@@ -1,7 +1,7 @@
 <template>
   <section class="contato-page">
     <div class="section-banner">
-      <h1>📞 Fale Conosco</h1>
+      <h1><Phone :size="26" /> Fale Conosco</h1>
       <p class="banner-sub">Estamos prontos para te ajudar a encontrar o carro ideal</p>
     </div>
 
@@ -9,46 +9,66 @@
       <!-- Formulário -->
       <div class="form-card">
         <h2>Envie uma mensagem</h2>
-        <form method="post" action="https://confirmar.animavite.com/processa.php" name="form">
+
+        <p v-if="enviado" class="form-sucesso">
+          <CircleCheck :size="18" />
+          <span>{{ mensagemSucesso }}</span>
+        </p>
+
+        <form v-else @submit.prevent="enviar" novalidate>
+          <p v-if="erroGeral" class="form-erro">{{ erroGeral }}</p>
+
           <label for="nome">Nome</label>
-          <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" required />
+          <input id="nome" v-model.trim="form.nome" type="text" placeholder="Digite seu nome completo" />
+          <span v-if="erros.nome" class="campo-erro">{{ erros.nome }}</span>
 
           <label for="email">E-mail</label>
-          <input type="email" id="email" name="email" placeholder="seu@email.com" required />
+          <input id="email" v-model.trim="form.email" type="email" placeholder="seu@email.com" />
+          <span v-if="erros.email" class="campo-erro">{{ erros.email }}</span>
 
           <label for="telefone">Telefone / WhatsApp</label>
-          <input type="tel" id="telefone" name="telefone" placeholder="(66) 9 9999-9999" required />
+          <input id="telefone" v-model.trim="form.telefone" type="tel" placeholder="(66) 9 9999-9999" />
+          <span v-if="erros.telefone" class="campo-erro">{{ erros.telefone }}</span>
 
           <label for="mensagem">Mensagem</label>
-          <textarea id="mensagem" name="mensagem" rows="5" placeholder="Descreva o veículo de interesse ou deixe sua mensagem…" required></textarea>
+          <textarea
+            id="mensagem"
+            v-model.trim="form.mensagem"
+            rows="5"
+            placeholder="Descreva o veículo de interesse ou deixe sua mensagem…"
+          ></textarea>
+          <span v-if="erros.mensagem" class="campo-erro">{{ erros.mensagem }}</span>
 
-          <input type="submit" value="Enviar Mensagem →" class="btn btn-red zoom-shadow submit-btn" />
+          <button type="submit" class="btn btn-red zoom-shadow submit-btn" :disabled="enviando">
+            <template v-if="enviando">Enviando…</template>
+            <template v-else>Enviar Mensagem <Send :size="15" /></template>
+          </button>
         </form>
       </div>
 
       <!-- Info de contato -->
       <div class="contato-info">
         <div class="info-card">
-          <span class="info-icon">💬</span>
+          <MessageCircle class="info-icon" :size="24" />
           <h3>WhatsApp</h3>
           <a href="https://wa.me/5566999896813?text=Chiquinho%20Motors/" target="_blank" rel="noopener noreferrer" class="btn btn-red zoom-shadow info-btn">
             Chamar no WhatsApp
           </a>
         </div>
         <div class="info-card">
-          <span class="info-icon">📸</span>
+          <Instagram class="info-icon" :size="24" />
           <h3>Instagram</h3>
           <a href="https://www.instagram.com/franc_xco/" target="_blank" rel="noopener noreferrer" class="btn zoom-shadow info-btn">
             @franc_xco
           </a>
         </div>
         <div class="info-card">
-          <span class="info-icon">✉️</span>
+          <Mail class="info-icon" :size="24" />
           <h3>E-mail</h3>
           <a href="mailto:chiquinhomotors@gmail.com" class="info-link">chiquinhomotors@gmail.com</a>
         </div>
         <div class="info-card">
-          <span class="info-icon">📍</span>
+          <MapPin class="info-icon" :size="24" />
           <h3>Endereço</h3>
           <p>Rua das Avencas, 2538<br />Sinop — Mato Grosso</p>
         </div>
@@ -56,6 +76,48 @@
     </div>
   </section>
 </template>
+
+<script setup>
+import { reactive, ref } from 'vue';
+import { Phone, CircleCheck, Send, MessageCircle, Instagram, Mail, MapPin } from 'lucide-vue-next';
+import { api } from '../api';
+
+const form = reactive({ nome: '', email: '', telefone: '', mensagem: '' });
+const erros = reactive({ nome: '', email: '', telefone: '', mensagem: '' });
+const erroGeral = ref('');
+const enviando = ref(false);
+const enviado = ref(false);
+const mensagemSucesso = ref('');
+
+function validar() {
+  erros.nome = form.nome.length >= 2 ? '' : 'Informe seu nome.';
+  erros.email = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email) ? '' : 'E-mail inválido.';
+  erros.telefone = form.telefone.length >= 8 ? '' : 'Telefone inválido.';
+  erros.mensagem = form.mensagem.length >= 10 ? '' : 'Escreva ao menos 10 caracteres.';
+  return !erros.nome && !erros.email && !erros.telefone && !erros.mensagem;
+}
+
+async function enviar() {
+  erroGeral.value = '';
+  if (!validar()) return;
+
+  enviando.value = true;
+  try {
+    const resp = await api.enviarContato({ ...form });
+    mensagemSucesso.value = resp?.mensagem || 'Mensagem enviada! Retornaremos em breve.';
+    enviado.value = true;
+  } catch (e) {
+    if (e.detalhes?.length) {
+      for (const d of e.detalhes) {
+        if (d.campo in erros) erros[d.campo] = d.mensagem;
+      }
+    }
+    erroGeral.value = e.message || 'Não foi possível enviar. Tente novamente.';
+  } finally {
+    enviando.value = false;
+  }
+}
+</script>
 
 <style scoped>
 .contato-page {
@@ -80,12 +142,11 @@
   align-items: start;
 }
 
-/* ── Formulário ── */
 .form-card {
   background: #fff;
   border-radius: 12px;
   padding: 2rem;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   border-top: 3px solid #c0392b;
 }
 
@@ -97,6 +158,37 @@
   margin-top: 0;
 }
 
+.form-sucesso {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: #eafaf0;
+  border: 1px solid #b7e4c7;
+  color: #1e7e45;
+  border-radius: 8px;
+  padding: 1rem 1.2rem;
+  font-weight: 600;
+  text-align: left;
+}
+
+.form-erro {
+  background: #fdeceb;
+  border: 1px solid #f3b7b1;
+  color: #c0392b;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-size: 0.9em;
+  margin-bottom: 1rem;
+}
+
+.campo-erro {
+  display: block;
+  color: #c0392b;
+  font-size: 0.8em;
+  font-weight: 600;
+  margin: -8px 0 12px;
+}
+
 .submit-btn {
   width: 100%;
   text-align: center;
@@ -105,7 +197,11 @@
   margin-top: 0.25rem;
 }
 
-/* ── Info cards ── */
+.submit-btn:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
 .contato-info {
   display: flex;
   flex-direction: column;
@@ -116,15 +212,15 @@
   background: #fff;
   border-radius: 10px;
   padding: 1.2rem;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
   text-align: center;
   border-left: 3px solid #c0392b;
 }
 
 .info-icon {
-  font-size: 1.5em;
   display: block;
-  margin-bottom: 0.3rem;
+  margin: 0 auto 0.5rem;
+  color: #c0392b;
 }
 
 .info-card h3 {
@@ -154,9 +250,10 @@
   word-break: break-all;
 }
 
-.info-link:hover { text-decoration: underline; }
+.info-link:hover {
+  text-decoration: underline;
+}
 
-/* ── Responsivo ── */
 @media (max-width: 700px) {
   .contato-inner {
     grid-template-columns: 1fr;
@@ -164,6 +261,8 @@
     gap: 1.2rem;
   }
 
-  .form-card { padding: 1.2rem; }
+  .form-card {
+    padding: 1.2rem;
+  }
 }
 </style>

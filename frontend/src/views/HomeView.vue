@@ -9,14 +9,14 @@
         class="hero-img"
       />
       <div class="hero-content">
-        <p class="hero-tag">🏎 Concessionária em Sinop – MT</p>
+        <p class="hero-tag"><MapPin :size="14" :stroke-width="2.5" /> Concessionária em Sinop – MT</p>
         <h1>Seu próximo carro está aqui.</h1>
         <p class="hero-sub">
           Preços acessíveis, garantia e atendimento personalizado.<br />
           A melhor concessionária do Centro-Oeste.
         </p>
         <RouterLink to="/carros" class="btn btn-red zoom-shadow hero-cta">
-          Ver Carros Disponíveis →
+          Ver Carros Disponíveis <ArrowRight :size="16" />
         </RouterLink>
       </div>
     </section>
@@ -24,7 +24,7 @@
     <!-- Diferenciais -->
     <section class="diferenciais">
       <div class="card-diff" v-for="item in diferenciais" :key="item.titulo">
-        <span class="diff-icon">{{ item.icon }}</span>
+        <component :is="item.icon" class="diff-icon" :size="34" :stroke-width="1.75" />
         <h3>{{ item.titulo }}</h3>
         <p>{{ item.desc }}</p>
       </div>
@@ -42,10 +42,12 @@
 </template>
 
 <script setup>
+import { MapPin, ArrowRight, ShieldCheck, CreditCard, Handshake } from 'lucide-vue-next';
+
 const diferenciais = [
-  { icon: '🔍', titulo: 'Procedência Garantida', desc: 'Todos os veículos revisados e com histórico verificado.' },
-  { icon: '💳', titulo: 'Condições Flexíveis', desc: 'Financiamento, troca e cartão de crédito aceitos.' },
-  { icon: '🤝', titulo: 'Atendimento Premium', desc: 'Desde 1985 com foco no melhor atendimento do mercado.' },
+  { icon: ShieldCheck, titulo: 'Procedência Garantida', desc: 'Todos os veículos revisados e com histórico verificado.' },
+  { icon: CreditCard, titulo: 'Condições Flexíveis', desc: 'Financiamento, troca e cartão de crédito aceitos.' },
+  { icon: Handshake, titulo: 'Atendimento Premium', desc: 'Desde 1985 com foco no melhor atendimento do mercado.' },
 ];
 </script>
 
@@ -101,6 +103,9 @@ const diferenciais = [
   text-transform: uppercase;
   letter-spacing: 0.1em;
   margin-bottom: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
 }
 
 .hero-content h1 {
@@ -152,9 +157,9 @@ const diferenciais = [
 }
 
 .diff-icon {
-  font-size: 2em;
   display: block;
-  margin-bottom: 0.6rem;
+  margin: 0 auto 0.6rem;
+  color: #c0392b;
 }
 
 .card-diff h3 {

@@ -6,7 +6,7 @@
     <template v-else-if="carro">
       <!-- Banner do veículo -->
       <div class="veiculo-banner">
-        <RouterLink to="/carros" class="voltar-link">← Voltar</RouterLink>
+        <RouterLink to="/carros" class="voltar-link"><ArrowLeft :size="14" /> Voltar</RouterLink>
         <h1>{{ carro.nome }}</h1>
         <p class="veiculo-preco">{{ carro.precoFormatado }}</p>
       </div>
@@ -48,7 +48,7 @@
             <h2>Formas de Pagamento</h2>
             <ul class="pagamento-lista">
               <li v-for="forma in carro.formasPagamento" :key="forma">
-                <span class="check">✓</span> {{ forma }}
+                <Check :size="15" class="check" /> {{ forma }}
               </li>
             </ul>
           </div>
@@ -62,7 +62,7 @@
               target="_blank"
               rel="noopener noreferrer"
             >
-              💬 Falar no WhatsApp
+              <MessageCircle :size="16" /> Falar no WhatsApp
             </a>
             <RouterLink to="/contato" class="btn zoom-shadow cta-email">
               Formulário de Contato
@@ -71,6 +71,17 @@
 
         </aside>
       </div>
+
+      <!-- Peças compatíveis -->
+      <div v-if="pecas.length" class="pecas-compat">
+        <h2>Peças compatíveis com este veículo</h2>
+        <div class="pecas-grid">
+          <CardProduto v-for="p in pecas" :key="p.id" :produto="p" />
+        </div>
+        <RouterLink :to="`/pecas?modelo=${modeloSlug}`" v-if="modeloSlug" class="ver-todas">
+          Ver todas as peças para este modelo <ArrowRight :size="14" />
+        </RouterLink>
+      </div>
     </template>
   </section>
 </template>
@@ -78,23 +89,40 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue';
 import { useRoute } from 'vue-router';
+import { ArrowLeft, ArrowRight, Check, MessageCircle } from 'lucide-vue-next';
+import { api } from '../api';
+import CardProduto from '../components/CardProduto.vue';
 
 const route = useRoute();
 const carro = ref(null);
+const pecas = ref([]);
+const modeloSlug = ref('');
 const carregando = ref(true);
 const erro = ref(null);
 
 async function buscarCarro(id) {
   carregando.value = true;
   erro.value = null;
+  pecas.value = [];
   try {
     const res = await fetch(`/api/carros/${id}`);
     if (!res.ok) throw new Error('Veículo não encontrado.');
     carro.value = await res.json();
+    modeloSlug.value = carro.value.modeloSlug || '';
+    buscarPecas(id);
   } catch (e) {
     erro.value = e.message;
   } finally {
     carregando.value = false;
+  }
+}
+
+async function buscarPecas(id) {
+  try {
+    const dados = await api.pecasCompativeis(id);
+    pecas.value = dados.itens.slice(0, 3);
+  } catch {
+    pecas.value = [];
   }
 }
 
@@ -118,7 +146,9 @@ watch(() => route.params.id, (novoId) => buscarCarro(novoId));
 }
 
 .voltar-link {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
   color: #c0392b;
   font-size: 0.85em;
   font-weight: 700;
@@ -269,6 +299,45 @@ watch(() => route.params.id, (novoId) => buscarCarro(novoId));
   font-size: 0.92em;
 }
 
+/* ── Peças compatíveis ── */
+.pecas-compat {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem 2.5rem;
+  width: 100%;
+}
+
+.pecas-compat h2 {
+  text-align: left;
+  font-size: 1.1em;
+  color: #c0392b;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 1.2rem;
+}
+
+.pecas-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+}
+
+.ver-todas {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 1.2rem;
+  color: #c0392b;
+  font-weight: 700;
+  font-size: 0.85em;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.ver-todas:hover {
+  text-decoration: underline;
+}
+
 /* ── Responsivo ── */
 @media (max-width: 800px) {
   .detalhe-inner {
@@ -282,5 +351,12 @@ watch(() => route.params.id, (novoId) => buscarCarro(novoId));
   .veiculo-banner { padding: 1.2rem 1rem; }
   .veiculo-banner h1 { font-size: 1.2em; }
   .veiculo-preco { font-size: 1.2em; }
+
+  .pecas-compat { padding: 0 1rem 1.5rem; }
+  .pecas-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 1100px) and (min-width: 801px) {
+  .pecas-grid { grid-template-columns: repeat(2, 1fr); }
 }
 </style>
