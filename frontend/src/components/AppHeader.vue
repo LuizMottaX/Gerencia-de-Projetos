@@ -55,6 +55,14 @@
       <RouterLink to="/acessorios" class="nav-link" title="Acessórios" @click="fecharMenu">
         Acessórios
       </RouterLink>
+      <RouterLink
+        to="/servicos"
+        class="nav-link"
+        title="Serviços e agendamento"
+        @click="fecharMenu"
+      >
+        Serviços
+      </RouterLink>
       <RouterLink to="/dicas" class="nav-link" title="Dicas Automotivas" @click="fecharMenu">
         Dicas Automotivas
       </RouterLink>

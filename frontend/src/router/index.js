@@ -63,6 +63,24 @@ const routes = [
     meta: { title: 'Contato — Chiquinho Motors®' },
   },
   {
+    path: '/servicos',
+    name: 'servicos',
+    component: () => import('../views/ServicosView.vue'),
+    meta: { title: 'Serviços — Chiquinho Motors®' },
+  },
+  {
+    path: '/agendar/:servicoSlug',
+    name: 'agendar',
+    component: () => import('../views/AgendamentoView.vue'),
+    meta: { title: 'Agendar serviço — Chiquinho Motors®' },
+  },
+  {
+    path: '/agendamento/:codigo',
+    name: 'agendamento',
+    component: () => import('../views/AgendamentoConfirmadoView.vue'),
+    meta: { title: 'Agendamento — Chiquinho Motors®' },
+  },
+  {
     path: '/carrinho',
     name: 'carrinho',
     component: () => import('../views/CarrinhoView.vue'),

@@ -15,7 +15,7 @@ entregas pendentes**, com critérios de aceitação e dependências.
 | **F1** Persistência — PostgreSQL + Prisma | ✅ concluída |
 | **F2** Catálogo de peças e acessórios | ✅ concluída |
 | **F3** Carrinho e checkout | ✅ concluída (12/10/2026) |
-| **F4** Serviços e agendamento | ⬜ não iniciada |
+| **F4** Serviços e agendamento | ✅ concluída (12/10/2026) |
 | **F5** Área administrativa | 🟡 autenticação pronta; falta CRUD e telas |
 | **F6** Qualidade e publicação | ⬜ não iniciada |
 
@@ -328,27 +328,27 @@ funcionamento (ex.: seg–sex 08:00–18:00), granularidade de 30 min.
 
 ### Backend
 
-- [ ] `GET /api/servicos` e `GET /api/servicos/:slug`.
-- [ ] `GET /api/agendamentos/disponibilidade?servico=<slug>&data=<YYYY-MM-DD>`
+- [x] `GET /api/servicos` e `GET /api/servicos/:slug`.
+- [x] `GET /api/agendamentos/disponibilidade?servico=<slug>&data=<YYYY-MM-DD>`
       — gera os slots do dia a partir do horário de funcionamento e da
       `duracaoMin`, remove os já ocupados, retorna os livres.
-- [ ] `POST /api/agendamentos` — `zod` + `upsert` do cliente + criação
+- [x] `POST /api/agendamentos` — `zod` + `upsert` do cliente + criação
       dentro de transação; a constraint `@@unique([servicoId, dataHora])`
       garante que dois não peguem o mesmo horário (capturar o erro P2002 →
       409 "horário indisponível").
-- [ ] `GET /api/agendamentos/:codigo`.
-- [ ] (Opcional) e-mail de confirmação com `nodemailer` — se não der,
-      deixar só o registro para o painel da F5.
+- [x] `GET /api/agendamentos/:codigo`.
+- [ ] (Opcional) e-mail de confirmação com `nodemailer` — **não feito**:
+      fica só o registro para o painel da F5 + botão de WhatsApp na confirmação.
 
 ### Frontend
 
-- [ ] `ServicosView` (`/servicos`) — cards de serviço com preço e duração.
-- [ ] `AgendamentoView` (`/agendar/:servicoSlug`): escolher data →
+- [x] `ServicosView` (`/servicos`) — cards de serviço com preço e duração.
+- [x] `AgendamentoView` (`/agendar/:servicoSlug`): escolher data →
       carregar slots → escolher horário → dados do cliente + veículo →
       confirmar.
-- [ ] `AgendamentoConfirmadoView` (`/agendamento/:codigo`).
-- [ ] Links no `AppHeader` e na Home.
-- [ ] Seed com ~5 serviços (troca de óleo, alinhamento, revisão dos
+- [x] `AgendamentoConfirmadoView` (`/agendamento/:codigo`).
+- [x] Links no `AppHeader` e na Home.
+- [x] Seed com ~5 serviços (troca de óleo, alinhamento, revisão dos
       freios, ar-condicionado, revisão completa).
 
 ### Pronto quando

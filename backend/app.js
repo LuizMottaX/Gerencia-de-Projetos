@@ -9,6 +9,8 @@ const carrosRouter = require('./src/routes/carros');
 const catalogoRouter = require('./src/routes/catalogo');
 const contatoRouter = require('./src/routes/contato');
 const pedidosRouter = require('./src/routes/pedidos');
+const servicosRouter = require('./src/routes/servicos');
+const agendamentosRouter = require('./src/routes/agendamentos');
 const authAdminRouter = require('./src/routes/authAdmin');
 const { criarRotasProduto } = require('./src/routes/produtoRotas');
 const { naoEncontrado, tratarErro } = require('./src/middleware/errors');
@@ -28,6 +30,8 @@ app.use('/api/pecas', criarRotasProduto('PECA'));
 app.use('/api/acessorios', criarRotasProduto('ACESSORIO'));
 app.use('/api/contato', contatoRouter);
 app.use('/api/pedidos', pedidosRouter);
+app.use('/api/servicos', servicosRouter);
+app.use('/api/agendamentos', agendamentosRouter);
 app.use('/api', catalogoRouter); // /api/categorias, /api/modelos
 app.use('/api/admin/auth', authAdminRouter);
 

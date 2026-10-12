@@ -71,4 +71,12 @@ export const api = {
 
   criarPedido: (dados) => pedir('/pedidos', { method: 'POST', body: JSON.stringify(dados) }),
   buscarPedido: (codigo) => pedir(`/pedidos/${encodeURIComponent(codigo)}`),
+
+  listarServicos: () => pedir('/servicos'),
+  buscarServico: (id) => pedir(`/servicos/${id}`),
+  disponibilidade: (servico, data) =>
+    pedir(`/agendamentos/disponibilidade${query({ servico, data })}`),
+  criarAgendamento: (dados) =>
+    pedir('/agendamentos', { method: 'POST', body: JSON.stringify(dados) }),
+  buscarAgendamento: (codigo) => pedir(`/agendamentos/${encodeURIComponent(codigo)}`),
 };

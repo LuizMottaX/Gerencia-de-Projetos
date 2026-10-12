@@ -38,13 +38,25 @@
         Nossos veículos são de procedência, revisados por profissionais qualificados. Visite-nos ou
         verifique o nosso catálogo on-line!
       </p>
-      <RouterLink to="/carros" class="btn zoom-shadow">Ver catálogo completo</RouterLink>
+      <div class="chamada-acoes">
+        <RouterLink to="/carros" class="btn zoom-shadow">Ver catálogo completo</RouterLink>
+        <RouterLink to="/servicos" class="btn btn-red zoom-shadow">
+          <CalendarCheck :size="16" /> Agendar revisão
+        </RouterLink>
+      </div>
     </section>
   </div>
 </template>
 
 <script setup>
-import { MapPin, ArrowRight, ShieldCheck, CreditCard, Handshake } from 'lucide-vue-next';
+import {
+  MapPin,
+  ArrowRight,
+  ShieldCheck,
+  CreditCard,
+  Handshake,
+  CalendarCheck,
+} from 'lucide-vue-next';
 
 const diferenciais = [
   {
@@ -202,6 +214,13 @@ const diferenciais = [
   flex-direction: column;
   align-items: center;
   gap: 1.2rem;
+}
+
+.chamada-acoes {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .chamada-texto {

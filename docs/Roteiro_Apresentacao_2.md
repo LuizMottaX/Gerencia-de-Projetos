@@ -21,7 +21,7 @@
 
 ### SLIDE 2 — ONDE ESTAMOS
 *[Mostrar o quadro de fases F0–F6.]*
-> "Recapitulando: F0, F1 e F2 concluídas e aceitas, e a F5 — autenticação do painel — foi antecipada. Isso vai aparecer mais adiante no controle de mudanças."
+> "Recapitulando: F0 a F4 concluídas e aceitas — inclusive carrinho e agendamento —, e a F5 — painel administrativo — já tem a autenticação pronta. Isso vai aparecer mais adiante no controle de mudanças."
 
 ### SLIDE 3 — TERMO DE ABERTURA
 *[Fonte: `01-Iniciacao/Termo-de-Abertura.md`]*
@@ -60,11 +60,11 @@
 
 ### SLIDE 10 — MONITORAR E CONTROLAR
 *[Fonte: `04-Monitoramento-e-Controle/Monitorar-e-Controlar-o-Trabalho.md`]*
-> "Nosso relatório de desempenho mostra **48% dos pacotes de produto concluídos**. Identificamos um desvio: lint, testes e CI da F0 atrasaram cerca de 7 semanas. A ação corretiva foi fechá-los **antes** de começar o carrinho — hoje são 14 testes automatizados rodando no GitHub Actions a cada Pull Request."
+> "Nosso relatório de desempenho mostra **76% dos pacotes de produto concluídos**. Identificamos um desvio: lint, testes e CI da F0 atrasaram cerca de 7 semanas. A ação corretiva foi fechá-los **antes** de começar o carrinho — hoje são 47 testes automatizados rodando no GitHub Actions a cada Pull Request. E a correção do desvio teve efeito: carrinho e agendamento ficaram prontos semanas antes do planejado."
 
 ### SLIDE 11 — CONTROLE INTEGRADO DE MUDANÇAS
 *[Fonte: `Controle-Integrado-de-Mudancas.md` — mostrar o fluxograma e o log.]*
-> "Toda mudança passa por um fluxo: solicitação, análise de impacto e decisão do comitê. Registramos **7 mudanças**. Exemplos: unificar peça e acessório num só modelo, tirar o Swagger da F2, e **antecipar a autenticação do painel** — aprovada com condições, como corrigir o segredo do JWT antes do deploy. E uma adiada: a contingência de prazo, que decidimos em novembro."
+> "Toda mudança passa por um fluxo: solicitação, análise de impacto e decisão do comitê. Registramos **8 mudanças**. Exemplos: unificar peça e acessório num só modelo, tirar o Swagger da F2, e **antecipar a autenticação do painel** — aprovada com condições, como corrigir o segredo do JWT antes do deploy. Outra boa: mudamos a grade da agenda para seguir a duração de cada serviço, porque a solução do plano deixava dois agendamentos se sobreporem. E uma adiada: a contingência de prazo, que com o adiantamento provavelmente não será necessária."
 
 ### SLIDE 12 — VERIFICAR O ESCOPO
 *[Fonte: `Verificar-Escopo.md`]*
@@ -76,7 +76,7 @@
 
 ### SLIDE 14 — ENCERRAR FASE + PRÓXIMOS PASSOS
 *[Fonte: `05-Encerramento/Encerramento-de-Fase.md`]*
-> "Encerramos formalmente a fase Fundação e Catálogo com **lições aprendidas** — a principal: qualidade no começo da fase, não no fim. Próximos passos: testes e CI, carrinho, agendamento, painel completo e deploy público em dezembro. Obrigado — estamos abertos a perguntas."
+> "Encerramos formalmente a fase Fundação e Catálogo com **lições aprendidas** — a principal: qualidade no começo da fase, não no fim. Próximos passos: completar o painel administrativo, testes ponta a ponta e o deploy público em dezembro. Obrigado — estamos abertos a perguntas."
 
 ---
 

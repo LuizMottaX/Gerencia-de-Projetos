@@ -1,11 +1,12 @@
 // Popula o banco com o catálogo inicial: veículos, marcas, modelos,
-// categorias, peças e acessórios (com compatibilidade por modelo).
+// categorias, peças e acessórios (com compatibilidade por modelo) e serviços.
 // Idempotente: usa upsert por slug, pode rodar quantas vezes quiser.
 
 const bcrypt = require('bcryptjs');
 const prisma = require('../src/lib/prisma');
 const { modelos, carros } = require('./seed/veiculos');
 const { categorias, pecas, acessorios } = require('./seed/catalogo');
+const { servicos } = require('./seed/servicos');
 
 const FORMAS_PADRAO = [
   'À vista',
@@ -151,6 +152,14 @@ async function seedProdutos(itens, tipo) {
   return itens.length;
 }
 
+async function seedServicos() {
+  for (const { precoBase, ...s } of servicos) {
+    const dados = { ...s, precoBaseCentavos: reais(precoBase) };
+    await prisma.servico.upsert({ where: { slug: s.slug }, update: dados, create: dados });
+  }
+  return servicos.length;
+}
+
 // Credenciais vêm do .env (ADMIN_EMAIL / ADMIN_SENHA) — nunca fixas no código.
 async function seedAdmin() {
   const email = process.env.ADMIN_EMAIL || 'admin@chiquinhomotors.com.br';
@@ -173,6 +182,7 @@ async function main() {
   console.log(`✔ ${await seedCategorias()} categorias`);
   console.log(`✔ ${await seedProdutos(pecas, 'PECA')} peças`);
   console.log(`✔ ${await seedProdutos(acessorios, 'ACESSORIO')} acessórios`);
+  console.log(`✔ ${await seedServicos()} serviços`);
   const admins = await seedAdmin();
   console.log(
     admins
