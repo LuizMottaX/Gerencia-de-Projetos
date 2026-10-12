@@ -74,6 +74,18 @@ const routes = [
     component: () => import('../views/NaoEncontradoView.vue'),
     meta: { title: 'Página não encontrada — Chiquinho Motors®' },
   },
+  {
+    path: '/admin/login',
+    name: 'admin-login',
+    component: () => import('../views/admin/LoginAdminView.vue'),
+    meta: { title: 'Login Admin — Chiquinho Motors®' },
+  },
+  {
+    path: '/admin',
+    name: 'admin-dashboard',
+    component: () => import('../views/admin/DashboardAdminView.vue'),
+    meta: { title: 'Painel Admin — Chiquinho Motors®', requerAdmin: true },
+  },
 ];
 
 const router = createRouter({
@@ -82,6 +94,19 @@ const router = createRouter({
   scrollBehavior() {
     return { top: 0 };
   },
+});
+
+// Sem token nem chega a carregar o painel; a validade do token é conferida
+// pela própria tela (GET /api/admin/auth/me).
+router.beforeEach((to) => {
+  if (!to.meta.requerAdmin) return true;
+  let token = null;
+  try {
+    token = localStorage.getItem('admin_token');
+  } catch {
+    // localStorage indisponível
+  }
+  return token ? true : { name: 'admin-login' };
 });
 
 router.afterEach((to) => {

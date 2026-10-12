@@ -7,8 +7,14 @@ const helmet = require('helmet');
 const carrosRouter = require('./src/routes/carros');
 const catalogoRouter = require('./src/routes/catalogo');
 const contatoRouter = require('./src/routes/contato');
+const authAdminRouter = require('./src/routes/authAdmin');
 const { criarRotasProduto } = require('./src/routes/produtoRotas');
 const { naoEncontrado, tratarErro } = require('./src/middleware/errors');
+
+if (!process.env.JWT_SECRET) {
+  console.error('❌  JWT_SECRET não definido. Veja backend/.env.example.');
+  process.exit(1);
+}
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -26,6 +32,7 @@ app.use('/api/pecas', criarRotasProduto('PECA'));
 app.use('/api/acessorios', criarRotasProduto('ACESSORIO'));
 app.use('/api/contato', contatoRouter);
 app.use('/api', catalogoRouter); // /api/categorias, /api/modelos
+app.use('/api/admin/auth', authAdminRouter);
 
 // ─── Erros ────────────────────────────────────────────────────────────────────
 app.use(naoEncontrado);

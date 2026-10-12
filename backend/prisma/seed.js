@@ -2,6 +2,7 @@
 // categorias, peças e acessórios (com compatibilidade por modelo).
 // Idempotente: usa upsert por slug, pode rodar quantas vezes quiser.
 
+const bcrypt = require('bcryptjs');
 const prisma = require('../src/lib/prisma');
 const { modelos, carros } = require('./seed/veiculos');
 const { categorias, pecas, acessorios } = require('./seed/catalogo');
@@ -139,6 +140,21 @@ async function seedProdutos(itens, tipo) {
   return itens.length;
 }
 
+// Credenciais vêm do .env (ADMIN_EMAIL / ADMIN_SENHA) — nunca fixas no código.
+async function seedAdmin() {
+  const email = process.env.ADMIN_EMAIL || 'admin@chiquinhomotors.com.br';
+  const senha = process.env.ADMIN_SENHA;
+  if (!senha) return 0;
+
+  const senhaHash = await bcrypt.hash(senha, 10);
+  await prisma.administrador.upsert({
+    where: { email },
+    update: { senha: senhaHash, ativo: true },
+    create: { nome: 'Administrador Chefe', email, senha: senhaHash },
+  });
+  return 1;
+}
+
 async function main() {
   console.log(`✔ ${await seedMarcas()} marcas`);
   console.log(`✔ ${await seedModelos()} modelos de veículo`);
@@ -146,6 +162,8 @@ async function main() {
   console.log(`✔ ${await seedCategorias()} categorias`);
   console.log(`✔ ${await seedProdutos(pecas, 'PECA')} peças`);
   console.log(`✔ ${await seedProdutos(acessorios, 'ACESSORIO')} acessórios`);
+  const admins = await seedAdmin();
+  console.log(admins ? `✔ ${admins} administrador` : '⚠ administrador não criado — defina ADMIN_SENHA no .env');
 }
 
 main()

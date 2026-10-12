@@ -48,16 +48,30 @@
       <RouterLink to="/sobre" class="nav-link" title="Quem Somos?" @click="fecharMenu">
         Quem Somos?
       </RouterLink>
+      
+      <!-- Link dinâmico para o admin -->
+      <RouterLink 
+        :to="auth.isAuthenticated ? '/admin' : '/admin/login'" 
+        class="nav-link nav-link--admin" 
+        title="Painel Administrativo" 
+        @click="fecharMenu"
+      >
+        <UserCog :size="15" :stroke-width="2.5" /> 
+        {{ auth.isAuthenticated ? 'Painel Admin' : 'Admin' }}
+      </RouterLink>
     </nav>
   </header>
 </template>
 
 <script setup>
 import { ref } from 'vue';
-import { Car } from 'lucide-vue-next';
+import { Car, UserCog } from 'lucide-vue-next';
+import { useAuthStore } from '@/stores/auth';
 
+const auth = useAuthStore();
 const menuAberto = ref(false);
 function fecharMenu() { menuAberto.value = false; }
+
 </script>
 
 <style scoped>
@@ -188,6 +202,23 @@ nav {
     text-align: center;
     font-size: 0.9em;
     padding: 0.65em 1em;
+  }
+}
+
+.nav-link--admin {
+  background-color: var(--carbon-700);
+  border-color: var(--carbon-600);
+  margin-left: auto; /* Empurra pro final se houver espaço */
+}
+
+.nav-link--admin:hover {
+  background-color: var(--carbon-600);
+  color: var(--carbon-100);
+}
+
+@media (max-width: 650px) {
+  .nav-link--admin {
+    margin-left: 0;
   }
 }
 </style>

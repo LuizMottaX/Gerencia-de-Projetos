@@ -170,3 +170,16 @@ model MensagemContato {
 
   @@index([lida])
 }
+
+// ─────────────────────────────  Administração  ─────────────────────────────
+
+/// Usuário com acesso ao painel administrativo.
+model Administrador {
+  id           Int      @id @default(autoincrement())
+  nome         String
+  email        String   @unique
+  senha        String   // Hash da senha
+  ativo        Boolean  @default(true)
+  criadoEm     DateTime @default(now())
+  atualizadoEm DateTime @updatedAt
+}
