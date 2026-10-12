@@ -1,5 +1,14 @@
 // 404 para rotas não mapeadas + tratamento centralizado de erros.
 
+/** Erro de regra de negócio com status HTTP próprio (ex.: 409 estoque insuficiente). */
+class ErroHttp extends Error {
+  constructor(status, mensagem, detalhes) {
+    super(mensagem);
+    this.status = status;
+    this.detalhes = detalhes;
+  }
+}
+
 function naoEncontrado(req, res) {
   res.status(404).json({ erro: 'Recurso não encontrado.' });
 }
@@ -14,8 +23,12 @@ function tratarErro(err, req, res, next) {
     });
   }
 
+  if (err instanceof ErroHttp) {
+    return res.status(err.status).json({ erro: err.message, detalhes: err.detalhes });
+  }
+
   console.error(err);
   res.status(500).json({ erro: 'Erro interno do servidor.' });
 }
 
-module.exports = { naoEncontrado, tratarErro };
+module.exports = { ErroHttp, naoEncontrado, tratarErro };

@@ -110,6 +110,9 @@ O GitHub Actions (`.github/workflows/ci.yml`) roda lint, formatação, testes e 
 | GET    | `/api/categorias`        | Categorias do catálogo (`?tipo=peca` \| `acessorio`) |
 | GET    | `/api/modelos`           | Modelos de veículo (para o filtro de compatibilidade) |
 | POST   | `/api/contato`           | Registra uma mensagem do formulário de contato        |
+| POST   | `/api/pedidos`           | Cria um pedido (`{ cliente, itens: [{ produto, quantidade }] }`); 409 se faltar estoque |
+| GET    | `/api/pedidos/:codigo`   | Acompanhamento do pedido pelo código                  |
+| POST   | `/api/admin/auth/login`  | Login do painel administrativo (JWT)                  |
 | GET    | `/api/servicos`          | Serviços de manutenção (planejado — F4)               |
 
 ---

@@ -85,18 +85,18 @@ entrega e à **evidência** de verificação.
 | RF04 | O1 | 1.3.1, 1.3.2 | Tabela `ProdutoCompatibilidade`; filtro `?modelo=` | ✅ |
 | RF06 | O1 | 1.3.2 | `GET /api/carros/:id/pecas` | ✅ |
 | RF07 | O1 | 1.1.3 | `POST /api/contato` → `MensagemContato` | ✅ |
-| RF08–RF10 | O2 | 1.4.1–1.4.4 | Fluxo carrinho → checkout → `/pedido/:codigo` | ⬜ |
+| RF08–RF10 | O2 | 1.4.1–1.4.4 | Fluxo carrinho → checkout → `/pedido/:codigo`; `tests/pedidos.test.js`, `tests/carrinho.test.js` | ✅ |
 | RF11, RF12 | O3 | 1.5.1–1.5.4 | `/api/servicos`, `/api/agendamentos/disponibilidade` | ⬜ |
-| RF13 | O4 | 1.6.1 | `POST /api/admin/auth/login`, `LoginAdminView` | 🟡 |
+| RF13 | O4 | 1.6.1 | `POST /api/admin/auth/login`, `LoginAdminView` | ✅ |
 | RF14–RF17 | O4 | 1.6.2–1.6.4 | CRUD protegido + telas do painel | ⬜ |
 | RNF01–RNF03 | todos | 1.1.1, 1.2.1 | Estrutura do repositório; `AGENTS.md` | ✅ |
 | RNF04, RNF05 | todos | 1.1.2 | `middleware/errors.js`, `server.js` | ✅ |
-| RNF06 | O4 | 1.6.1 | `bcryptjs` + `jsonwebtoken` + `middleware/authAdmin.js` | 🟡 |
+| RNF06 | O4 | 1.6.1 | `bcryptjs` + `jsonwebtoken` + `middleware/authAdmin.js` | ✅ |
 | RNF07 | O1, O2 | 1.2.2 | Colunas `*Centavos Int` no schema | ✅ |
-| RNF08 | O2 | 1.4.1 | Teste de concorrência do pedido | ⬜ |
+| RNF08 | O2 | 1.4.2 | Teste de concorrência (5 pedidos simultâneos do último item) | ✅ |
 | RNF09 | O3 | 1.5.1 | `@@unique([servicoId, dataHora])` + teste | ⬜ |
 | RNF10 | todos | 1.1.4 | `assets/style.css`; `lucide-vue-next` | ✅ |
 | RNF11 | O5 | 1.7.2 | Relatório Lighthouse | ⬜ |
-| RNF12 | O5 | 1.1.5, 1.7.1 | Workflow GitHub Actions | ⬜ |
+| RNF12 | O5 | 1.1.5, 1.7.1 | Workflow GitHub Actions | 🟡 (unit ✅, E2E na F6) |
 
 Legenda: ✅ atendido e verificado · 🟡 em andamento · ⬜ não iniciado

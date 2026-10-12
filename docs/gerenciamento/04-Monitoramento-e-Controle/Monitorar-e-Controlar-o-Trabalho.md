@@ -23,20 +23,20 @@
 | F0 Fundação | 14/08 – 20/08 | Concluída em 12/10 (lint/testes/CI atrasados) | 5 / 5 (100%) | ✅ |
 | F1 Persistência | 21/08 – 27/08 | Concluída em 27/08 | 4 / 4 (100%) | ✅ |
 | F2 Peças e acessórios | 21/08 – 27/08 | Concluída em 27/08 | 4 / 4 (100%) | ✅ |
-| F3 Carrinho | 19/10 – 08/11 | Não iniciada | 0 / 4 (0%) | ⬜ |
+| F3 Carrinho | 19/10 – 08/11 | **Concluída em 12/10** (adiantada) | 4 / 4 (100%) | ✅ |
 | F4 Agendamento | 09/11 – 22/11 | Não iniciada | 0 / 4 (0%) | ⬜ |
 | F5 Admin | 23/11 – 06/12 | **Antecipada** — autenticação concluída | 1 / 4 (25%) | 🟡 |
 | F6 Publicação | 07/12 – 13/12 | Não iniciada | 0 / 4 (0%) | ⬜ |
 | Gerenciamento | contínuo | Artefatos de Integração e Escopo prontos | 4 / 5 | 🟡 |
 
-**Progresso geral das entregas de produto:** 14 de 29 pacotes de produto
-concluídos ≈ **48%**.
+**Progresso geral das entregas de produto:** 18 de 29 pacotes de produto
+concluídos ≈ **62%**.
 
 ```mermaid
 pie showData title Pacotes de produto da EAP (29)
-    "Concluídos" : 14
+    "Concluídos" : 18
     "Em andamento" : 1
-    "Não iniciados" : 14
+    "Não iniciados" : 10
 ```
 
 ## 3. Análise de desempenho
@@ -45,11 +45,13 @@ pie showData title Pacotes de produto da EAP (29)
   e verificadas (ver [Verificar o Escopo](Verificar-Escopo.md)).
 - **Cronograma:** o pacote 1.1.5 (lint/testes/CI) atrasou ~7 semanas em
   relação ao previsto (agosto), mas foi **concluído em 12/10** pela ação A1.
-  Risco R3 (regressões) mitigado: 14 testes automatizados no CI.
+  Risco R3 (regressões) mitigado: 29 testes automatizados no CI.
+- **F3 adiantada:** concluída em 12/10, uma semana antes do início
+  planejado (19/10), o que abre folga para F4–F6.
 - **Sequência:** a F5 (autenticação) foi **antecipada** em relação à F3/F4.
   A mudança foi registrada como **CR-05** e aprovada com condições.
-- **Qualidade:** 8 testes de API (com banco isolado) e 6 de frontend rodam
-  no GitHub Actions a cada push/PR, junto com lint e formatação.
+- **Qualidade:** 16 testes de API (com banco isolado, incluindo concorrência
+  de estoque) e 13 de frontend rodam no GitHub Actions a cada push/PR.
 
 ## 4. Ações corretivas e preventivas
 

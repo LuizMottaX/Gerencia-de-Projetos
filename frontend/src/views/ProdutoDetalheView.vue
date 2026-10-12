@@ -54,9 +54,21 @@
 
           <div class="cta-box">
             <p class="cta-titulo">Quer este item?</p>
+            <button
+              type="button"
+              class="btn btn-red zoom-shadow"
+              :disabled="!produto.disponivel"
+              @click="adicionarAoCarrinho"
+            >
+              <ShoppingCart :size="16" />
+              {{ produto.disponivel ? 'Adicionar ao carrinho' : 'Sem estoque' }}
+            </button>
+            <p v-if="avisoCarrinho" class="aviso-carrinho">
+              {{ avisoCarrinho }} <RouterLink to="/carrinho">Ver carrinho</RouterLink>
+            </p>
             <a
               :href="linkWhatsApp"
-              class="btn btn-red zoom-shadow"
+              class="btn zoom-shadow"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -73,8 +85,9 @@
 <script setup>
 import { ref, computed, watch } from 'vue';
 import { useRoute } from 'vue-router';
-import { ArrowLeft, MessageCircle, Headphones, Wrench } from 'lucide-vue-next';
+import { ArrowLeft, MessageCircle, Headphones, ShoppingCart, Wrench } from 'lucide-vue-next';
 import { api } from '../api';
+import { useCarrinhoStore } from '../stores/carrinho';
 
 const route = useRoute();
 const produto = ref(null);
@@ -91,7 +104,18 @@ const linkWhatsApp = computed(() => {
   return `https://wa.me/5566999896813?text=${encodeURIComponent(texto)}`;
 });
 
+const carrinho = useCarrinhoStore();
+const avisoCarrinho = ref('');
+
+function adicionarAoCarrinho() {
+  const coube = carrinho.adicionar(produto.value);
+  avisoCarrinho.value = coube
+    ? 'Adicionado ao carrinho!'
+    : 'Você já tem todo o estoque deste item no carrinho.';
+}
+
 async function carregar(id) {
+  avisoCarrinho.value = '';
   carregando.value = true;
   erro.value = null;
   produto.value = null;
@@ -285,6 +309,21 @@ watch(
   font-size: 0.95em;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+}
+
+.cta-box .btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.aviso-carrinho {
+  color: #e8eaed;
+  font-size: 0.85em;
+}
+
+.aviso-carrinho a {
+  color: #e74c3c;
+  font-weight: 700;
 }
 
 @media (max-width: 800px) {

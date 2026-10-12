@@ -60,6 +60,17 @@ demonstrados — não basta o código existir.
 ¹ Para o CI **bloquear o merge**, falta ativar a proteção da branch `main`
 no GitHub (Settings → Branches → exigir os checks `backend` e `frontend`).
 
+### E4 — Carrinho, checkout e pedido (F3) — ✅ ACEITA
+
+| Critério | Verificação | Resultado |
+|----------|-------------|:---------:|
+| Fluxo carrinho → checkout → pedido com código | Teste de API + execução manual pelo proxy do Vite | ✅ |
+| Comprar além do estoque é bloqueado com mensagem específica | 409 com item e quantidade disponível (teste) | ✅ |
+| Recarregar a página não perde o carrinho | Persistência em `localStorage` (teste da store) | ✅ |
+| Pedidos simultâneos não deixam estoque negativo | 5 pedidos paralelos do último item → 1 aceito, 4 recusados (teste) | ✅ |
+
+**Aceite:** Equipe · 12/10/2026.
+
 ### E6 — Painel administrativo (F5) — ⏳ EM VERIFICAÇÃO (incremento: autenticação)
 
 | Critério | Verificação | Resultado |
@@ -85,7 +96,7 @@ no GitHub (Settings → Branches → exigir os checks `backend` e `frontend`).
 | E1 Fundação | ✅ aceita |
 | E2 Persistência | ✅ aceita |
 | E3 Peças e acessórios | ✅ aceita |
-| E4 Carrinho | ⬜ |
+| E4 Carrinho | ✅ aceita |
 | E5 Agendamento | ⬜ |
 | E6 Admin | ⏳ em verificação |
 | E7 Publicação | ⬜ |

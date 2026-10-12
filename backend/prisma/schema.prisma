@@ -1,6 +1,7 @@
 // Schema do banco — Chiquinho Motors®
 // F1: núcleo de veículos (Marca, Carro, CarroImagem).
 // F2: catálogo de peças e acessórios (Produto unificado + compatibilidade por modelo).
+// F3: carrinho e checkout (Cliente, Pedido, PedidoItem).
 
 generator client {
   provider = "prisma-client-js"
@@ -136,6 +137,7 @@ model Produto {
   categoriaId Int
 
   compatibilidades ProdutoCompatibilidade[]
+  itensPedido      PedidoItem[]
 
   criadoEm     DateTime @default(now())
   atualizadoEm DateTime @updatedAt
@@ -154,6 +156,61 @@ model ProdutoCompatibilidade {
 
   @@id([produtoId, modeloVeiculoId])
   @@index([modeloVeiculoId])
+}
+
+// ─────────────────────────────  Pedidos  ─────────────────────────────
+
+/// Cliente identificado pelo e-mail — não há cadastro com senha (fora do escopo).
+model Cliente {
+  id       Int      @id @default(autoincrement())
+  nome     String
+  email    String   @unique
+  telefone String
+  pedidos  Pedido[]
+  criadoEm DateTime @default(now())
+}
+
+enum StatusPedido {
+  RECEBIDO
+  EM_SEPARACAO
+  PRONTO
+  ENTREGUE
+  CANCELADO
+}
+
+/// Pedido de peças/acessórios. Sem pagamento online: a loja entra em contato.
+model Pedido {
+  id            Int          @id @default(autoincrement())
+  /// Código curto que o cliente usa para acompanhar o pedido (ex.: "CM-7K2QXP").
+  codigo        String       @unique
+  status        StatusPedido @default(RECEBIDO)
+  /// Calculado no servidor a partir dos preços do banco — nunca vem do cliente.
+  totalCentavos Int
+
+  cliente   Cliente @relation(fields: [clienteId], references: [id])
+  clienteId Int
+
+  itens PedidoItem[]
+
+  criadoEm     DateTime @default(now())
+  atualizadoEm DateTime @updatedAt
+
+  @@index([clienteId])
+  @@index([status])
+}
+
+model PedidoItem {
+  id         Int     @id @default(autoincrement())
+  pedido     Pedido  @relation(fields: [pedidoId], references: [id], onDelete: Cascade)
+  pedidoId   Int
+  produto    Produto @relation(fields: [produtoId], references: [id])
+  produtoId  Int
+  quantidade Int
+  /// Preço congelado no momento da compra — mudanças futuras de preço não afetam o pedido.
+  precoUnitCentavos Int
+
+  @@index([pedidoId])
+  @@index([produtoId])
 }
 
 // ─────────────────────────────  Contato  ─────────────────────────────
