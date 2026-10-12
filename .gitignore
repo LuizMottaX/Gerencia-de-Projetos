@@ -12,6 +12,7 @@ frontend/.vite/
 # Variáveis de ambiente
 .env
 .env.local
+.env.test
 .env.*.local
 
 # Editor
