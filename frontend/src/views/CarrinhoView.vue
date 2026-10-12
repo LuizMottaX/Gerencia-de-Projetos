@@ -105,7 +105,7 @@ const rotaDe = (item) => `/${item.tipo === 'acessorio' ? 'acessorios' : 'pecas'}
   align-items: center;
   gap: 1rem;
   padding: 4rem 1rem;
-  color: #888;
+  color: #666;
 }
 
 .vazio-acoes {
@@ -183,7 +183,7 @@ const rotaDe = (item) => `/${item.tipo === 'acessorio' ? 'acessorios' : 'pecas'}
 
 .item-preco {
   font-size: 0.82em;
-  color: #777;
+  color: #666;
 }
 
 .item-qtd {

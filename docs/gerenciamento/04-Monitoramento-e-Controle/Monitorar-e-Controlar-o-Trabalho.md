@@ -26,17 +26,17 @@
 | F3 Carrinho | 19/10 – 08/11 | **Concluída em 12/10** (adiantada) | 4 / 4 (100%) | ✅ |
 | F4 Agendamento | 09/11 – 22/11 | **Concluída em 12/10** (adiantada) | 4 / 4 (100%) | ✅ |
 | F5 Admin | 23/11 – 06/12 | **Concluída em 12/10** (adiantada) | 4 / 4 (100%) | ✅ |
-| F6 Publicação | 07/12 – 13/12 | Não iniciada | 0 / 4 (0%) | ⬜ |
+| F6 Publicação | 07/12 – 13/12 | Tudo pronto em 12/10, **exceto publicar** | 3 / 4 (75%) | 🟡 |
 | Gerenciamento | contínuo | Artefatos de Integração e Escopo prontos | 4 / 5 | 🟡 |
 
-**Progresso geral das entregas de produto:** 25 de 29 pacotes de produto
-concluídos ≈ **86%**. Só a F6 (publicação) falta.
+**Progresso geral das entregas de produto:** 28 de 29 pacotes de produto
+concluídos ≈ **97%**. Falta só publicar (1.7.3), que depende das contas da equipe.
 
 ```mermaid
 pie showData title Pacotes de produto da EAP (29)
-    "Concluídos" : 25
-    "Em andamento" : 0
-    "Não iniciados" : 4
+    "Concluídos" : 28
+    "Em andamento" : 1
+    "Não iniciados" : 0
 ```
 
 ## 3. Análise de desempenho
@@ -45,7 +45,7 @@ pie showData title Pacotes de produto da EAP (29)
   e verificadas (ver [Verificar o Escopo](Verificar-Escopo.md)).
 - **Cronograma:** o pacote 1.1.5 (lint/testes/CI) atrasou ~7 semanas em
   relação ao previsto (agosto), mas foi **concluído em 12/10** pela ação A1.
-  Risco R3 (regressões) mitigado: 81 testes automatizados no CI.
+  Risco R3 (regressões) mitigado: 94 testes automatizados no CI (incluindo 10 E2E).
 - **F3, F4 e F5 adiantadas:** concluídas em 12/10, antes do início planejado
   (19/10, 09/11 e 23/11). A folga praticamente elimina o risco R1; a
   contingência CR-07 deixou de ser necessária.
@@ -67,6 +67,6 @@ pie showData title Pacotes de produto da EAP (29)
 
 ## 5. Previsão
 
-Com F0–F5 concluídas em outubro, resta apenas a F6 (testes E2E, Lighthouse
-e deploy público), estimada em 1 semana. A entrega final em dezembro tem
-folga de várias semanas.
+Todo o desenvolvimento ficou pronto em outubro. Resta publicar (seguir
+`docs/DEPLOY.md`, ~2 h) e formalizar o encerramento — com folga de várias
+semanas para a entrega final de dezembro.

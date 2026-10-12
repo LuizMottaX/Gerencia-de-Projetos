@@ -173,7 +173,7 @@ async function enviar() {
 .form-card h2 {
   text-align: left;
   font-size: 1em;
-  color: #888;
+  color: #666;
   margin-bottom: 1.2rem;
   margin-top: 0;
 }

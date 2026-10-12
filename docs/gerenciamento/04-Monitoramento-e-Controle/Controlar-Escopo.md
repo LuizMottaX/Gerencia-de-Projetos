@@ -34,6 +34,7 @@ autorizadas (*scope creep*) ou trabalho extra não pedido (*gold plating*).
 | Grade de horários | Slots de 30 min + `@@unique` | Grade no passo da duração de cada serviço | Mudança de solução (evita sobreposição) | CR-08 ✅ |
 | E-mail de confirmação do agendamento | Opcional na F4 | Não feito (WhatsApp na confirmação) | Item opcional não entregue | Sem CR — era opcional |
 | Dashboard admin | Indicadores (estoque baixo, pedidos) | Indicadores entregues | Sem variação | ✅ |
+| Hospedagem | Vercel + Railway/Render | Docker pronto para Coolify (e alternativa Vercel) | Mudança de solução proposta | CR-10 ⏳ |
 | Rotas de status e uploads | `PATCH /api/pedidos/...`; uploads em `frontend/public/` | Em `/api/admin/...`; uploads no backend | Mudança de solução | CR-09 ✅ |
 | Links "Pedidos (F3)" e "Serviços (F4)" no menu admin | — | Links para telas que não existem | Antecipação de UI sem pacote | ✅ Desabilitados ("em breve") até F3/F4 |
 
@@ -54,8 +55,8 @@ Itens que surgiram em conversas e **não entram** sem um CR aprovado:
 |-----------|:-----------:|:----:|
 | PRs sem pacote da EAP | 0 | 0 |
 | Mudanças implementadas sem CR | 0 | 0 |
-| CRs registrados / aprovados / adiados / encerrados | 9 / 8 / 0 / 1 | — |
-| Pacotes de produto concluídos | 25 / 29 (86%) | 100% em 12/2026 |
+| CRs registrados / aprovados / propostos / encerrados | 10 / 8 / 1 / 1 | — |
+| Pacotes de produto concluídos | 28 / 29 (97%) | 100% em 12/2026 |
 
 ## 5. Resultados do controle
 

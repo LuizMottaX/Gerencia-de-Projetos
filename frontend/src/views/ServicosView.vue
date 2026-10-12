@@ -104,6 +104,6 @@ onMounted(async () => {
   align-items: center;
   gap: 0.3rem;
   font-size: 0.85em;
-  color: #777;
+  color: #666;
 }
 </style>

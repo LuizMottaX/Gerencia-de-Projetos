@@ -86,6 +86,9 @@ onMounted(async () => {
   display: flex;
   min-height: calc(100vh - 80px);
   background-color: var(--color-carbon);
+  /* Encosta no rodapé: anula o margin-top global do footer (senão aparece o
+     fundo claro do site entre o painel escuro e o rodapé). */
+  margin-bottom: -3rem;
 }
 
 .sidebar {

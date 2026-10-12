@@ -1,0 +1,14 @@
+{
+  "name": "chiquinho-motors-e2e",
+  "private": true,
+  "description": "Testes ponta a ponta (Playwright) — sobem backend + frontend e navegam como um usuário.",
+  "type": "module",
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "relatorio": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.0"
+  }
+}

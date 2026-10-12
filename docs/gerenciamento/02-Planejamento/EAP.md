@@ -102,11 +102,11 @@ flowchart TD
     - 1.6.2 CRUD protegido do catálogo + upload de imagem — ✅
     - 1.6.3 Status de pedidos/agendamentos + caixa de mensagens — ✅
     - 1.6.4 Telas do painel (login, dashboard, listas/formulários, pedidos, agenda, mensagens) — ✅
-  - **1.7 Qualidade e Publicação (F6)** — ⬜
-    - 1.7.1 Testes E2E (Playwright) — ⬜
-    - 1.7.2 Lighthouse ≥ 90, SEO, lazy loading — ⬜
-    - 1.7.3 Deploy (Vercel/Netlify + Railway/Render) — ⬜
-    - 1.7.4 README final com instruções de deploy — ⬜
+  - **1.7 Qualidade e Publicação (F6)** — 🟡
+    - 1.7.1 Testes E2E (Playwright, desktop e celular) — ✅
+    - 1.7.2 Lighthouse ≥ 90, SEO, lazy loading — ✅
+    - 1.7.3 Deploy — 🟡 (Dockerfiles e guia prontos; publicação pendente — CR-10)
+    - 1.7.4 README final com instruções de deploy — ✅
   - **1.8 Gerenciamento do Projeto** — 🟡
     - 1.8.1 Termo de abertura — ✅
     - 1.8.2 Plano de gerenciamento, requisitos, escopo, EAP — ✅
@@ -130,7 +130,7 @@ flowchart TD
 | 1.5.3 | Agendamento | Reserva com trava única | Conflito → 409 "horário indisponível" | Luiz | 2 d |
 | 1.6.1 | Autenticação | `Administrador`, bcrypt, JWT, `verificarAdmin`, store `auth` | Login válido gera token; rotas protegidas → 401 sem token | Luiz | 3 d |
 | 1.6.2 | CRUD protegido | POST/PUT/DELETE de carros, produtos, categorias, serviços | Item criado no painel aparece no site | Luiz | 5 d |
-| 1.7.3 | Deploy | Front e back publicados, `migrate deploy` | URL pública abre sem instalar nada | A definir | 2 d |
+| 1.7.3 | Deploy | Front e back publicados, `migrate deploy` | URL pública abre sem instalar nada | Luiz (config.) + Equipe (contas) | 2 d |
 | 1.8.4 | Apresentações | Slides + roteiro | Apresentado no tempo para a banca | Equipe | 2 d |
 
 > Pacotes marcados "A definir" serão atribuídos na reunião de

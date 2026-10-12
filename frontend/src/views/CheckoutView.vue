@@ -123,7 +123,7 @@ async function finalizar() {
   align-items: center;
   gap: 1rem;
   padding: 4rem 1rem;
-  color: #888;
+  color: #666;
 }
 
 .checkout-inner {
@@ -153,7 +153,7 @@ async function finalizar() {
 }
 
 .form-card h2 {
-  color: #888;
+  color: #666;
 }
 
 .form-erro {

@@ -21,7 +21,7 @@
 
 ### SLIDE 2 — ONDE ESTAMOS
 *[Mostrar o quadro de fases F0–F6.]*
-> "Recapitulando: F0 a F5 concluídas e aceitas — catálogo, carrinho, agendamento e o painel administrativo completo. Só falta a F6, a publicação. Isso vai aparecer mais adiante no controle de mudanças."
+> "Recapitulando: F0 a F5 concluídas e aceitas — catálogo, carrinho, agendamento e o painel administrativo completo — e a F6 pronta, faltando só publicar. Isso vai aparecer mais adiante no controle de mudanças."
 
 ### SLIDE 3 — TERMO DE ABERTURA
 *[Fonte: `01-Iniciacao/Termo-de-Abertura.md`]*
@@ -60,11 +60,11 @@
 
 ### SLIDE 10 — MONITORAR E CONTROLAR
 *[Fonte: `04-Monitoramento-e-Controle/Monitorar-e-Controlar-o-Trabalho.md`]*
-> "Nosso relatório de desempenho mostra **86% dos pacotes de produto concluídos**. Identificamos um desvio: lint, testes e CI da F0 atrasaram cerca de 7 semanas. A ação corretiva foi fechá-los **antes** de começar o carrinho — hoje são 81 testes automatizados rodando no GitHub Actions a cada Pull Request. E a correção do desvio teve efeito: carrinho, agendamento e painel ficaram prontos semanas antes do planejado."
+> "Nosso relatório de desempenho mostra **97% dos pacotes de produto concluídos**. Identificamos um desvio: lint, testes e CI da F0 atrasaram cerca de 7 semanas. A ação corretiva foi fechá-los **antes** de começar o carrinho — hoje são 94 testes automatizados, incluindo testes ponta a ponta no navegador, rodando no GitHub Actions a cada Pull Request. E a correção do desvio teve efeito: carrinho, agendamento e painel ficaram prontos semanas antes do planejado."
 
 ### SLIDE 11 — CONTROLE INTEGRADO DE MUDANÇAS
 *[Fonte: `Controle-Integrado-de-Mudancas.md` — mostrar o fluxograma e o log.]*
-> "Toda mudança passa por um fluxo: solicitação, análise de impacto e decisão do comitê. Registramos **9 mudanças**. Exemplos: unificar peça e acessório num só modelo, tirar o Swagger da F2, e **antecipar a autenticação do painel** — aprovada com condições, como corrigir o segredo do JWT antes do deploy. Outra boa: mudamos a grade da agenda para seguir a duração de cada serviço, porque a solução do plano deixava dois agendamentos se sobreporem. E uma que encerramos sem usar: a contingência de prazo — com o adiantamento, ela deixou de ser necessária."
+> "Toda mudança passa por um fluxo: solicitação, análise de impacto e decisão do comitê. Registramos **10 mudanças**. Exemplos: unificar peça e acessório num só modelo, tirar o Swagger da F2, e **antecipar a autenticação do painel** — aprovada com condições, como corrigir o segredo do JWT antes do deploy. Outra boa: mudamos a grade da agenda para seguir a duração de cada serviço, porque a solução do plano deixava dois agendamentos se sobreporem. E uma que encerramos sem usar: a contingência de prazo — com o adiantamento, ela deixou de ser necessária."
 
 ### SLIDE 12 — VERIFICAR O ESCOPO
 *[Fonte: `Verificar-Escopo.md`]*
@@ -76,7 +76,7 @@
 
 ### SLIDE 14 — ENCERRAR FASE + PRÓXIMOS PASSOS
 *[Fonte: `05-Encerramento/Encerramento-de-Fase.md`]*
-> "Encerramos formalmente a fase Fundação e Catálogo com **lições aprendidas** — a principal: qualidade no começo da fase, não no fim. Próximo passo: a F6 — testes ponta a ponta, acessibilidade e o deploy público. Obrigado — estamos abertos a perguntas."
+> "Encerramos formalmente a fase Fundação e Catálogo com **lições aprendidas** — a principal: qualidade no começo da fase, não no fim. Próximo passo: publicar o sistema — a configuração já está pronta e testada. Obrigado — estamos abertos a perguntas."
 
 ---
 

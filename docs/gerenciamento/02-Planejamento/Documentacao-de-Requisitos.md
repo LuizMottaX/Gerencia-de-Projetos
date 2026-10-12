@@ -96,7 +96,9 @@ entrega e à **evidência** de verificação.
 | RNF08 | O2 | 1.4.2 | Teste de concorrência (5 pedidos simultâneos do último item) | ✅ |
 | RNF09 | O3 | 1.5.1 | `@@unique([servicoId, dataHora])` + grade pela duração + teste de concorrência | ✅ |
 | RNF10 | todos | 1.1.4 | `assets/style.css`; `lucide-vue-next` | ✅ |
-| RNF11 | O5 | 1.7.2 | Relatório Lighthouse | ⬜ |
-| RNF12 | O5 | 1.1.5, 1.7.1 | Workflow GitHub Actions | 🟡 (unit ✅, E2E na F6) |
+| RNF11 | O5 | 1.7.2 | Lighthouse: acessibilidade 100, performance 95–98 (celular) e 100 (desktop) | ✅ |
+| RNF12 | O5 | 1.1.5, 1.7.1 | Workflow GitHub Actions: lint, unit, build e E2E | ✅ ¹ |
+
+¹ Bloquear o merge exige ativar a proteção da branch `main` no GitHub.
 
 Legenda: ✅ atendido e verificado · 🟡 em andamento · ⬜ não iniciado

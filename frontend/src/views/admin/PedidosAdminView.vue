@@ -142,6 +142,7 @@ watch(filtro, carregar, { immediate: true });
   color: var(--color-red-light);
   font: inherit;
   font-weight: 700;
+  white-space: nowrap;
   cursor: pointer;
 }
 

@@ -144,7 +144,7 @@ watch(
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: #888;
+  color: #666;
 }
 
 .codigo {

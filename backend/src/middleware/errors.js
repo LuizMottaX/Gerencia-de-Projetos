@@ -1,5 +1,7 @@
 // 404 para rotas não mapeadas + tratamento centralizado de erros.
 
+const { log } = require('./logs');
+
 /** Erro de regra de negócio com status HTTP próprio (ex.: 409 estoque insuficiente). */
 class ErroHttp extends Error {
   constructor(status, mensagem, detalhes) {
@@ -46,7 +48,12 @@ function tratarErro(err, req, res, next) {
     return res.status(400).json({ erro: mensagem });
   }
 
-  console.error(err);
+  log('erro', {
+    metodo: req.method,
+    rota: req.originalUrl,
+    erro: err?.message,
+    pilha: err?.stack?.split('\n').slice(0, 5).join(' | '),
+  });
   res.status(500).json({ erro: 'Erro interno do servidor.' });
 }
 

@@ -11,6 +11,8 @@
           src="https://blog.howeb.com.br/wp-content/uploads/2019/11/vendedor-entregando-chave-de-carro-ap%C3%B3s-uma-venda-com-abordagem-de-gatilhos-mentais.jpg"
           alt="Equipe Chiquinho Motors"
           class="sobre-img"
+          loading="lazy"
+          decoding="async"
         />
         <div class="sobre-texto-bloco">
           <h2>Nossa História</h2>
@@ -40,6 +42,8 @@
           src="https://holmes.app/wp-content/uploads/2022/05/shutterstock_1668929842.jpg"
           alt="Concessionária Chiquinho Motors"
           class="sobre-img"
+          loading="lazy"
+          decoding="async"
         />
         <div class="sobre-texto-bloco">
           <h2>Nossa Equipe</h2>

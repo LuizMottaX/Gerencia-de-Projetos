@@ -19,7 +19,8 @@
     "test:watch": "vitest",
     "db:test:setup": "dotenv -e .env.test -o -- prisma migrate deploy && dotenv -e .env.test -o -- node prisma/seed.js",
     "db:test:reset": "dotenv -e .env.test -o -- prisma migrate reset --force",
-    "admin:criar": "node scripts/criar-admin.js"
+    "admin:criar": "node scripts/criar-admin.js",
+    "start:prod": "prisma migrate deploy && node server.js"
   },
   "prisma": {
     "seed": "node prisma/seed.js"

@@ -95,6 +95,17 @@ no GitHub (Settings → Branches → exigir os checks `backend` e `frontend`).
 
 **Aceite:** Equipe · 12/10/2026.
 
+### E7 — Qualidade e publicação (F6) — 🟡 ACEITE PARCIAL
+
+| Critério | Verificação | Resultado |
+|----------|-------------|:---------:|
+| CI roda unit + E2E | Jobs `backend`, `frontend` e `e2e` no GitHub Actions | ✅ ¹ |
+| Lighthouse ≥ 90 (acessibilidade e performance) | 6 páginas: acessibilidade 100; performance 95–98 (celular) e 100 (desktop) | ✅ |
+| Um dev novo sobe o projeto seguindo só o README | README reescrito; os passos são os mesmos do CI | ✅ |
+| URL pública que qualquer avaliador abre | Imagens Docker testadas localmente; publicação depende das contas da equipe | ⏳ |
+
+¹ Para o CI **bloquear** o merge, falta ativar a proteção da branch `main`.
+
 ### E8 — Documentação PMBOK — ✅ ACEITA (Integração e Escopo)
 
 | Critério | Resultado |
@@ -114,5 +125,5 @@ no GitHub (Settings → Branches → exigir os checks `backend` e `frontend`).
 | E4 Carrinho | ✅ aceita |
 | E5 Agendamento | ✅ aceita |
 | E6 Admin | ✅ aceita |
-| E7 Publicação | ⬜ |
+| E7 Publicação | 🟡 falta publicar |
 | E8 Documentação | ✅ (Integração + Escopo) |
