@@ -54,17 +54,22 @@ flowchart TD
 | CR-04 | 27/08/2026 | Retirar **Swagger/OpenAPI** da F2 e mover para dívida técnica | Priorizar entrega funcional da F2 no prazo | Baixo — reduz escopo da F2 | ✅ Aprovada |
 | CR-05 | 25/09/2026 | **Antecipar a autenticação admin (F5)** antes de F3/F4 | Telas futuras de pedidos e agenda dependem de rotas protegidas; equipe com disponibilidade | Médio — altera sequência; não altera prazo final | ✅ Aprovada com condições ¹ |
 | CR-06 | 25/09/2026 | Modelo `Administrador` (com campo `ativo`) no lugar de `Usuario` + enum `PapelUsuario` previsto no plano | Escopo só prevê um papel (admin); exclusão "múltiplos papéis" | Baixo — pacote 1.6.1 | ✅ Aprovada |
-| CR-07 | 12/10/2026 | Contingência: se o prazo apertar, entregar **F4 como protótipo de tela** e usar **Prisma Studio** no lugar do CRUD completo da F5 | Risco R1 (prazo do semestre) | Alto — reduz escopo de E5 e E6 | ⏸ Adiada — decidir em 08/11 |
+| CR-07 | 12/10/2026 | Contingência: se o prazo apertar, entregar **F4 como protótipo de tela** e usar **Prisma Studio** no lugar do CRUD completo da F5 | Risco R1 (prazo do semestre) | Alto — reduz escopo de E5 e E6 | ⛔ Encerrada sem uso — F4 e F5 entregues completas em 12/10 |
 | CR-08 | 12/10/2026 | Agenda: grade de horários de cada serviço avança pela **duração do serviço** (08:00, 09:00… para 60 min) em vez de slots fixos de 30 min; fuso fixo de Sinop–MT (UTC-4) | Com slots de 30 min, a trava `@@unique([servicoId, dataHora])` permitiria sobreposição (60 min às 08:00 + outro às 08:30) | Baixo — pacotes 1.5.1–1.5.3, sem efeito no prazo | ✅ Aprovada ² |
+| CR-09 | 12/10/2026 | Painel: rotas de status em `/api/admin/pedidos/:codigo/status` e `/api/admin/agendamentos/:codigo/status` (o plano previa `/api/pedidos/...`); uploads gravados em `backend/uploads` em vez de `frontend/public/uploads` | Um só prefixo protegido para o painel; backend não escreve na pasta do frontend | Baixo — pacotes 1.6.2 e 1.6.3 | ✅ Aprovada ³ |
 
 ¹ **Condições do CR-05:** (a) a F3 continua sendo a próxima prioridade de
 produto; (b) o trabalho de autenticação entra na `main` via PR revisado;
 (c) o *fallback* de `JWT_SECRET` e a senha padrão do seed são corrigidos
 antes do deploy (risco R4).
 
-² **Limitação conhecida do CR-08:** um agendamento cancelado continua
-segurando o horário (a trava única não distingue status). Tratar na F5,
-quando o cancelamento pelo painel for implementado.
+² **Limitação do CR-08 (resolvida na F5):** a trava passou para
+`@@unique([servicoId, horarioAtivo])`; `horarioAtivo` vira NULL ao cancelar,
+liberando o horário sem apagar o histórico.
+
+³ **CR-09:** o painel concentra tudo sob `/api/admin/*` (um único ponto de
+proteção por JWT) e as imagens ficam no backend (`backend/uploads`, servidas
+em `/uploads`), respeitando a separação frontend/backend do `AGENTS.md`.
 
 ## 5. Linhas de base atualizadas por mudanças
 
@@ -75,3 +80,4 @@ quando o cancelamento pelo painel for implementado.
 | CR-05 | Monitoramento (situação F5), Cronograma |
 | CR-06 | EAP (1.6.1), Dicionário da EAP |
 | CR-08 | Controlar o Escopo (análise de variação), `plan.md` (F4) |
+| CR-09 | `plan.md` (F5), README (endpoints) |

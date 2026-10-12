@@ -1,0 +1,305 @@
+/* ═══════════════════════════════════════════════════════════════
+   Painel administrativo — estilos compartilhados pelas telas /admin.
+   Tudo restrito a .admin-layout para não vazar para o site público.
+   Usa apenas os tokens de style.css (tema Carbon & Racing Red).
+   ═══════════════════════════════════════════════════════════════ */
+
+.admin-layout {
+  color: var(--color-light);
+}
+
+/* ── Cabeçalho de cada tela ── */
+.admin-layout .painel-cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--color-surface);
+  background-color: var(--color-dark);
+}
+
+.admin-layout .painel-cabecalho h1 {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0;
+  font-size: 1.4rem;
+  color: var(--color-white);
+  text-transform: none;
+}
+
+.admin-layout .painel-corpo {
+  padding: 1.5rem 2rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* ── Cartões ── */
+.admin-layout .painel-card {
+  background-color: var(--color-dark);
+  border: 1px solid var(--color-surface);
+  border-radius: var(--radius-sm);
+  padding: 1.25rem 1.5rem;
+  text-align: left;
+}
+
+.admin-layout .painel-card h2 {
+  margin: 0 0 1rem;
+  font-size: 1rem;
+  color: var(--color-white);
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ── Filtros ── */
+.admin-layout .filtros {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* ── Formulários ── */
+.admin-layout label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-silver);
+  margin: 0 0 0.35rem;
+  text-align: left;
+}
+
+.admin-layout input:not([type='checkbox']):not([type='file']),
+.admin-layout select,
+.admin-layout textarea {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  margin: 0;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-mid);
+  background-color: var(--color-carbon);
+  color: var(--color-light);
+  font: inherit;
+  font-size: 0.95rem;
+  box-shadow: none;
+}
+
+.admin-layout input:focus,
+.admin-layout select:focus,
+.admin-layout textarea:focus {
+  outline: none;
+  border-color: var(--color-red);
+}
+
+.admin-layout textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+.admin-layout .filtros input,
+.admin-layout .filtros select {
+  width: auto;
+  min-width: 180px;
+}
+
+.admin-layout .form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem 1.25rem;
+}
+
+.admin-layout .campo--largo {
+  grid-column: 1 / -1;
+}
+
+.admin-layout .campo-erro {
+  display: block;
+  color: var(--color-red-light);
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-top: 0.3rem;
+}
+
+.admin-layout .checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 0.95rem;
+  color: var(--color-light);
+  cursor: pointer;
+}
+
+.admin-layout .checkboxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+}
+
+.admin-layout .form-acoes {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+/* ── Botões ── */
+.admin-layout .btn-sm {
+  padding: 0.4em 0.9em;
+  font-size: 0.85rem;
+}
+
+.admin-layout .btn-fantasma {
+  background: transparent;
+  border: 1px solid var(--color-mid);
+  color: var(--color-light);
+}
+
+.admin-layout .btn-fantasma:hover {
+  border-color: var(--color-red);
+  background: var(--color-red-dim);
+}
+
+.admin-layout .btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.admin-layout .btn-icone {
+  display: inline-grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-mid);
+  background: transparent;
+  color: var(--color-silver);
+  cursor: pointer;
+}
+
+.admin-layout .btn-icone:hover {
+  color: var(--color-red-light);
+  border-color: var(--color-red);
+}
+
+/* ── Tabelas ── */
+.admin-layout .tabela-wrapper {
+  overflow-x: auto;
+}
+
+.admin-layout .tabela {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+.admin-layout .tabela th,
+.admin-layout .tabela td {
+  padding: 0.7rem 0.6rem;
+  border-bottom: 1px solid var(--color-surface);
+  text-align: left;
+  vertical-align: middle;
+}
+
+.admin-layout .tabela th {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-silver);
+}
+
+.admin-layout .tabela tr:hover td {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.admin-layout .tabela .num {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.admin-layout .tabela .acoes {
+  display: flex;
+  gap: 0.4rem;
+  justify-content: flex-end;
+}
+
+.admin-layout .miniatura {
+  width: 48px;
+  height: 36px;
+  object-fit: cover;
+  border-radius: 4px;
+  background: var(--color-surface);
+  display: block;
+}
+
+.admin-layout .secundario {
+  color: var(--color-silver);
+  font-size: 0.82rem;
+}
+
+/* ── Selos de status ── */
+.admin-layout .selo {
+  display: inline-block;
+  padding: 0.2em 0.65em;
+  border-radius: var(--radius-pill);
+  font-size: 0.75rem;
+  font-weight: 700;
+  white-space: nowrap;
+  background: var(--color-surface);
+  color: var(--color-light);
+}
+
+.admin-layout .selo--alerta {
+  background: rgba(230, 160, 40, 0.18);
+  color: #f0b44c;
+}
+
+.admin-layout .selo--ok {
+  background: rgba(46, 160, 90, 0.18);
+  color: #5fd08f;
+}
+
+.admin-layout .selo--erro {
+  background: var(--color-red-dim);
+  color: var(--color-red-light);
+}
+
+/* ── Avisos ── */
+.admin-layout .aviso {
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+.admin-layout .aviso--erro {
+  background: var(--color-red-dim);
+  border: 1px solid var(--color-red);
+  color: var(--color-red-light);
+}
+
+.admin-layout .aviso--ok {
+  background: rgba(46, 160, 90, 0.15);
+  border: 1px solid rgba(46, 160, 90, 0.5);
+  color: #5fd08f;
+}
+
+.admin-layout .vazio {
+  color: var(--color-silver);
+  padding: 1.5rem 0;
+  text-align: center;
+}
+
+@media (max-width: 800px) {
+  .admin-layout .painel-cabecalho,
+  .admin-layout .painel-corpo {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}

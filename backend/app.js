@@ -12,6 +12,8 @@ const pedidosRouter = require('./src/routes/pedidos');
 const servicosRouter = require('./src/routes/servicos');
 const agendamentosRouter = require('./src/routes/agendamentos');
 const authAdminRouter = require('./src/routes/authAdmin');
+const adminRouter = require('./src/routes/admin');
+const { UPLOAD_DIR } = require('./src/routes/admin/uploads');
 const { criarRotasProduto } = require('./src/routes/produtoRotas');
 const { naoEncontrado, tratarErro } = require('./src/middleware/errors');
 
@@ -34,6 +36,10 @@ app.use('/api/servicos', servicosRouter);
 app.use('/api/agendamentos', agendamentosRouter);
 app.use('/api', catalogoRouter); // /api/categorias, /api/modelos
 app.use('/api/admin/auth', authAdminRouter);
+app.use('/api/admin', adminRouter);
+
+// Imagens enviadas pelo painel (nomes aleatórios, nunca sobrescritos → cache longo).
+app.use('/uploads', express.static(UPLOAD_DIR, { maxAge: '30d', immutable: true }));
 
 // ─── Erros ────────────────────────────────────────────────────────────────────
 app.use(naoEncontrado);

@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
-import { api } from '@/api';
+import { api, definirAoNaoAutorizado } from '@/api';
 import router from '@/router';
 
 const CHAVE_TOKEN = 'admin_token';
@@ -52,9 +52,7 @@ export const useAuthStore = defineStore('auth', () => {
   const checkAuth = async () => {
     if (!token.value) return false;
     try {
-      const resposta = await api.get('/admin/auth/me', {
-        headers: { Authorization: `Bearer ${token.value}` },
-      });
+      const resposta = await api.get('/admin/auth/me');
       user.value = resposta.admin;
       return true;
     } catch {
@@ -62,6 +60,11 @@ export const useAuthStore = defineStore('auth', () => {
       return false;
     }
   };
+
+  // Qualquer 401 vindo do painel derruba a sessão e volta para o login.
+  definirAoNaoAutorizado(() => {
+    if (token.value) logout();
+  });
 
   return { token, user, isAuthenticated, login, logout, checkAuth };
 });

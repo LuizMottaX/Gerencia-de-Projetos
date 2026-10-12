@@ -113,6 +113,21 @@ O GitHub Actions (`.github/workflows/ci.yml`) roda lint, formatação, testes e 
 | POST   | `/api/pedidos`           | Cria um pedido (`{ cliente, itens: [{ produto, quantidade }] }`); 409 se faltar estoque |
 | GET    | `/api/pedidos/:codigo`   | Acompanhamento do pedido pelo código                  |
 | POST   | `/api/admin/auth/login`  | Login do painel administrativo (JWT)                  |
+
+**Painel (`/api/admin/*`, exige `Authorization: Bearer <token>`)**
+
+| Método | Rota | Descrição |
+|--------|------|-----------|
+| GET/POST/PUT/DELETE | `/api/admin/carros`, `/produtos`, `/servicos`, `/categorias`, `/marcas`, `/modelos` | Cadastros (ids numéricos; `PUT`/`DELETE` em `/:id`) |
+| POST   | `/api/admin/uploads` | Envia imagem (campo `imagem`, JPG/PNG/WebP até 5 MB); devolve `{ url }` |
+| GET    | `/api/admin/pedidos?status=` | Fila de pedidos com dados do cliente |
+| PATCH  | `/api/admin/pedidos/:codigo/status` | Muda o status; `CANCELADO` devolve o estoque |
+| GET    | `/api/admin/agendamentos?de=&ate=&status=` | Agenda da oficina |
+| PATCH  | `/api/admin/agendamentos/:codigo/status` | Muda o status; `CANCELADO` libera o horário |
+| GET/PATCH | `/api/admin/mensagens` | Mensagens de contato (`?lida=false`; `PATCH /:id { lida }`) |
+| GET    | `/api/admin/resumo` | Indicadores do dashboard |
+
+Para criar um administrador: `ADMIN_SENHA='senha-forte' npm run admin:criar -- email@loja.com.br "Nome"` (no `backend/`).
 | GET    | `/api/servicos`          | Serviços de manutenção (`/:id` para o detalhe)        |
 | GET    | `/api/agendamentos/disponibilidade` | Horários livres: `?servico=<slug>&data=AAAA-MM-DD` |
 | POST   | `/api/agendamentos`      | Reserva um horário; 409 se já estiver ocupado         |

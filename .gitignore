@@ -26,3 +26,6 @@ frontend/.vite/
 # Sistema Operacional
 .DS_Store
 Thumbs.db
+
+# Imagens enviadas pelo painel admin
+backend/uploads/

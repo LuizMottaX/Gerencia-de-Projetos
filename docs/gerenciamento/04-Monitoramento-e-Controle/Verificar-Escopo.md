@@ -82,14 +82,18 @@ no GitHub (Settings → Branches → exigir os checks `backend` e `frontend`).
 
 **Aceite:** Equipe · 12/10/2026. E-mail de confirmação (opcional) não implementado.
 
-### E6 — Painel administrativo (F5) — ⏳ EM VERIFICAÇÃO (incremento: autenticação)
+### E6 — Painel administrativo (F5) — ✅ ACEITA
 
 | Critério | Verificação | Resultado |
 |----------|-------------|:---------:|
 | Login com credenciais válidas gera token | Teste automatizado `tests/api.test.js` | ✅ |
 | Credenciais inválidas → 401 | Teste automatizado | ✅ |
 | Rotas protegidas → 401 sem token / token inválido | Teste automatizado | ✅ |
-| Admin cadastra veículo e ele aparece no site | CRUD não implementado | ❌ |
+| Admin cadastra veículo **com foto** e ele aparece no site | Teste automatizado + execução manual pelo proxy do Vite | ✅ |
+| Rotas de escrita retornam 401 sem token válido | Teste em todas as 16 rotas do painel | ✅ |
+| Mudar status de pedido e de agendamento pelo painel | Testes: cancelar pedido devolve o estoque; cancelar agendamento libera o horário | ✅ |
+
+**Aceite:** Equipe · 12/10/2026.
 
 ### E8 — Documentação PMBOK — ✅ ACEITA (Integração e Escopo)
 
@@ -109,6 +113,6 @@ no GitHub (Settings → Branches → exigir os checks `backend` e `frontend`).
 | E3 Peças e acessórios | ✅ aceita |
 | E4 Carrinho | ✅ aceita |
 | E5 Agendamento | ✅ aceita |
-| E6 Admin | ⏳ em verificação |
+| E6 Admin | ✅ aceita |
 | E7 Publicação | ⬜ |
 | E8 Documentação | ✅ (Integração + Escopo) |
