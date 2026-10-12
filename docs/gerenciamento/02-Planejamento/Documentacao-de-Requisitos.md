@@ -88,7 +88,7 @@ entrega e à **evidência** de verificação.
 | RF08–RF10 | O2 | 1.4.1–1.4.4 | Fluxo carrinho → checkout → `/pedido/:codigo`; `tests/pedidos.test.js`, `tests/carrinho.test.js` | ✅ |
 | RF11, RF12 | O3 | 1.5.1–1.5.4 | `/api/servicos`, `/api/agendamentos/disponibilidade`; `tests/agendamentos.test.js` | ✅ |
 | RF13 | O4 | 1.6.1 | `POST /api/admin/auth/login`, `LoginAdminView` | ✅ |
-| RF14–RF17 | O4 | 1.6.2–1.6.4 | CRUD protegido + telas do painel | ⬜ |
+| RF14–RF17 | O4 | 1.6.2–1.6.4 | `/api/admin/*` + telas do painel; `tests/admin.test.js` | ✅ |
 | RNF01–RNF03 | todos | 1.1.1, 1.2.1 | Estrutura do repositório; `AGENTS.md` | ✅ |
 | RNF04, RNF05 | todos | 1.1.2 | `middleware/errors.js`, `server.js` | ✅ |
 | RNF06 | O4 | 1.6.1 | `bcryptjs` + `jsonwebtoken` + `middleware/authAdmin.js` | ✅ |

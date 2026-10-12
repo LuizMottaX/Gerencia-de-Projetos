@@ -253,15 +253,19 @@ model Agendamento {
   /// Texto livre: "Gol 2020, placa ABC-1234".
   veiculoDescricao String
   dataHora         DateTime
+  /// Igual a `dataHora` enquanto o agendamento ocupa a agenda; NULL quando
+  /// cancelado. A trava única fica nesta coluna (o Postgres aceita vários
+  /// NULL), então cancelar libera o horário sem perder o histórico.
+  horarioAtivo     DateTime?
   status           StatusAgendamento @default(SOLICITADO)
 
   criadoEm     DateTime @default(now())
   atualizadoEm DateTime @updatedAt
 
-  /// Trava de horário: dois agendamentos do mesmo serviço nunca no mesmo início.
-  /// Como a grade de cada serviço avança pela própria duração, isso também
-  /// impede sobreposição.
-  @@unique([servicoId, dataHora])
+  /// Trava de horário: dois agendamentos ativos do mesmo serviço nunca no
+  /// mesmo início. Como a grade de cada serviço avança pela própria duração,
+  /// isso também impede sobreposição.
+  @@unique([servicoId, horarioAtivo])
   @@index([clienteId])
   @@index([dataHora])
 }

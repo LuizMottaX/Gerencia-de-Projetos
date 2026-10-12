@@ -33,7 +33,8 @@ autorizadas (*scope creep*) ou trabalho extra não pedido (*gold plating*).
 | Usuário admin | `Usuario` + `PapelUsuario` | `Administrador` | Simplificação dentro do escopo | CR-06 ✅ |
 | Grade de horários | Slots de 30 min + `@@unique` | Grade no passo da duração de cada serviço | Mudança de solução (evita sobreposição) | CR-08 ✅ |
 | E-mail de confirmação do agendamento | Opcional na F4 | Não feito (WhatsApp na confirmação) | Item opcional não entregue | Sem CR — era opcional |
-| Dashboard admin | Indicadores (estoque baixo, pedidos) | Tela de boas-vindas | Incompleto — pacote ainda em andamento | Acompanhar em 1.6.4 |
+| Dashboard admin | Indicadores (estoque baixo, pedidos) | Indicadores entregues | Sem variação | ✅ |
+| Rotas de status e uploads | `PATCH /api/pedidos/...`; uploads em `frontend/public/` | Em `/api/admin/...`; uploads no backend | Mudança de solução | CR-09 ✅ |
 | Links "Pedidos (F3)" e "Serviços (F4)" no menu admin | — | Links para telas que não existem | Antecipação de UI sem pacote | ✅ Desabilitados ("em breve") até F3/F4 |
 
 ## 3. Pedidos de escopo recusados ou fora do escopo
@@ -53,8 +54,8 @@ Itens que surgiram em conversas e **não entram** sem um CR aprovado:
 |-----------|:-----------:|:----:|
 | PRs sem pacote da EAP | 0 | 0 |
 | Mudanças implementadas sem CR | 0 | 0 |
-| CRs registrados / aprovados / adiados | 8 / 7 / 1 | — |
-| Pacotes de produto concluídos | 22 / 29 (76%) | 100% em 12/2026 |
+| CRs registrados / aprovados / adiados / encerrados | 9 / 8 / 0 / 1 | — |
+| Pacotes de produto concluídos | 25 / 29 (86%) | 100% em 12/2026 |
 
 ## 5. Resultados do controle
 

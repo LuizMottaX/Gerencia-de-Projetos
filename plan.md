@@ -16,7 +16,7 @@ entregas pendentes**, com critérios de aceitação e dependências.
 | **F2** Catálogo de peças e acessórios | ✅ concluída |
 | **F3** Carrinho e checkout | ✅ concluída (12/10/2026) |
 | **F4** Serviços e agendamento | ✅ concluída (12/10/2026) |
-| **F5** Área administrativa | 🟡 autenticação pronta; falta CRUD e telas |
+| **F5** Área administrativa | ✅ concluída (12/10/2026) |
 | **F6** Qualidade e publicação | ⬜ não iniciada |
 
 Já implementado da F0: estrutura em `backend/src/`, `.env.example`,
@@ -383,26 +383,26 @@ enum PapelUsuario { ADMIN }
 
 - [x] Auth: `POST /api/admin/auth/login` (bcrypt + JWT), middleware
       `verificarAdmin` que valida o `Authorization: Bearer`.
-- [ ] Script `create-admin` (cria o primeiro usuário via CLI/prompt).
-- [ ] CRUD **protegido** (POST/PUT/DELETE) para: `carros` (+ imagens),
+- [x] Script `create-admin` → `ADMIN_SENHA=... npm run admin:criar -- <email> [nome]`.
+- [x] CRUD **protegido** em `/api/admin/*` para: `carros` (+ imagens),
       `marcas`, `modelos`, `produtos` (peças/acessórios), `categorias`,
       `servicos`.
-- [ ] `PATCH /api/pedidos/:codigo/status` e
-      `PATCH /api/agendamentos/:codigo/status`.
-- [ ] `GET /api/admin/mensagens` (lista `MensagemContato`, marcar como lida).
-- [ ] Upload de imagem: `multer` gravando em `frontend/public/uploads/`
-      (ou storage externo depois); endpoint devolve a URL.
+- [x] `PATCH /api/admin/pedidos/:codigo/status` (cancelar devolve o estoque) e
+      `PATCH /api/admin/agendamentos/:codigo/status` (cancelar libera o horário).
+- [x] `GET /api/admin/mensagens` (lista `MensagemContato`, marcar como lida).
+- [x] Upload de imagem: `multer` gravando em `backend/uploads/` (ou `UPLOAD_DIR`),
+      servido em `/uploads`; endpoint devolve a URL.
 
 ### Frontend
 
-- [ ] Layout `/admin` com guard de rota (checa token no `localStorage`).
-- [ ] `AdminLoginView`.
-- [ ] Telas de lista + formulário para cada entidade.
-- [ ] Fila de pedidos (com troca de status) e agenda de serviços.
-- [ ] Caixa de entrada de mensagens de contato.
-- [ ] `AdminDashboard`: nº de veículos disponíveis, pedidos do mês,
+- [x] Layout `/admin` com guard de rota (checa token no `localStorage`).
+- [x] `AdminLoginView`.
+- [x] Telas de lista + formulário para cada entidade.
+- [x] Fila de pedidos (com troca de status) e agenda de serviços.
+- [x] Caixa de entrada de mensagens de contato.
+- [x] `AdminDashboard`: nº de veículos disponíveis, pedidos do mês,
       próximos agendamentos, itens com estoque baixo.
-- [ ] Store Pinia `auth` (token, usuário, `login`, `logout`); interceptor
+- [x] Store Pinia `auth` (token, usuário, `login`, `logout`); interceptor
       no cliente `src/api` que injeta o `Bearer` e trata 401 → redireciona
       para o login.
 

@@ -55,10 +55,9 @@ router.get('/disponibilidade', async (req, res, next) => {
     const grade = gradeDoDia(data, servico.duracaoMin);
     const naJanela = grade.filter((h) => dentroDaJanela(h.dataHora));
 
-    // Conta qualquer agendamento (inclusive cancelado): a trava única do banco
-    // ainda segura o horário, então oferecê-lo só geraria um 409.
+    // Só agendamentos ativos ocupam a agenda — cancelados têm horarioAtivo NULL.
     const ocupados = await prisma.agendamento.findMany({
-      where: { servicoId: servico.id, dataHora: { in: naJanela.map((h) => h.dataHora) } },
+      where: { servicoId: servico.id, horarioAtivo: { in: naJanela.map((h) => h.dataHora) } },
       select: { dataHora: true },
     });
     const ocupadosMs = new Set(ocupados.map((a) => a.dataHora.getTime()));
@@ -104,14 +103,15 @@ router.post('/', limitador, async (req, res, next) => {
           clienteId,
           veiculoDescricao: dados.veiculoDescricao,
           dataHora,
+          horarioAtivo: dataHora,
         },
         include: agendamentoInclude,
       });
       res.status(201).json(agendamentoView(agendamento));
     } catch (err) {
-      // A constraint @@unique([servicoId, dataHora]) resolve a corrida entre
+      // A constraint @@unique([servicoId, horarioAtivo]) resolve a corrida entre
       // dois clientes escolhendo o mesmo horário ao mesmo tempo.
-      if (err.code === 'P2002' && String(err.meta?.target).includes('dataHora')) {
+      if (err.code === 'P2002' && String(err.meta?.target).includes('horarioAtivo')) {
         throw new ErroHttp(
           409,
           `Horário indisponível: ${horaLocal(dataHora)} acabou de ser reservado.`,

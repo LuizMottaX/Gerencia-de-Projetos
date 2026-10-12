@@ -97,11 +97,11 @@ flowchart TD
     - 1.5.2 API de disponibilidade de horários — ✅
     - 1.5.3 API de agendamento + consulta por código — ✅
     - 1.5.4 Telas `ServicosView`, `AgendamentoView`, confirmação — ✅
-  - **1.6 Área Administrativa (F5)** — 🟡
+  - **1.6 Área Administrativa (F5)** — ✅
     - 1.6.1 Autenticação (modelo `Administrador`, login JWT, middleware, store `auth`) — ✅
-    - 1.6.2 CRUD protegido do catálogo + upload de imagem — ⬜
-    - 1.6.3 Status de pedidos/agendamentos + caixa de mensagens — ⬜
-    - 1.6.4 Telas do painel (login ✅, dashboard 🟡, listas/formulários ⬜) — 🟡
+    - 1.6.2 CRUD protegido do catálogo + upload de imagem — ✅
+    - 1.6.3 Status de pedidos/agendamentos + caixa de mensagens — ✅
+    - 1.6.4 Telas do painel (login, dashboard, listas/formulários, pedidos, agenda, mensagens) — ✅
   - **1.7 Qualidade e Publicação (F6)** — ⬜
     - 1.7.1 Testes E2E (Playwright) — ⬜
     - 1.7.2 Lighthouse ≥ 90, SEO, lazy loading — ⬜
@@ -129,7 +129,7 @@ flowchart TD
 | 1.5.2 | Disponibilidade | Geração de slots livres por dia/serviço | Retorna só horários não ocupados | Luiz | 2 d |
 | 1.5.3 | Agendamento | Reserva com trava única | Conflito → 409 "horário indisponível" | Luiz | 2 d |
 | 1.6.1 | Autenticação | `Administrador`, bcrypt, JWT, `verificarAdmin`, store `auth` | Login válido gera token; rotas protegidas → 401 sem token | Luiz | 3 d |
-| 1.6.2 | CRUD protegido | POST/PUT/DELETE de carros, produtos, categorias, serviços | Item criado no painel aparece no site | A definir | 5 d |
+| 1.6.2 | CRUD protegido | POST/PUT/DELETE de carros, produtos, categorias, serviços | Item criado no painel aparece no site | Luiz | 5 d |
 | 1.7.3 | Deploy | Front e back publicados, `migrate deploy` | URL pública abre sem instalar nada | A definir | 2 d |
 | 1.8.4 | Apresentações | Slides + roteiro | Apresentado no tempo para a banca | Equipe | 2 d |
 

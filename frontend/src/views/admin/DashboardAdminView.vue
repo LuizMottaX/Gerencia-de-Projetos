@@ -1,187 +1,178 @@
 <script setup>
-import { onMounted } from 'vue';
-import { useRouter } from 'vue-router';
-import { useAuthStore } from '@/stores/auth';
-import { LogOut, LayoutDashboard, ShoppingBag, Wrench, PackageSearch } from 'lucide-vue-next';
+import { onMounted, ref } from 'vue';
+import {
+  AlertTriangle,
+  CalendarDays,
+  Car,
+  Inbox,
+  LayoutDashboard,
+  ShoppingBag,
+  Wallet,
+} from 'lucide-vue-next';
+import { api } from '@/api';
+import { brl } from '@/utils/formatar';
+import { formatarData } from '@/utils/agenda';
 
-const auth = useAuthStore();
-const router = useRouter();
+const resumo = ref(null);
+const erro = ref('');
 
 onMounted(async () => {
-  const isValido = await auth.checkAuth();
-  if (!isValido) {
-    router.push('/admin/login');
+  try {
+    resumo.value = await api.admin.resumo();
+  } catch (e) {
+    erro.value = e.message;
   }
 });
-
-const sair = () => {
-  auth.logout();
-};
 </script>
 
 <template>
-  <div v-if="auth.isAuthenticated" class="admin-layout">
-    <aside class="sidebar">
-      <div class="sidebar-header">
-        <h2>Painel Admin</h2>
-        <p>Olá, {{ auth.user?.nome }}</p>
+  <header class="painel-cabecalho">
+    <h1><LayoutDashboard :size="24" /> Dashboard</h1>
+  </header>
+
+  <div class="painel-corpo">
+    <p v-if="erro" class="aviso aviso--erro">{{ erro }}</p>
+    <p v-else-if="!resumo" class="vazio">Carregando…</p>
+
+    <template v-else>
+      <div class="indicadores">
+        <RouterLink to="/admin/carros" class="indicador">
+          <Car :size="22" />
+          <strong>{{ resumo.veiculosDisponiveis }}</strong>
+          <span>veículos disponíveis</span>
+        </RouterLink>
+        <RouterLink to="/admin/pedidos" class="indicador">
+          <Wallet :size="22" />
+          <strong>{{ brl(resumo.pedidosMes.total) }}</strong>
+          <span>{{ resumo.pedidosMes.quantidade }} pedidos no mês</span>
+        </RouterLink>
+        <RouterLink
+          to="/admin/pedidos"
+          class="indicador"
+          :class="{ destaque: resumo.pedidosPendentes }"
+        >
+          <ShoppingBag :size="22" />
+          <strong>{{ resumo.pedidosPendentes }}</strong>
+          <span>pedidos a separar</span>
+        </RouterLink>
+        <RouterLink
+          to="/admin/mensagens"
+          class="indicador"
+          :class="{ destaque: resumo.mensagensNaoLidas }"
+        >
+          <Inbox :size="22" />
+          <strong>{{ resumo.mensagensNaoLidas }}</strong>
+          <span>mensagens não lidas</span>
+        </RouterLink>
       </div>
 
-      <nav class="sidebar-nav">
-        <router-link to="/admin" class="nav-item">
-          <LayoutDashboard :size="20" /> Dashboard
-        </router-link>
-        <!-- Telas ainda não implementadas (F3, F4 e CRUD da F5) -->
-        <span class="nav-item nav-item--em-breve" title="Em breve">
-          <ShoppingBag :size="20" /> Pedidos (F3)
-        </span>
-        <span class="nav-item nav-item--em-breve" title="Em breve">
-          <PackageSearch :size="20" /> Peças/Acessórios
-        </span>
-        <span class="nav-item nav-item--em-breve" title="Em breve">
-          <Wrench :size="20" /> Serviços (F4)
-        </span>
-      </nav>
+      <div class="colunas">
+        <section class="painel-card">
+          <h2><CalendarDays :size="16" /> Próximos agendamentos</h2>
+          <p v-if="!resumo.proximosAgendamentos.length" class="vazio">Nenhum agendamento futuro.</p>
+          <ul v-else class="lista">
+            <li v-for="a in resumo.proximosAgendamentos" :key="a.codigo">
+              <div>
+                <strong>{{ a.hora }}</strong> · {{ formatarData(a.data) }}
+                <p class="secundario">{{ a.servico.nome }} — {{ a.cliente.nome }}</p>
+              </div>
+              <span class="secundario">{{ a.codigo }}</span>
+            </li>
+          </ul>
+          <RouterLink to="/admin/agenda" class="ver-mais">Ver agenda completa</RouterLink>
+        </section>
 
-      <div class="sidebar-footer">
-        <button class="btn btn-outline btn-sair" @click="sair">
-          <LogOut :size="18" /> Sair do Painel
-        </button>
+        <section class="painel-card">
+          <h2><AlertTriangle :size="16" /> Estoque baixo</h2>
+          <p v-if="!resumo.estoqueBaixo.length" class="vazio">Nenhum item com estoque baixo.</p>
+          <ul v-else class="lista">
+            <li v-for="p in resumo.estoqueBaixo" :key="p.id">
+              <RouterLink :to="`/admin/produtos/${p.id}`">{{ p.nome }}</RouterLink>
+              <span class="selo" :class="p.estoque ? 'selo--alerta' : 'selo--erro'">
+                {{ p.estoque ? `${p.estoque} un.` : 'Esgotado' }}
+              </span>
+            </li>
+          </ul>
+        </section>
       </div>
-    </aside>
-
-    <main class="admin-content">
-      <header class="content-header">
-        <h1>Dashboard Geral</h1>
-      </header>
-
-      <div class="content-body">
-        <div class="welcome-card">
-          <h3>Bem-vindo ao Painel Administrativo</h3>
-          <p>O sistema de login e proteção de rotas foi implementado com sucesso.</p>
-          <p>
-            A partir daqui, você pode expandir a Fase 5 gerenciando o catálogo, e futuramente
-            acompanhando pedidos (Fase 3) e serviços (Fase 4).
-          </p>
-        </div>
-      </div>
-    </main>
+    </template>
   </div>
 </template>
 
 <style scoped>
-.admin-layout {
-  display: flex;
-  min-height: calc(
-    100vh - 80px
-  ); /* Ajuste dependendo do header global, ou pode ser full height se esconder o nav principal */
-  background-color: var(--carbon-900);
+.indicadores {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
 }
 
-.sidebar {
-  width: 260px;
-  background-color: var(--carbon-800);
-  border-right: 1px solid var(--carbon-700);
+.indicador {
   display: flex;
   flex-direction: column;
+  gap: 0.25rem;
+  padding: 1.25rem;
+  border-radius: var(--radius-sm);
+  background: var(--color-dark);
+  border: 1px solid var(--color-surface);
+  color: var(--color-silver);
+  text-decoration: none;
+  text-align: left;
+  transition: border-color 0.2s;
 }
 
-.sidebar-header {
-  padding: 1.5rem;
-  border-bottom: 1px solid var(--carbon-700);
+.indicador:hover {
+  border-color: var(--color-red);
 }
 
-.sidebar-header h2 {
-  font-size: 1.25rem;
-  color: var(--carbon-100);
-  margin: 0 0 0.5rem 0;
+.indicador .lucide {
+  color: var(--color-red-light);
 }
 
-.sidebar-header p {
-  color: var(--carbon-400);
-  font-size: 0.9rem;
-  margin: 0;
+.indicador strong {
+  font-size: 1.6rem;
+  color: var(--color-white);
 }
 
-.sidebar-nav {
-  padding: 1rem 0;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
+.indicador.destaque {
+  border-color: var(--color-red);
+  background: linear-gradient(180deg, var(--color-red-dim), var(--color-dark));
 }
 
-.nav-item {
+.colunas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.25rem;
+}
+
+.painel-card h2 {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 1rem 1.5rem;
-  color: var(--carbon-300);
-  text-decoration: none;
-  transition: all 0.2s;
-  border-left: 3px solid transparent;
+  gap: 0.4rem;
 }
 
-.nav-item:hover,
-.nav-item.router-link-exact-active {
-  background-color: rgba(229, 57, 53, 0.1);
-  color: var(--red-light);
-  border-left-color: var(--red-main);
-}
-
-.nav-item--em-breve,
-.nav-item--em-breve:hover {
-  opacity: 0.45;
-  cursor: not-allowed;
-  background-color: transparent;
-  color: var(--carbon-300);
-  border-left-color: transparent;
-}
-
-.sidebar-footer {
-  padding: 1.5rem;
-  border-top: 1px solid var(--carbon-700);
-}
-
-.btn-sair {
-  width: 100%;
-  justify-content: center;
-}
-
-.admin-content {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.content-header {
-  padding: 1.5rem 2rem;
-  border-bottom: 1px solid var(--carbon-700);
-  background-color: var(--carbon-800);
-}
-
-.content-header h1 {
+.lista {
+  list-style: none;
+  padding: 0;
   margin: 0;
-  font-size: 1.5rem;
 }
 
-.content-body {
-  padding: 2rem;
+.lista li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--color-surface);
 }
 
-.welcome-card {
-  background-color: var(--carbon-800);
-  border: 1px solid var(--carbon-700);
-  border-radius: 8px;
-  padding: 2rem;
+.lista a {
+  color: var(--color-light);
 }
 
-.welcome-card h3 {
-  margin-top: 0;
-  color: var(--red-light);
-}
-
-.welcome-card p {
-  color: var(--carbon-300);
-  line-height: 1.6;
+.ver-mais {
+  display: inline-block;
+  margin-top: 0.75rem;
+  color: var(--color-red-light);
+  font-size: 0.85rem;
 }
 </style>

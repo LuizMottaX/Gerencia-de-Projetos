@@ -27,6 +27,25 @@ function tratarErro(err, req, res, next) {
     return res.status(err.status).json({ erro: err.message, detalhes: err.detalhes });
   }
 
+  // Erros conhecidos do Prisma que são culpa da requisição, não do servidor.
+  if (err?.code === 'P2025') {
+    return res.status(404).json({ erro: 'Registro não encontrado.' });
+  }
+  if (err?.code === 'P2003') {
+    return res.status(409).json({
+      erro: 'Não é possível concluir: o registro está ligado a outros (ex.: pedidos, veículos ou agendamentos).',
+    });
+  }
+  if (err?.code === 'P2002') {
+    return res.status(409).json({ erro: 'Já existe um registro com estes dados.' });
+  }
+
+  // Upload (multer): arquivo grande demais, campo errado etc.
+  if (err?.name === 'MulterError') {
+    const mensagem = err.code === 'LIMIT_FILE_SIZE' ? 'Imagem maior que 5 MB.' : 'Upload inválido.';
+    return res.status(400).json({ erro: mensagem });
+  }
+
   console.error(err);
   res.status(500).json({ erro: 'Erro interno do servidor.' });
 }

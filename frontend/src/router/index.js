@@ -118,9 +118,82 @@ const routes = [
   },
   {
     path: '/admin',
-    name: 'admin-dashboard',
-    component: () => import('../views/admin/DashboardAdminView.vue'),
-    meta: { title: 'Painel Admin — Chiquinho Motors®', requerAdmin: true },
+    component: () => import('../views/admin/AdminLayout.vue'),
+    meta: { requerAdmin: true },
+    children: [
+      {
+        path: '',
+        name: 'admin-dashboard',
+        component: () => import('../views/admin/DashboardAdminView.vue'),
+        meta: { title: 'Dashboard — Painel Chiquinho Motors®' },
+      },
+      {
+        path: 'pedidos',
+        name: 'admin-pedidos',
+        component: () => import('../views/admin/PedidosAdminView.vue'),
+        meta: { title: 'Pedidos — Painel Chiquinho Motors®' },
+      },
+      {
+        path: 'agenda',
+        name: 'admin-agenda',
+        component: () => import('../views/admin/AgendaAdminView.vue'),
+        meta: { title: 'Agenda — Painel Chiquinho Motors®' },
+      },
+      {
+        path: 'produtos',
+        name: 'admin-produtos',
+        component: () => import('../views/admin/ProdutosAdminView.vue'),
+        meta: { title: 'Peças e acessórios — Painel Chiquinho Motors®' },
+      },
+      {
+        path: 'produtos/novo',
+        name: 'admin-produto-novo',
+        component: () => import('../views/admin/ProdutoFormView.vue'),
+        meta: { title: 'Novo produto — Painel Chiquinho Motors®' },
+      },
+      {
+        path: 'produtos/:id',
+        name: 'admin-produto-editar',
+        component: () => import('../views/admin/ProdutoFormView.vue'),
+        meta: { title: 'Editar produto — Painel Chiquinho Motors®' },
+      },
+      {
+        path: 'carros',
+        name: 'admin-carros',
+        component: () => import('../views/admin/CarrosAdminView.vue'),
+        meta: { title: 'Veículos — Painel Chiquinho Motors®' },
+      },
+      {
+        path: 'carros/novo',
+        name: 'admin-carro-novo',
+        component: () => import('../views/admin/CarroFormView.vue'),
+        meta: { title: 'Novo veículo — Painel Chiquinho Motors®' },
+      },
+      {
+        path: 'carros/:id',
+        name: 'admin-carro-editar',
+        component: () => import('../views/admin/CarroFormView.vue'),
+        meta: { title: 'Editar veículo — Painel Chiquinho Motors®' },
+      },
+      {
+        path: 'servicos',
+        name: 'admin-servicos',
+        component: () => import('../views/admin/ServicosAdminView.vue'),
+        meta: { title: 'Serviços — Painel Chiquinho Motors®' },
+      },
+      {
+        path: 'cadastros',
+        name: 'admin-cadastros',
+        component: () => import('../views/admin/CadastrosAdminView.vue'),
+        meta: { title: 'Cadastros — Painel Chiquinho Motors®' },
+      },
+      {
+        path: 'mensagens',
+        name: 'admin-mensagens',
+        component: () => import('../views/admin/MensagensAdminView.vue'),
+        meta: { title: 'Mensagens — Painel Chiquinho Motors®' },
+      },
+    ],
   },
 ];
 
@@ -135,7 +208,7 @@ const router = createRouter({
 // Sem token nem chega a carregar o painel; a validade do token é conferida
 // pela própria tela (GET /api/admin/auth/me).
 router.beforeEach((to) => {
-  if (!to.meta.requerAdmin) return true;
+  if (!to.matched.some((r) => r.meta.requerAdmin)) return true;
   let token = null;
   try {
     token = localStorage.getItem('admin_token');

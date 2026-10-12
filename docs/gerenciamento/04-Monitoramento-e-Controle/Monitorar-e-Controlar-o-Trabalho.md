@@ -25,18 +25,18 @@
 | F2 Peças e acessórios | 21/08 – 27/08 | Concluída em 27/08 | 4 / 4 (100%) | ✅ |
 | F3 Carrinho | 19/10 – 08/11 | **Concluída em 12/10** (adiantada) | 4 / 4 (100%) | ✅ |
 | F4 Agendamento | 09/11 – 22/11 | **Concluída em 12/10** (adiantada) | 4 / 4 (100%) | ✅ |
-| F5 Admin | 23/11 – 06/12 | **Antecipada** — autenticação concluída | 1 / 4 (25%) | 🟡 |
+| F5 Admin | 23/11 – 06/12 | **Concluída em 12/10** (adiantada) | 4 / 4 (100%) | ✅ |
 | F6 Publicação | 07/12 – 13/12 | Não iniciada | 0 / 4 (0%) | ⬜ |
 | Gerenciamento | contínuo | Artefatos de Integração e Escopo prontos | 4 / 5 | 🟡 |
 
-**Progresso geral das entregas de produto:** 22 de 29 pacotes de produto
-concluídos ≈ **76%**.
+**Progresso geral das entregas de produto:** 25 de 29 pacotes de produto
+concluídos ≈ **86%**. Só a F6 (publicação) falta.
 
 ```mermaid
 pie showData title Pacotes de produto da EAP (29)
-    "Concluídos" : 22
-    "Em andamento" : 1
-    "Não iniciados" : 6
+    "Concluídos" : 25
+    "Em andamento" : 0
+    "Não iniciados" : 4
 ```
 
 ## 3. Análise de desempenho
@@ -45,14 +45,15 @@ pie showData title Pacotes de produto da EAP (29)
   e verificadas (ver [Verificar o Escopo](Verificar-Escopo.md)).
 - **Cronograma:** o pacote 1.1.5 (lint/testes/CI) atrasou ~7 semanas em
   relação ao previsto (agosto), mas foi **concluído em 12/10** pela ação A1.
-  Risco R3 (regressões) mitigado: 47 testes automatizados no CI.
-- **F3 e F4 adiantadas:** concluídas em 12/10, antes do início planejado
-  (19/10 e 09/11). A folga reduz o risco R1 e torna improvável acionar a
-  contingência CR-07.
+  Risco R3 (regressões) mitigado: 81 testes automatizados no CI.
+- **F3, F4 e F5 adiantadas:** concluídas em 12/10, antes do início planejado
+  (19/10, 09/11 e 23/11). A folga praticamente elimina o risco R1; a
+  contingência CR-07 deixou de ser necessária.
 - **Sequência:** a F5 (autenticação) foi **antecipada** em relação à F3/F4.
   A mudança foi registrada como **CR-05** e aprovada com condições.
-- **Qualidade:** 31 testes de backend (com banco isolado, incluindo concorrência
-  de estoque e de horários) e 16 de frontend rodam no GitHub Actions a cada push/PR.
+- **Qualidade:** 61 testes de backend (com banco isolado, incluindo concorrência
+  de estoque e de horários e a proteção de todas as rotas do painel) e 20 de
+  frontend rodam no GitHub Actions a cada push/PR.
 
 ## 4. Ações corretivas e preventivas
 
@@ -66,7 +67,6 @@ pie showData title Pacotes de produto da EAP (29)
 
 ## 5. Previsão
 
-Mantido o ritmo atual, F3 e F4 cabem até o fim de novembro. A F5 completa
-e a F6 são o **caminho crítico** para dezembro; a contingência prevista
-no plano de riscos (R1) é usar o Prisma Studio no lugar do CRUD completo
-do painel.
+Com F0–F5 concluídas em outubro, resta apenas a F6 (testes E2E, Lighthouse
+e deploy público), estimada em 1 semana. A entrega final em dezembro tem
+folga de várias semanas.
