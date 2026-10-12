@@ -75,30 +75,30 @@ const sair = () => {
   min-height: calc(
     100vh - 80px
   ); /* Ajuste dependendo do header global, ou pode ser full height se esconder o nav principal */
-  background-color: var(--carbon-900);
+  background-color: var(--color-carbon);
 }
 
 .sidebar {
   width: 260px;
-  background-color: var(--carbon-800);
-  border-right: 1px solid var(--carbon-700);
+  background-color: var(--color-dark);
+  border-right: 1px solid var(--color-surface);
   display: flex;
   flex-direction: column;
 }
 
 .sidebar-header {
   padding: 1.5rem;
-  border-bottom: 1px solid var(--carbon-700);
+  border-bottom: 1px solid var(--color-surface);
 }
 
 .sidebar-header h2 {
   font-size: 1.25rem;
-  color: var(--carbon-100);
+  color: var(--color-light);
   margin: 0 0 0.5rem 0;
 }
 
 .sidebar-header p {
-  color: var(--carbon-400);
+  color: var(--color-silver);
   font-size: 0.9rem;
   margin: 0;
 }
@@ -115,7 +115,7 @@ const sair = () => {
   align-items: center;
   gap: 0.75rem;
   padding: 1rem 1.5rem;
-  color: var(--carbon-300);
+  color: var(--color-silver);
   text-decoration: none;
   transition: all 0.2s;
   border-left: 3px solid transparent;
@@ -123,9 +123,9 @@ const sair = () => {
 
 .nav-item:hover,
 .nav-item.router-link-exact-active {
-  background-color: rgba(229, 57, 53, 0.1);
-  color: var(--red-light);
-  border-left-color: var(--red-main);
+  background-color: var(--color-red-dim);
+  color: var(--color-red-light);
+  border-left-color: var(--color-red);
 }
 
 .nav-item--em-breve,
@@ -133,13 +133,13 @@ const sair = () => {
   opacity: 0.45;
   cursor: not-allowed;
   background-color: transparent;
-  color: var(--carbon-300);
+  color: var(--color-silver);
   border-left-color: transparent;
 }
 
 .sidebar-footer {
   padding: 1.5rem;
-  border-top: 1px solid var(--carbon-700);
+  border-top: 1px solid var(--color-surface);
 }
 
 .btn-sair {
@@ -155,8 +155,8 @@ const sair = () => {
 
 .content-header {
   padding: 1.5rem 2rem;
-  border-bottom: 1px solid var(--carbon-700);
-  background-color: var(--carbon-800);
+  border-bottom: 1px solid var(--color-surface);
+  background-color: var(--color-dark);
 }
 
 .content-header h1 {
@@ -169,19 +169,19 @@ const sair = () => {
 }
 
 .welcome-card {
-  background-color: var(--carbon-800);
-  border: 1px solid var(--carbon-700);
+  background-color: var(--color-dark);
+  border: 1px solid var(--color-surface);
   border-radius: 8px;
   padding: 2rem;
 }
 
 .welcome-card h3 {
   margin-top: 0;
-  color: var(--red-light);
+  color: var(--color-red-light);
 }
 
 .welcome-card p {
-  color: var(--carbon-300);
+  color: var(--color-silver);
   line-height: 1.6;
 }
 </style>
