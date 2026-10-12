@@ -63,6 +63,24 @@ const routes = [
     meta: { title: 'Contato — Chiquinho Motors®' },
   },
   {
+    path: '/carrinho',
+    name: 'carrinho',
+    component: () => import('../views/CarrinhoView.vue'),
+    meta: { title: 'Carrinho — Chiquinho Motors®' },
+  },
+  {
+    path: '/checkout',
+    name: 'checkout',
+    component: () => import('../views/CheckoutView.vue'),
+    meta: { title: 'Finalizar pedido — Chiquinho Motors®' },
+  },
+  {
+    path: '/pedido/:codigo',
+    name: 'pedido',
+    component: () => import('../views/PedidoView.vue'),
+    meta: { title: 'Pedido — Chiquinho Motors®' },
+  },
+  {
     path: '/sobre',
     name: 'sobre',
     component: () => import('../views/SobreNosView.vue'),

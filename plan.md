@@ -14,7 +14,7 @@ entregas pendentes**, com critérios de aceitação e dependências.
 | **F0** Fundação técnica | ✅ concluída (12/10/2026) |
 | **F1** Persistência — PostgreSQL + Prisma | ✅ concluída |
 | **F2** Catálogo de peças e acessórios | ✅ concluída |
-| **F3** Carrinho e checkout | ⬜ não iniciada |
+| **F3** Carrinho e checkout | ✅ concluída (12/10/2026) |
 | **F4** Serviços e agendamento | ⬜ não iniciada |
 | **F5** Área administrativa | 🟡 autenticação pronta; falta CRUD e telas |
 | **F6** Qualidade e publicação | ⬜ não iniciada |
@@ -247,7 +247,7 @@ enum StatusPedido { RECEBIDO EM_SEPARACAO PRONTO ENTREGUE CANCELADO }
 
 ### Backend
 
-- [ ] `POST /api/pedidos` — corpo: `{ cliente: {...}, itens: [{ produtoId, quantidade }] }`.
+- [x] `POST /api/pedidos` — corpo: `{ cliente: {...}, itens: [{ produto: <slug>, quantidade }] }`.
   - Valida com `zod`.
   - `upsert` do `Cliente` por e-mail.
   - Em **uma transação** (`prisma.$transaction`): confere estoque de cada
@@ -255,26 +255,26 @@ enum StatusPedido { RECEBIDO EM_SEPARACAO PRONTO ENTREGUE CANCELADO }
     (nunca confia no preço enviado), cria `Pedido` + `PedidoItem`,
     decrementa `Produto.estoque`.
   - Retorna `{ codigo }`.
-- [ ] `GET /api/pedidos/:codigo` — pedido + itens (para a tela de
+- [x] `GET /api/pedidos/:codigo` — pedido + itens (para a tela de
       acompanhamento).
-- [ ] Estoque insuficiente → 409 com mensagem clara (qual item, quanto há).
+- [x] Estoque insuficiente → 409 com mensagem clara (qual item, quanto há).
 
 ### Frontend
 
-- [ ] Store Pinia `carrinho`: `adicionar`, `remover`, `alterarQuantidade`,
+- [x] Store Pinia `carrinho`: `adicionar`, `remover`, `alterarQuantidade`,
       getters `subtotal` e `quantidadeTotal`. Persistência em
       `localStorage` (try/catch).
-- [ ] Botão "Adicionar ao carrinho" em `CardProduto` e `ProdutoDetalheView`
+- [x] Botão "Adicionar ao carrinho" em `CardProduto` e `ProdutoDetalheView`
       (desabilitado quando `!disponivel`).
-- [ ] Mini-carrinho no `AppHeader` (ícone `ShoppingCart` do lucide +
+- [x] Mini-carrinho no `AppHeader` (ícone `ShoppingCart` do lucide +
       contador).
-- [ ] `CarrinhoView` (`/carrinho`): lista, ajuste de quantidade, subtotal,
+- [x] `CarrinhoView` (`/carrinho`): lista, ajuste de quantidade, subtotal,
       botão "Finalizar".
-- [ ] `CheckoutView` (`/checkout`): formulário de cliente (nome, e-mail,
+- [x] `CheckoutView` (`/checkout`): formulário de cliente (nome, e-mail,
       telefone) + revisão; ao enviar chama `POST /api/pedidos`.
-- [ ] `PedidoView` (`/pedido/:codigo`): confirmação + status + itens +
+- [x] `PedidoView` (`/pedido/:codigo`): confirmação + status + itens +
       botão WhatsApp com o resumo.
-- [ ] Limpar o carrinho após pedido criado.
+- [x] Limpar o carrinho após pedido criado.
 
 ### Pronto quando
 

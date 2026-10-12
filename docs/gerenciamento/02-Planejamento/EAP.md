@@ -87,11 +87,11 @@ flowchart TD
     - 1.3.2 API `/api/pecas`, `/api/acessorios`, `/api/categorias`, `/api/modelos`, `/api/carros/:id/pecas` — ✅
     - 1.3.3 Telas `PecasView`, `AcessoriosView`, `ProdutoDetalheView` + store Pinia — ✅
     - 1.3.4 Seed idempotente do catálogo — ✅
-  - **1.4 Carrinho e Checkout (F3)** — ⬜
-    - 1.4.1 Modelagem `Pedido`, `PedidoItem`, `Cliente` — ⬜
-    - 1.4.2 API `POST /api/pedidos` (transação + estoque) e `GET /api/pedidos/:codigo` — ⬜
-    - 1.4.3 Store Pinia `carrinho` com persistência — ⬜
-    - 1.4.4 Telas `CarrinhoView`, `CheckoutView`, `PedidoView` + mini-carrinho — ⬜
+  - **1.4 Carrinho e Checkout (F3)** — ✅
+    - 1.4.1 Modelagem `Pedido`, `PedidoItem`, `Cliente` — ✅
+    - 1.4.2 API `POST /api/pedidos` (transação + estoque) e `GET /api/pedidos/:codigo` — ✅
+    - 1.4.3 Store Pinia `carrinho` com persistência — ✅
+    - 1.4.4 Telas `CarrinhoView`, `CheckoutView`, `PedidoView` + mini-carrinho — ✅
   - **1.5 Serviços e Agendamento (F4)** — ⬜
     - 1.5.1 Modelagem `Servico`, `Agendamento` (trava de horário) — ⬜
     - 1.5.2 API de disponibilidade de horários — ⬜
@@ -124,8 +124,8 @@ flowchart TD
 | 1.3.1 | Modelagem Produto | Produto unificado + junção N:N com modelos | Migration aplicada; FKs com cascade | Alex | 1 d |
 | 1.3.2 | API de catálogo | Fábrica `criarRotasProduto(tipo)` com filtros | `?modelo=` retorna só compatíveis | Alex | 2 d |
 | 1.3.3 | Telas de catálogo | `CatalogoProdutos`, `CardProduto`, `useProdutos` | Filtros funcionam com debounce | Alex / Francisco | 2 d |
-| 1.4.2 | API de pedidos | Criação de pedido em transação | Estoque nunca negativo; 409 se faltar | A definir | 3 d |
-| 1.4.4 | Telas de compra | Carrinho, checkout e acompanhamento | Fluxo completo até o código do pedido | A definir | 4 d |
+| 1.4.2 | API de pedidos | Criação de pedido em transação | Estoque nunca negativo; 409 se faltar | Luiz | 3 d |
+| 1.4.4 | Telas de compra | Carrinho, checkout e acompanhamento | Fluxo completo até o código do pedido | Luiz | 4 d |
 | 1.5.2 | Disponibilidade | Geração de slots livres por dia/serviço | Retorna só horários não ocupados | A definir | 2 d |
 | 1.5.3 | Agendamento | Reserva com trava única | Conflito → 409 "horário indisponível" | A definir | 2 d |
 | 1.6.1 | Autenticação | `Administrador`, bcrypt, JWT, `verificarAdmin`, store `auth` | Login válido gera token; rotas protegidas → 401 sem token | Luiz | 3 d |

@@ -68,4 +68,7 @@ export const api = {
   listarModelos: () => pedir('/modelos'),
 
   enviarContato: (dados) => pedir('/contato', { method: 'POST', body: JSON.stringify(dados) }),
+
+  criarPedido: (dados) => pedir('/pedidos', { method: 'POST', body: JSON.stringify(dados) }),
+  buscarPedido: (codigo) => pedir(`/pedidos/${encodeURIComponent(codigo)}`),
 };

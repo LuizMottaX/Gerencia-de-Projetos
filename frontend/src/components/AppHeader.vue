@@ -7,18 +7,32 @@
           <RouterLink to="/">Chiquinho <span class="brand-accent">Motors</span>®</RouterLink>
         </h1>
       </div>
-      <!-- Botão hambúrguer (mobile) -->
-      <button
-        class="hamburger"
-        :class="{ open: menuAberto }"
-        aria-label="Abrir menu"
-        :aria-expanded="menuAberto"
-        @click="menuAberto = !menuAberto"
-      >
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+      <div class="header-acoes">
+        <RouterLink
+          to="/carrinho"
+          class="mini-carrinho"
+          :aria-label="`Carrinho com ${carrinho.quantidadeTotal} itens`"
+          title="Carrinho"
+          @click="fecharMenu"
+        >
+          <ShoppingCart :size="22" :stroke-width="2.25" />
+          <span v-if="carrinho.quantidadeTotal" class="mini-carrinho-contador">
+            {{ carrinho.quantidadeTotal > 99 ? '99+' : carrinho.quantidadeTotal }}
+          </span>
+        </RouterLink>
+        <!-- Botão hambúrguer (mobile) -->
+        <button
+          class="hamburger"
+          :class="{ open: menuAberto }"
+          aria-label="Abrir menu"
+          :aria-expanded="menuAberto"
+          @click="menuAberto = !menuAberto"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
     </div>
 
     <hr />
@@ -70,10 +84,12 @@
 
 <script setup>
 import { ref } from 'vue';
-import { Car, UserCog } from 'lucide-vue-next';
+import { Car, ShoppingCart, UserCog } from 'lucide-vue-next';
 import { useAuthStore } from '@/stores/auth';
+import { useCarrinhoStore } from '@/stores/carrinho';
 
 const auth = useAuthStore();
+const carrinho = useCarrinhoStore();
 const menuAberto = ref(false);
 function fecharMenu() {
   menuAberto.value = false;
@@ -101,6 +117,42 @@ function fecharMenu() {
 
 .brand-accent {
   color: #c0392b;
+}
+
+.header-acoes {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.mini-carrinho {
+  position: relative;
+  display: inline-flex;
+  padding: 0.4rem;
+  color: #e8eaed;
+  border-radius: 8px;
+  transition: color 0.2s ease;
+}
+
+.mini-carrinho:hover,
+.mini-carrinho.router-link-active {
+  color: #e74c3c;
+}
+
+.mini-carrinho-contador {
+  position: absolute;
+  top: -2px;
+  right: -4px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: 9px;
+  background: #c0392b;
+  color: #fff;
+  font-size: 0.7em;
+  font-weight: 700;
+  line-height: 18px;
+  text-align: center;
 }
 
 /* Sobreescrita do h1 global para o header */

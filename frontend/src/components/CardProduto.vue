@@ -18,12 +18,24 @@
         </p>
       </div>
     </RouterLink>
+    <div class="card-acoes">
+      <button
+        type="button"
+        class="btn btn-red btn-carrinho"
+        :disabled="!produto.disponivel"
+        @click="adicionarAoCarrinho"
+      >
+        <component :is="adicionado ? Check : ShoppingCart" :size="16" />
+        {{ rotuloBotao }}
+      </button>
+    </div>
   </div>
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import { ArrowRight, Headphones, Wrench } from 'lucide-vue-next';
+import { computed, ref } from 'vue';
+import { ArrowRight, Check, Headphones, ShoppingCart, Wrench } from 'lucide-vue-next';
+import { useCarrinhoStore } from '../stores/carrinho';
 
 const props = defineProps({
   produto: { type: Object, required: true },
@@ -35,6 +47,22 @@ const rota = computed(() => {
 });
 
 const tipoIcone = computed(() => (props.produto.tipo === 'acessorio' ? Headphones : Wrench));
+
+const carrinho = useCarrinhoStore();
+const adicionado = ref(false);
+let timer = null;
+
+const rotuloBotao = computed(() => {
+  if (!props.produto.disponivel) return 'Esgotado';
+  return adicionado.value ? 'Adicionado!' : 'Adicionar ao carrinho';
+});
+
+function adicionarAoCarrinho() {
+  carrinho.adicionar(props.produto);
+  adicionado.value = true;
+  clearTimeout(timer);
+  timer = setTimeout(() => (adicionado.value = false), 1500);
+}
 </script>
 
 <style scoped>
@@ -140,6 +168,21 @@ const tipoIcone = computed(() => (props.produto.tipo === 'acessorio' ? Headphone
   font-weight: 900;
   color: #c0392b;
   margin-bottom: 0.4rem;
+}
+
+.card-acoes {
+  padding: 0 16px 16px;
+}
+
+.btn-carrinho {
+  width: 100%;
+  font-size: 0.85em;
+}
+
+.btn-carrinho:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
 }
 
 .produto-compat {

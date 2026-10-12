@@ -52,7 +52,7 @@ Itens que surgiram em conversas e **não entram** sem um CR aprovado:
 | PRs sem pacote da EAP | 0 | 0 |
 | Mudanças implementadas sem CR | 0 | 0 |
 | CRs registrados / aprovados / adiados | 7 / 6 / 1 | — |
-| Pacotes de produto concluídos | 14 / 29 (48%) | 100% em 12/2026 |
+| Pacotes de produto concluídos | 18 / 29 (62%) | 100% em 12/2026 |
 
 ## 5. Resultados do controle
 
