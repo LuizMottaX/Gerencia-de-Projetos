@@ -32,7 +32,7 @@ const fazerLogin = async () => {
   <main class="login-admin">
     <div class="login-box">
       <div class="login-header">
-        <ShieldAlert :size="40" color="var(--red-main)" />
+        <ShieldAlert class="login-icone" :size="40" />
         <h1>Acesso Restrito</h1>
         <p>Área administrativa da Chiquinho Motors</p>
       </div>
@@ -71,12 +71,12 @@ const fazerLogin = async () => {
   align-items: center;
   min-height: calc(100vh - 150px);
   padding: 2rem;
-  background-color: var(--carbon-900);
+  background-color: var(--color-carbon);
 }
 
 .login-box {
-  background-color: var(--carbon-800);
-  border: 1px solid var(--carbon-700);
+  background-color: var(--color-dark);
+  border: 1px solid var(--color-surface);
   border-radius: 8px;
   padding: 3rem;
   width: 100%;
@@ -89,14 +89,19 @@ const fazerLogin = async () => {
   margin-bottom: 2rem;
 }
 
+/* `color` como prop do ícone vira atributo SVG, onde var() não funciona. */
+.login-icone {
+  color: var(--color-red);
+}
+
 .login-header h1 {
   margin: 1rem 0 0.5rem;
   font-size: 1.5rem;
-  color: var(--carbon-100);
+  color: var(--color-light);
 }
 
 .login-header p {
-  color: var(--carbon-300);
+  color: var(--color-silver);
   font-size: 0.9rem;
 }
 
@@ -115,7 +120,7 @@ const fazerLogin = async () => {
 .campo label {
   font-size: 0.85rem;
   font-weight: 600;
-  color: var(--carbon-200);
+  color: var(--color-light);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -123,22 +128,22 @@ const fazerLogin = async () => {
 .campo input {
   padding: 0.75rem 1rem;
   border-radius: 4px;
-  border: 1px solid var(--carbon-600);
-  background-color: var(--carbon-900);
-  color: var(--carbon-100);
+  border: 1px solid var(--color-mid);
+  background-color: var(--color-carbon);
+  color: var(--color-light);
   font-size: 1rem;
   transition: border-color 0.2s;
 }
 
 .campo input:focus {
   outline: none;
-  border-color: var(--red-main);
+  border-color: var(--color-red);
 }
 
 .erro-alerta {
-  background-color: rgba(229, 57, 53, 0.1);
-  color: var(--red-light);
-  border: 1px solid var(--red-main);
+  background-color: var(--color-red-dim);
+  color: var(--color-red-light);
+  border: 1px solid var(--color-red);
   padding: 0.75rem;
   border-radius: 4px;
   font-size: 0.9rem;

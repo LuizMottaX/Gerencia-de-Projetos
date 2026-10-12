@@ -227,14 +227,14 @@ nav {
 }
 
 .nav-link--admin {
-  background-color: var(--carbon-700);
-  border-color: var(--carbon-600);
+  background-color: var(--color-surface);
+  border-color: var(--color-mid);
   margin-left: auto; /* Empurra pro final se houver espaço */
 }
 
 .nav-link--admin:hover {
-  background-color: var(--carbon-600);
-  color: var(--carbon-100);
+  background-color: var(--color-mid);
+  color: var(--color-light);
 }
 
 @media (max-width: 650px) {
