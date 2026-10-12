@@ -78,6 +78,22 @@ npm run dev
 
 > O site estará disponível em: `http://localhost:5173`
 
+### 3. Qualidade — lint e testes
+
+```bash
+# Backend: os testes usam um PostgreSQL SEPARADO (nunca o do .env de dev)
+cd backend
+cp .env.test.example .env.test   # ajuste a DATABASE_URL de teste
+npm run db:test:setup            # aplica migrations + seed no banco de teste
+npm run lint && npm test
+
+# Frontend
+cd frontend
+npm run lint && npm test
+```
+
+O GitHub Actions (`.github/workflows/ci.yml`) roda lint, formatação, testes e build em cada push e Pull Request.
+
 ---
 
 ## 🌐 Endpoints da API

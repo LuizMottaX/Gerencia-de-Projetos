@@ -11,12 +11,12 @@ entregas pendentes**, com critérios de aceitação e dependências.
 
 | Fase | Status |
 |------|--------|
-| **F0** Fundação técnica | 🟡 parcial (falta lint, testes e CI) |
+| **F0** Fundação técnica | ✅ concluída (12/10/2026) |
 | **F1** Persistência — PostgreSQL + Prisma | ✅ concluída |
 | **F2** Catálogo de peças e acessórios | ✅ concluída |
 | **F3** Carrinho e checkout | ⬜ não iniciada |
 | **F4** Serviços e agendamento | ⬜ não iniciada |
-| **F5** Área administrativa | ⬜ não iniciada |
+| **F5** Área administrativa | 🟡 autenticação pronta; falta CRUD e telas |
 | **F6** Qualidade e publicação | ⬜ não iniciada |
 
 Já implementado da F0: estrutura em `backend/src/`, `.env.example`,
@@ -183,21 +183,21 @@ public/carros/  public/produtos/   imagens locais
 
 ### Entregas
 
-- [ ] ESLint + Prettier + `.editorconfig` nos dois pacotes; script
+- [x] ESLint + Prettier + `.editorconfig` nos dois pacotes; script
       `npm run lint` (e `lint:fix`).
-- [ ] Backend: Vitest + Supertest. Testes mínimos:
+- [x] Backend: Vitest + Supertest. Testes mínimos:
   - `GET /api/carros` retorna 200 e uma lista.
   - `GET /api/carros/:id` retorna 404 para slug inexistente.
   - `GET /api/pecas?modelo=<slug>` filtra por compatibilidade.
   - `POST /api/contato` com corpo inválido retorna 400 com `detalhes`.
-- [ ] Frontend: Vitest + `@vue/test-utils`. Testes mínimos:
+- [x] Frontend: Vitest + `@vue/test-utils`. Testes mínimos:
   - `CardProduto` renderiza nome, preço e a rota correta por `tipo`.
   - `useProdutos` chama o fetcher e popula `itens`.
-- [ ] Banco de teste isolado para o backend (outra `DATABASE_URL` ou
+- [x] Banco de teste isolado para o backend (outra `DATABASE_URL` ou
       schema `test`); script `db:test:reset`.
-- [ ] GitHub Actions: workflow que roda `lint`, `test` e `build` em cada
+- [x] GitHub Actions: workflow que roda `lint`, `test` e `build` em cada
       push e PR. Serviço `postgres` no runner para os testes de integração.
-- [ ] `LICENSE` (MIT) e `CHANGELOG.md`.
+- [x] `LICENSE` (MIT) e `CHANGELOG.md`.
 
 ### Pronto quando
 
@@ -381,8 +381,8 @@ enum PapelUsuario { ADMIN }
 
 ### Backend
 
-- [ ] Auth: `POST /api/auth/login` (bcrypt + JWT), middleware
-      `requireAdmin` que valida o `Authorization: Bearer`.
+- [x] Auth: `POST /api/admin/auth/login` (bcrypt + JWT), middleware
+      `verificarAdmin` que valida o `Authorization: Bearer`.
 - [ ] Script `create-admin` (cria o primeiro usuário via CLI/prompt).
 - [ ] CRUD **protegido** (POST/PUT/DELETE) para: `carros` (+ imagens),
       `marcas`, `modelos`, `produtos` (peças/acessórios), `categorias`,

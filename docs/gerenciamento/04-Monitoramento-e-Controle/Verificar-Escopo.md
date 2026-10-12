@@ -45,25 +45,28 @@ demonstrados — não basta o código existir.
 
 **Aceite:** Equipe · 27/08/2026 · demonstrado na 1ª apresentação (14/09/2026).
 
-### E1 — Fundação técnica (F0) — 🟡 ACEITE PARCIAL
+### E1 — Fundação técnica (F0) — ✅ ACEITA
 
 | Critério | Verificação | Resultado |
 |----------|-------------|:---------:|
 | Estrutura separada front/back | Pastas `frontend/` e `backend/` | ✅ |
 | Segurança e validação | Helmet, rate limit, Zod, `tratarErro` | ✅ |
-| `npm run lint` passa | Não configurado | ❌ |
-| `npm test` passa | Não configurado | ❌ |
-| CI bloqueia PR com falha | Workflow inexistente | ❌ |
+| `npm run lint` passa | ESLint nos dois pacotes, 0 erros e 0 avisos | ✅ |
+| `npm test` passa | 8 testes de API + 6 de frontend | ✅ |
+| CI roda em cada PR | `.github/workflows/ci.yml` | ✅ ¹ |
 
-**Situação:** aceite **parcial** — pendências viram a ação corretiva A1.
+**Aceite:** Equipe · 12/10/2026 (aceite parcial anterior resolvido pela ação A1).
+
+¹ Para o CI **bloquear o merge**, falta ativar a proteção da branch `main`
+no GitHub (Settings → Branches → exigir os checks `backend` e `frontend`).
 
 ### E6 — Painel administrativo (F5) — ⏳ EM VERIFICAÇÃO (incremento: autenticação)
 
 | Critério | Verificação | Resultado |
 |----------|-------------|:---------:|
-| Login com credenciais válidas gera token | `POST /api/admin/auth/login` | ⏳ a demonstrar |
-| Credenciais inválidas → 401 | Mesmo endpoint | ⏳ |
-| Rotas protegidas → 401 sem token | `GET /api/admin/auth/me` sem header | ⏳ |
+| Login com credenciais válidas gera token | Teste automatizado `tests/api.test.js` | ✅ |
+| Credenciais inválidas → 401 | Teste automatizado | ✅ |
+| Rotas protegidas → 401 sem token / token inválido | Teste automatizado | ✅ |
 | Admin cadastra veículo e ele aparece no site | CRUD não implementado | ❌ |
 
 ### E8 — Documentação PMBOK — ✅ ACEITA (Integração e Escopo)
@@ -79,7 +82,7 @@ demonstrados — não basta o código existir.
 
 | Entrega | Situação |
 |---------|:--------:|
-| E1 Fundação | 🟡 parcial |
+| E1 Fundação | ✅ aceita |
 | E2 Persistência | ✅ aceita |
 | E3 Peças e acessórios | ✅ aceita |
 | E4 Carrinho | ⬜ |

@@ -71,12 +71,12 @@ flowchart TD
 ## 2. EAP em formato de lista (com status)
 
 - **1 Chiquinho Motors®**
-  - **1.1 Fundação técnica (F0)** — 🟡
+  - **1.1 Fundação técnica (F0)** — ✅
     - 1.1.1 Estrutura `frontend/` + `backend/` (Vue 3 + Express) — ✅
     - 1.1.2 Segurança e validação (Helmet, rate limit, Zod, tratamento de erros) — ✅
     - 1.1.3 Formulário de contato (`POST /api/contato`) e páginas 404 — ✅
     - 1.1.4 Design system "Carbon & Racing Red" + ícones Lucide — ✅
-    - 1.1.5 ESLint/Prettier, Vitest, GitHub Actions, LICENSE/CHANGELOG — ⬜
+    - 1.1.5 ESLint/Prettier, Vitest, GitHub Actions, LICENSE/CHANGELOG — ✅
   - **1.2 Persistência e Veículos (F1)** — ✅
     - 1.2.1 Setup PostgreSQL (Coolify) + Prisma + migrations — ✅
     - 1.2.2 Modelagem `Marca`, `Carro`, `CarroImagem` — ✅
@@ -98,7 +98,7 @@ flowchart TD
     - 1.5.3 API de agendamento + consulta por código — ⬜
     - 1.5.4 Telas `ServicosView`, `AgendamentoView`, confirmação — ⬜
   - **1.6 Área Administrativa (F5)** — 🟡
-    - 1.6.1 Autenticação (modelo `Administrador`, login JWT, middleware, store `auth`) — 🟡
+    - 1.6.1 Autenticação (modelo `Administrador`, login JWT, middleware, store `auth`) — ✅
     - 1.6.2 CRUD protegido do catálogo + upload de imagem — ⬜
     - 1.6.3 Status de pedidos/agendamentos + caixa de mensagens — ⬜
     - 1.6.4 Telas do painel (login ✅, dashboard 🟡, listas/formulários ⬜) — 🟡

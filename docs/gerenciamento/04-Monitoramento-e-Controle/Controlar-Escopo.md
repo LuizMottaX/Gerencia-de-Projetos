@@ -28,11 +28,11 @@ autorizadas (*scope creep*) ou trabalho extra não pedido (*gold plating*).
 | Modelo de peças/acessórios | Duas entidades (peça e acessório) | `Produto` unificado | Mudança de solução, mesmo escopo | CR-02 ✅ |
 | Imagens | Links externos | Imagens locais | Mudança de solução | CR-03 ✅ |
 | Documentação da API | Swagger na F2 | Não feito | **Redução** de escopo | CR-04 ✅ (dívida técnica) |
-| Lint/testes/CI | Na F0 | Não feito | **Atraso**, escopo mantido | Ação corretiva A1 |
+| Lint/testes/CI | Na F0 | Feito em 12/10 | **Atraso** de ~7 semanas, escopo mantido | Ação corretiva A1 ✅ |
 | Sequência das fases | F3 → F4 → F5 | F5 (auth) iniciada antes | Mudança de sequência | CR-05 ✅ |
 | Usuário admin | `Usuario` + `PapelUsuario` | `Administrador` | Simplificação dentro do escopo | CR-06 ✅ |
 | Dashboard admin | Indicadores (estoque baixo, pedidos) | Tela de boas-vindas | Incompleto — pacote ainda em andamento | Acompanhar em 1.6.4 |
-| Links "Pedidos (F3)" e "Serviços (F4)" no menu admin | — | Links para telas que não existem | Antecipação de UI sem pacote | Manter ocultos/desabilitados até F3/F4 |
+| Links "Pedidos (F3)" e "Serviços (F4)" no menu admin | — | Links para telas que não existem | Antecipação de UI sem pacote | ✅ Desabilitados ("em breve") até F3/F4 |
 
 ## 3. Pedidos de escopo recusados ou fora do escopo
 
@@ -52,11 +52,10 @@ Itens que surgiram em conversas e **não entram** sem um CR aprovado:
 | PRs sem pacote da EAP | 0 | 0 |
 | Mudanças implementadas sem CR | 0 | 0 |
 | CRs registrados / aprovados / adiados | 7 / 6 / 1 | — |
-| Pacotes de produto concluídos | 12 / 29 (41%) | 100% em 12/2026 |
+| Pacotes de produto concluídos | 14 / 29 (48%) | 100% em 12/2026 |
 
 ## 5. Resultados do controle
 
 - Linha de base do escopo **atualizada** com CR-02 a CR-06.
-- **Ação corretiva A1** (lint/testes/CI) antes de expandir o escopo com a F3.
-- **Recomendação:** desabilitar os links do menu admin que apontam para
-  telas de F3/F4 até essas fases serem entregues.
+- **Ação corretiva A1** (lint/testes/CI) concluída antes de expandir o escopo com a F3.
+- Links do menu admin para telas de F3/F4 desabilitados até essas fases serem entregues.

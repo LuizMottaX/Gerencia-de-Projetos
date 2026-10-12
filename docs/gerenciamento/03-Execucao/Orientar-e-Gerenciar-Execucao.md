@@ -42,8 +42,9 @@ flowchart LR
 | 27/08/2026 | `5d7b885` | Alex | README atualizado (PostgreSQL, endpoints) | 1.8.2 |
 | 10/09/2026 | `7509a96` | Alex | Plano de implementação das entregas pendentes | 1.8.2 |
 | 14/09/2026 | `05ec8f0` | Luiz | Roteiro e slides da 1ª apresentação | 1.8.4 |
-| 25/09/2026 | *(em andamento)* | Luiz | Autenticação admin: modelo `Administrador`, login JWT, store `auth`, telas de login e dashboard | 1.6.1, 1.6.4 |
-| 12/10/2026 | *(este pacote)* | Luiz | Artefatos de Integração e Escopo (PMBOK) | 1.8.1–1.8.3 |
+| 25/09 – 12/10/2026 | `c657b44` | Luiz | Autenticação admin: modelo `Administrador`, login JWT, store `auth`, telas de login e dashboard | 1.6.1, 1.6.4 |
+| 12/10/2026 | `07be25c` | Luiz | Artefatos de Integração e Escopo (PMBOK) | 1.8.1–1.8.3 |
+| 12/10/2026 | `870b68b`, `d8cc979` | Luiz | F0: ESLint, Prettier, Vitest, Supertest, GitHub Actions, LICENSE, CHANGELOG | 1.1.5 |
 
 ## 3. Produtos entregues até agora
 
@@ -62,7 +63,7 @@ flowchart LR
 | I1 | Prisma apontando para porta 5432 (MariaDB) → erro de SSL | Bloqueou F1 | Banco correto na porta **5433** documentado no `plan.md` | ✅ |
 | I2 | Imagens externas (OLX) retornando 403 por hotlink | Fotos quebradas | Imagens baixadas para `frontend/public/` (CR-03) | ✅ |
 | I3 | `npm audit` com 3 "high" em `deepmerge-ts` | Baixo (só CLI do Prisma) | Registrado como dívida técnica | 🟡 |
-| I4 | `JWT_SECRET` com valor padrão no código e senha seed `admin123` | Risco R4 em produção | Exigir variável de ambiente e trocar senha antes do deploy (F6) | ⬜ |
+| I4 | `JWT_SECRET` com valor padrão no código e senha seed `admin123` | Risco R4 em produção | `JWT_SECRET` obrigatório; senha do admin vem de `ADMIN_SENHA` no `.env` | ✅ |
 | I5 | Footer com "© 2023" e contatos pessoais no código | Baixo | Registrado como dívida técnica | ⬜ |
 
 ## 5. Solicitações de mudança geradas na execução

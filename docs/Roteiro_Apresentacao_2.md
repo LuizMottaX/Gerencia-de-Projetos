@@ -21,7 +21,7 @@
 
 ### SLIDE 2 — ONDE ESTAMOS
 *[Mostrar o quadro de fases F0–F6.]*
-> "Recapitulando: F1 e F2 concluídas e aceitas, F0 parcial, e a F5 — autenticação do painel — foi antecipada. Isso vai aparecer mais adiante no controle de mudanças."
+> "Recapitulando: F0, F1 e F2 concluídas e aceitas, e a F5 — autenticação do painel — foi antecipada. Isso vai aparecer mais adiante no controle de mudanças."
 
 ### SLIDE 3 — TERMO DE ABERTURA
 *[Fonte: `01-Iniciacao/Termo-de-Abertura.md`]*
@@ -60,7 +60,7 @@
 
 ### SLIDE 10 — MONITORAR E CONTROLAR
 *[Fonte: `04-Monitoramento-e-Controle/Monitorar-e-Controlar-o-Trabalho.md`]*
-> "Nosso relatório de desempenho mostra **41% dos pacotes de produto concluídos**. Identificamos um desvio: lint, testes e CI da F0 estão atrasados. A ação corretiva é fechá-los **antes** de começar o carrinho."
+> "Nosso relatório de desempenho mostra **48% dos pacotes de produto concluídos**. Identificamos um desvio: lint, testes e CI da F0 atrasaram cerca de 7 semanas. A ação corretiva foi fechá-los **antes** de começar o carrinho — hoje são 14 testes automatizados rodando no GitHub Actions a cada Pull Request."
 
 ### SLIDE 11 — CONTROLE INTEGRADO DE MUDANÇAS
 *[Fonte: `Controle-Integrado-de-Mudancas.md` — mostrar o fluxograma e o log.]*
@@ -68,7 +68,7 @@
 
 ### SLIDE 12 — VERIFICAR O ESCOPO
 *[Fonte: `Verificar-Escopo.md`]*
-> "Verificar o escopo é obter o **aceite formal**. F1 e F2 foram aceitas com todos os critérios atendidos. A F0 teve **aceite parcial** — e deixamos isso explícito, com o que falta."
+> "Verificar o escopo é obter o **aceite formal**. F1 e F2 foram aceitas com todos os critérios atendidos. A F0 primeiro recebeu **aceite parcial** — faltavam testes e CI — e só foi aceita depois da ação corretiva. A autenticação do painel foi verificada com testes automatizados."
 
 ### SLIDE 13 — CONTROLAR O ESCOPO
 *[Fonte: `Controlar-Escopo.md`]*
