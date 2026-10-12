@@ -47,8 +47,19 @@ async function seedModelos() {
   for (const m of modelos) {
     await prisma.modeloVeiculo.upsert({
       where: { slug: m.slug },
-      update: { marca: m.marca, modelo: m.modelo, anoInicio: m.anoInicio ?? null, anoFim: m.anoFim ?? null },
-      create: { slug: m.slug, marca: m.marca, modelo: m.modelo, anoInicio: m.anoInicio ?? null, anoFim: m.anoFim ?? null },
+      update: {
+        marca: m.marca,
+        modelo: m.modelo,
+        anoInicio: m.anoInicio ?? null,
+        anoFim: m.anoFim ?? null,
+      },
+      create: {
+        slug: m.slug,
+        marca: m.marca,
+        modelo: m.modelo,
+        anoInicio: m.anoInicio ?? null,
+        anoFim: m.anoFim ?? null,
+      },
     });
   }
   return modelos.length;
@@ -163,7 +174,11 @@ async function main() {
   console.log(`✔ ${await seedProdutos(pecas, 'PECA')} peças`);
   console.log(`✔ ${await seedProdutos(acessorios, 'ACESSORIO')} acessórios`);
   const admins = await seedAdmin();
-  console.log(admins ? `✔ ${admins} administrador` : '⚠ administrador não criado — defina ADMIN_SENHA no .env');
+  console.log(
+    admins
+      ? `✔ ${admins} administrador`
+      : '⚠ administrador não criado — defina ADMIN_SENHA no .env',
+  );
 }
 
 main()

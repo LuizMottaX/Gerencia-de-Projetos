@@ -9,7 +9,9 @@
         class="hero-img"
       />
       <div class="hero-content">
-        <p class="hero-tag"><MapPin :size="14" :stroke-width="2.5" /> Concessionária em Sinop – MT</p>
+        <p class="hero-tag">
+          <MapPin :size="14" :stroke-width="2.5" /> Concessionária em Sinop – MT
+        </p>
         <h1>Seu próximo carro está aqui.</h1>
         <p class="hero-sub">
           Preços acessíveis, garantia e atendimento personalizado.<br />
@@ -23,7 +25,7 @@
 
     <!-- Diferenciais -->
     <section class="diferenciais">
-      <div class="card-diff" v-for="item in diferenciais" :key="item.titulo">
+      <div v-for="item in diferenciais" :key="item.titulo" class="card-diff">
         <component :is="item.icon" class="diff-icon" :size="34" :stroke-width="1.75" />
         <h3>{{ item.titulo }}</h3>
         <p>{{ item.desc }}</p>
@@ -33,8 +35,8 @@
     <!-- Chamada -->
     <section class="chamada">
       <p class="chamada-texto">
-        Nossos veículos são de procedência, revisados por profissionais qualificados.
-        Visite-nos ou verifique o nosso catálogo on-line!
+        Nossos veículos são de procedência, revisados por profissionais qualificados. Visite-nos ou
+        verifique o nosso catálogo on-line!
       </p>
       <RouterLink to="/carros" class="btn zoom-shadow">Ver catálogo completo</RouterLink>
     </section>
@@ -45,9 +47,21 @@
 import { MapPin, ArrowRight, ShieldCheck, CreditCard, Handshake } from 'lucide-vue-next';
 
 const diferenciais = [
-  { icon: ShieldCheck, titulo: 'Procedência Garantida', desc: 'Todos os veículos revisados e com histórico verificado.' },
-  { icon: CreditCard, titulo: 'Condições Flexíveis', desc: 'Financiamento, troca e cartão de crédito aceitos.' },
-  { icon: Handshake, titulo: 'Atendimento Premium', desc: 'Desde 1985 com foco no melhor atendimento do mercado.' },
+  {
+    icon: ShieldCheck,
+    titulo: 'Procedência Garantida',
+    desc: 'Todos os veículos revisados e com histórico verificado.',
+  },
+  {
+    icon: CreditCard,
+    titulo: 'Condições Flexíveis',
+    desc: 'Financiamento, troca e cartão de crédito aceitos.',
+  },
+  {
+    icon: Handshake,
+    titulo: 'Atendimento Premium',
+    desc: 'Desde 1985 com foco no melhor atendimento do mercado.',
+  },
 ];
 </script>
 
@@ -146,14 +160,16 @@ const diferenciais = [
   border-radius: 12px;
   padding: 1.6rem 1.4rem;
   text-align: center;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   border-top: 3px solid #c0392b;
-  transition: transform 0.25s, box-shadow 0.25s;
+  transition:
+    transform 0.25s,
+    box-shadow 0.25s;
 }
 
 .card-diff:hover {
   transform: translateY(-4px);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.14);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.14);
 }
 
 .diff-icon {

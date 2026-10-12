@@ -15,22 +15,21 @@
         <div class="sobre-texto-bloco">
           <h2>Nossa História</h2>
           <p>
-            Somos uma empresa familiar, fundada em 1985, desde sempre movidos pela paixão
-            automotiva e pelo apreço com a honestidade e qualidade dos serviços prestados.
-            Nosso primeiro carro vendido foi um Fusca 1975, e desde então, seguimos com a
-            mesma filosofia até hoje.
+            Somos uma empresa familiar, fundada em 1985, desde sempre movidos pela paixão automotiva
+            e pelo apreço com a honestidade e qualidade dos serviços prestados. Nosso primeiro carro
+            vendido foi um Fusca 1975, e desde então, seguimos com a mesma filosofia até hoje.
           </p>
           <p>
-            Nosso objetivo é oferecer aos nossos clientes um atendimento personalizado, com a
-            melhor relação cliente-vendedor do mercado, e com a qualidade e segurança de
-            negócios que você merece.
+            Nosso objetivo é oferecer aos nossos clientes um atendimento personalizado, com a melhor
+            relação cliente-vendedor do mercado, e com a qualidade e segurança de negócios que você
+            merece.
           </p>
         </div>
       </div>
 
       <!-- Números / stats -->
       <div class="stats">
-        <div class="stat" v-for="s in stats" :key="s.valor">
+        <div v-for="s in stats" :key="s.valor" class="stat">
           <span class="stat-valor">{{ s.valor }}</span>
           <span class="stat-label">{{ s.label }}</span>
         </div>
@@ -45,16 +44,14 @@
         <div class="sobre-texto-bloco">
           <h2>Nossa Equipe</h2>
           <p>
-            Nossa equipe é formada por profissionais altamente qualificados, que estão
-            sempre prontos para atender você da melhor forma possível.
+            Nossa equipe é formada por profissionais altamente qualificados, que estão sempre
+            prontos para atender você da melhor forma possível.
           </p>
           <p class="destaque">
             Venha nos conhecer e fazer parte da nossa história!
             <Car :size="18" class="destaque-icone" />
           </p>
-          <RouterLink to="/contato" class="btn btn-red zoom-shadow">
-            Entrar em Contato
-          </RouterLink>
+          <RouterLink to="/contato" class="btn btn-red zoom-shadow"> Entrar em Contato </RouterLink>
         </div>
       </div>
     </div>
@@ -73,7 +70,10 @@ const stats = [
 </script>
 
 <style scoped>
-.sobre-page { display: flex; flex-direction: column; }
+.sobre-page {
+  display: flex;
+  flex-direction: column;
+}
 
 .banner-sub {
   color: #b0b4bc;
@@ -110,7 +110,7 @@ const stats = [
 .sobre-img {
   width: 100%;
   border-radius: 12px;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
   display: block;
   object-fit: cover;
   height: 280px;
@@ -188,10 +188,17 @@ const stats = [
     direction: ltr;
   }
 
-  .sobre-img { height: 200px; }
+  .sobre-img {
+    height: 200px;
+  }
 
-  .stats { grid-template-columns: repeat(2, 1fr); }
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
 
-  .sobre-inner { padding: 1rem; gap: 2rem; }
+  .sobre-inner {
+    padding: 1rem;
+    gap: 2rem;
+  }
 }
 </style>

@@ -101,7 +101,9 @@ onMounted(async () => {
   padding: 1rem 1rem 0.5rem;
   opacity: 0;
   transform: translateY(6px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
 }
 
 .card:hover .card-badge {

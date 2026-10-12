@@ -11,9 +11,9 @@
       <button
         class="hamburger"
         :class="{ open: menuAberto }"
-        @click="menuAberto = !menuAberto"
         aria-label="Abrir menu"
         :aria-expanded="menuAberto"
+        @click="menuAberto = !menuAberto"
       >
         <span></span>
         <span></span>
@@ -27,7 +27,12 @@
       <RouterLink to="/" class="nav-link" title="Página Inicial" @click="fecharMenu">
         Página Inicial
       </RouterLink>
-      <RouterLink to="/carros" class="nav-link nav-link--destaque" title="Carros Disponíveis" @click="fecharMenu">
+      <RouterLink
+        to="/carros"
+        class="nav-link nav-link--destaque"
+        title="Carros Disponíveis"
+        @click="fecharMenu"
+      >
         <Car :size="15" :stroke-width="2.5" /> Carros Disponíveis
       </RouterLink>
       <RouterLink to="/pecas" class="nav-link" title="Auto-peças" @click="fecharMenu">
@@ -48,15 +53,15 @@
       <RouterLink to="/sobre" class="nav-link" title="Quem Somos?" @click="fecharMenu">
         Quem Somos?
       </RouterLink>
-      
+
       <!-- Link dinâmico para o admin -->
-      <RouterLink 
-        :to="auth.isAuthenticated ? '/admin' : '/admin/login'" 
-        class="nav-link nav-link--admin" 
-        title="Painel Administrativo" 
+      <RouterLink
+        :to="auth.isAuthenticated ? '/admin' : '/admin/login'"
+        class="nav-link nav-link--admin"
+        title="Painel Administrativo"
         @click="fecharMenu"
       >
-        <UserCog :size="15" :stroke-width="2.5" /> 
+        <UserCog :size="15" :stroke-width="2.5" />
         {{ auth.isAuthenticated ? 'Painel Admin' : 'Admin' }}
       </RouterLink>
     </nav>
@@ -70,8 +75,9 @@ import { useAuthStore } from '@/stores/auth';
 
 const auth = useAuthStore();
 const menuAberto = ref(false);
-function fecharMenu() { menuAberto.value = false; }
-
+function fecharMenu() {
+  menuAberto.value = false;
+}
 </script>
 
 <style scoped>
@@ -125,7 +131,10 @@ nav {
   letter-spacing: 0.05em;
   border-radius: 50px;
   border: 1px solid transparent;
-  transition: color 0.25s, border-color 0.25s, background 0.25s;
+  transition:
+    color 0.25s,
+    border-color 0.25s,
+    background 0.25s;
 }
 
 .nav-link:hover {
@@ -180,13 +189,23 @@ nav {
   transition: all 0.3s ease;
 }
 
-.hamburger.open span:nth-child(1) { transform: translateY(8.75px) rotate(45deg); background: #c0392b; }
-.hamburger.open span:nth-child(2) { opacity: 0; }
-.hamburger.open span:nth-child(3) { transform: translateY(-8.75px) rotate(-45deg); background: #c0392b; }
+.hamburger.open span:nth-child(1) {
+  transform: translateY(8.75px) rotate(45deg);
+  background: #c0392b;
+}
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.open span:nth-child(3) {
+  transform: translateY(-8.75px) rotate(-45deg);
+  background: #c0392b;
+}
 
 /* ── Mobile ── */
 @media (max-width: 640px) {
-  .hamburger { display: flex; }
+  .hamburger {
+    display: flex;
+  }
 
   nav {
     display: none;
@@ -196,7 +215,9 @@ nav {
     padding: 0.5rem 0;
   }
 
-  nav.nav-aberto { display: flex; }
+  nav.nav-aberto {
+    display: flex;
+  }
 
   .nav-link {
     text-align: center;

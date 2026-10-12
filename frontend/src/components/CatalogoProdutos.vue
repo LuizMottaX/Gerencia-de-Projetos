@@ -92,7 +92,9 @@ watchEffect(async () => {
   if (props.tipo === 'peca') modelos.value = await store.carregarModelos();
 });
 
-const fetcher = computed(() => (props.tipo === 'acessorio' ? api.listarAcessorios : api.listarPecas));
+const fetcher = computed(() =>
+  props.tipo === 'acessorio' ? api.listarAcessorios : api.listarPecas,
+);
 const { itens, total, carregando, erro } = useProdutos((f) => fetcher.value(f), filtros);
 
 const temFiltro = computed(

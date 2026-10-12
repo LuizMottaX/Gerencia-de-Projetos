@@ -15,15 +15,15 @@ const auth = useAuthStore();
 const fazerLogin = async () => {
   erroMensagem.value = '';
   carregando.value = true;
-  
+
   const resultado = await auth.login(email.value, senha.value);
-  
+
   if (resultado.sucesso) {
     router.push('/admin');
   } else {
     erroMensagem.value = resultado.erro;
   }
-  
+
   carregando.value = false;
 };
 </script>
@@ -36,32 +36,26 @@ const fazerLogin = async () => {
         <h1>Acesso Restrito</h1>
         <p>Área administrativa da Chiquinho Motors</p>
       </div>
-      
-      <form @submit.prevent="fazerLogin" class="login-form">
+
+      <form class="login-form" @submit.prevent="fazerLogin">
         <div v-if="erroMensagem" class="erro-alerta">{{ erroMensagem }}</div>
-        
+
         <div class="campo">
           <label for="email">E-mail</label>
-          <input 
-            type="email" 
-            id="email" 
-            v-model="email" 
-            required 
+          <input
+            id="email"
+            v-model="email"
+            type="email"
+            required
             placeholder="admin@chiquinhomotors.com.br"
           />
         </div>
-        
+
         <div class="campo">
           <label for="senha">Senha</label>
-          <input 
-            type="password" 
-            id="senha" 
-            v-model="senha" 
-            required 
-            placeholder="••••••••"
-          />
+          <input id="senha" v-model="senha" type="password" required placeholder="••••••••" />
         </div>
-        
+
         <button type="submit" class="btn btn-primary" :disabled="carregando">
           {{ carregando ? 'Autenticando...' : 'Entrar no Painel' }}
         </button>
@@ -87,7 +81,7 @@ const fazerLogin = async () => {
   padding: 3rem;
   width: 100%;
   max-width: 450px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
 }
 
 .login-header {

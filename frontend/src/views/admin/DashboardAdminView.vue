@@ -20,13 +20,13 @@ const sair = () => {
 </script>
 
 <template>
-  <div class="admin-layout" v-if="auth.isAuthenticated">
+  <div v-if="auth.isAuthenticated" class="admin-layout">
     <aside class="sidebar">
       <div class="sidebar-header">
         <h2>Painel Admin</h2>
         <p>Olá, {{ auth.user?.nome }}</p>
       </div>
-      
+
       <nav class="sidebar-nav">
         <router-link to="/admin" class="nav-item">
           <LayoutDashboard :size="20" /> Dashboard
@@ -42,24 +42,27 @@ const sair = () => {
           <Wrench :size="20" /> Serviços (F4)
         </span>
       </nav>
-      
+
       <div class="sidebar-footer">
-        <button @click="sair" class="btn btn-outline btn-sair">
+        <button class="btn btn-outline btn-sair" @click="sair">
           <LogOut :size="18" /> Sair do Painel
         </button>
       </div>
     </aside>
-    
+
     <main class="admin-content">
       <header class="content-header">
         <h1>Dashboard Geral</h1>
       </header>
-      
+
       <div class="content-body">
         <div class="welcome-card">
           <h3>Bem-vindo ao Painel Administrativo</h3>
           <p>O sistema de login e proteção de rotas foi implementado com sucesso.</p>
-          <p>A partir daqui, você pode expandir a Fase 5 gerenciando o catálogo, e futuramente acompanhando pedidos (Fase 3) e serviços (Fase 4).</p>
+          <p>
+            A partir daqui, você pode expandir a Fase 5 gerenciando o catálogo, e futuramente
+            acompanhando pedidos (Fase 3) e serviços (Fase 4).
+          </p>
         </div>
       </div>
     </main>
@@ -69,7 +72,9 @@ const sair = () => {
 <style scoped>
 .admin-layout {
   display: flex;
-  min-height: calc(100vh - 80px); /* Ajuste dependendo do header global, ou pode ser full height se esconder o nav principal */
+  min-height: calc(
+    100vh - 80px
+  ); /* Ajuste dependendo do header global, ou pode ser full height se esconder o nav principal */
   background-color: var(--carbon-900);
 }
 
@@ -116,7 +121,8 @@ const sair = () => {
   border-left: 3px solid transparent;
 }
 
-.nav-item:hover, .nav-item.router-link-exact-active {
+.nav-item:hover,
+.nav-item.router-link-exact-active {
   background-color: rgba(229, 57, 53, 0.1);
   color: var(--red-light);
   border-left-color: var(--red-main);

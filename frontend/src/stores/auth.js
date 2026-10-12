@@ -35,7 +35,10 @@ export const useAuthStore = defineStore('auth', () => {
       gravarToken(token.value);
       return { sucesso: true };
     } catch (erro) {
-      return { sucesso: false, erro: erro.detalhes?.[0]?.mensagem || erro.message || 'Erro ao fazer login' };
+      return {
+        sucesso: false,
+        erro: erro.detalhes?.[0]?.mensagem || erro.message || 'Erro ao fazer login',
+      };
     }
   };
 

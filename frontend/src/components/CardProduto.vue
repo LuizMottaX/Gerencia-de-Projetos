@@ -68,13 +68,7 @@ const tipoIcone = computed(() => (props.produto.tipo === 'acessorio' ? Headphone
   display: grid;
   place-items: center;
   color: #a3a3a3;
-  background: repeating-linear-gradient(
-    45deg,
-    #f0f0f0,
-    #f0f0f0 12px,
-    #e9e9e9 12px,
-    #e9e9e9 24px
-  );
+  background: repeating-linear-gradient(45deg, #f0f0f0, #f0f0f0 12px, #e9e9e9 12px, #e9e9e9 24px);
 }
 
 .card-esgotado {
@@ -108,7 +102,9 @@ const tipoIcone = computed(() => (props.produto.tipo === 'acessorio' ? Headphone
   padding: 1rem 0.9rem 0.5rem;
   opacity: 0;
   transform: translateY(6px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
 }
 
 .produto-card:hover .card-badge {

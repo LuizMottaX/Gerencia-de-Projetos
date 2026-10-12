@@ -15,11 +15,16 @@
           <span>{{ mensagemSucesso }}</span>
         </p>
 
-        <form v-else @submit.prevent="enviar" novalidate>
+        <form v-else novalidate @submit.prevent="enviar">
           <p v-if="erroGeral" class="form-erro">{{ erroGeral }}</p>
 
           <label for="nome">Nome</label>
-          <input id="nome" v-model.trim="form.nome" type="text" placeholder="Digite seu nome completo" />
+          <input
+            id="nome"
+            v-model.trim="form.nome"
+            type="text"
+            placeholder="Digite seu nome completo"
+          />
           <span v-if="erros.nome" class="campo-erro">{{ erros.nome }}</span>
 
           <label for="email">E-mail</label>
@@ -27,7 +32,12 @@
           <span v-if="erros.email" class="campo-erro">{{ erros.email }}</span>
 
           <label for="telefone">Telefone / WhatsApp</label>
-          <input id="telefone" v-model.trim="form.telefone" type="tel" placeholder="(66) 9 9999-9999" />
+          <input
+            id="telefone"
+            v-model.trim="form.telefone"
+            type="tel"
+            placeholder="(66) 9 9999-9999"
+          />
           <span v-if="erros.telefone" class="campo-erro">{{ erros.telefone }}</span>
 
           <label for="mensagem">Mensagem</label>
@@ -51,14 +61,24 @@
         <div class="info-card">
           <MessageCircle class="info-icon" :size="24" />
           <h3>WhatsApp</h3>
-          <a href="https://wa.me/5566999896813?text=Chiquinho%20Motors/" target="_blank" rel="noopener noreferrer" class="btn btn-red zoom-shadow info-btn">
+          <a
+            href="https://wa.me/5566999896813?text=Chiquinho%20Motors/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-red zoom-shadow info-btn"
+          >
             Chamar no WhatsApp
           </a>
         </div>
         <div class="info-card">
           <Instagram class="info-icon" :size="24" />
           <h3>Instagram</h3>
-          <a href="https://www.instagram.com/franc_xco/" target="_blank" rel="noopener noreferrer" class="btn zoom-shadow info-btn">
+          <a
+            href="https://www.instagram.com/franc_xco/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn zoom-shadow info-btn"
+          >
             @franc_xco
           </a>
         </div>

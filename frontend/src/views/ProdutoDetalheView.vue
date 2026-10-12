@@ -5,7 +5,9 @@
 
     <template v-else-if="produto">
       <div class="detalhe-banner">
-        <RouterLink :to="voltarPara" class="voltar-link"><ArrowLeft :size="14" /> {{ voltarLabel }}</RouterLink>
+        <RouterLink :to="voltarPara" class="voltar-link"
+          ><ArrowLeft :size="14" /> {{ voltarLabel }}</RouterLink
+        >
         <span class="detalhe-categoria">{{ produto.categoria?.nome }}</span>
         <h1>{{ produto.nome }}</h1>
         <p class="detalhe-preco">{{ produto.precoFormatado }}</p>
@@ -28,8 +30,12 @@
           <div class="ficha">
             <h2>Informações</h2>
             <ul class="ficha-lista">
-              <li><span>Categoria</span><span>{{ produto.categoria?.nome }}</span></li>
-              <li v-if="produto.sku"><span>Código</span><span>{{ produto.sku }}</span></li>
+              <li>
+                <span>Categoria</span><span>{{ produto.categoria?.nome }}</span>
+              </li>
+              <li v-if="produto.sku">
+                <span>Código</span><span>{{ produto.sku }}</span>
+              </li>
               <li>
                 <span>Disponibilidade</span>
                 <span :class="produto.disponivel ? 'ok' : 'off'">
@@ -99,7 +105,11 @@ async function carregar(id) {
   }
 }
 
-watch(() => route.params.id, (id) => carregar(id), { immediate: true });
+watch(
+  () => route.params.id,
+  (id) => carregar(id),
+  { immediate: true },
+);
 </script>
 
 <style scoped>

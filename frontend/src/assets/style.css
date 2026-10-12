@@ -7,41 +7,45 @@
 
 /* ── Variáveis (tokens) ── */
 :root {
-  --color-carbon:    #111214;
-  --color-dark:      #1c1e22;
-  --color-surface:   #25282d;
-  --color-mid:       #3a3d44;
-  --color-silver:    #b0b4bc;
-  --color-light:     #e8eaed;
-  --color-white:     #ffffff;
+  --color-carbon: #111214;
+  --color-dark: #1c1e22;
+  --color-surface: #25282d;
+  --color-mid: #3a3d44;
+  --color-silver: #b0b4bc;
+  --color-light: #e8eaed;
+  --color-white: #ffffff;
 
-  --color-red:       #c0392b;
+  --color-red: #c0392b;
   --color-red-light: #e74c3c;
-  --color-red-dim:   rgba(192, 57, 43, 0.15);
+  --color-red-dim: rgba(192, 57, 43, 0.15);
 
-  --color-bg-start:  #f5f5f5;
-  --color-bg-end:    #dcdcdc;
+  --color-bg-start: #f5f5f5;
+  --color-bg-end: #dcdcdc;
 
-  --radius-sm:  6px;
-  --radius-md:  12px;
-  --radius-lg:  20px;
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
   --radius-pill: 50px;
 
   --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.12);
   --shadow-hover: 0 10px 32px rgba(0, 0, 0, 0.2);
-  --shadow-red:  0 8px 24px rgba(192, 57, 43, 0.35);
+  --shadow-red: 0 8px 24px rgba(192, 57, 43, 0.35);
 
   --transition: 0.28s ease;
 }
 
 /* ── Reset ── */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   font-family: 'Roboto', sans-serif;
@@ -160,7 +164,10 @@ header h1 a:hover {
   vertical-align: middle;
   letter-spacing: 0.03em;
   text-transform: uppercase;
-  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+  transition:
+    background var(--transition),
+    transform var(--transition),
+    box-shadow var(--transition);
 }
 
 /* Ícones (lucide) — alinhamento padrão em textos e botões */
@@ -188,7 +195,9 @@ header h1 a:hover {
 /* ── Efeito zoom-shadow ── */
 .zoom-shadow {
   box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-  transition: box-shadow var(--transition), transform var(--transition);
+  transition:
+    box-shadow var(--transition),
+    transform var(--transition);
 }
 
 .zoom-shadow:hover,
@@ -214,8 +223,10 @@ header h1 a:hover {
 .section-banner::before {
   content: '';
   position: absolute;
-  left: 0; bottom: 0;
-  width: 100%; height: 3px;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 3px;
   background: linear-gradient(90deg, transparent, var(--color-red), transparent);
 }
 
@@ -247,11 +258,17 @@ header h1 a:hover {
 }
 
 @media (max-width: 900px) {
-  .grid-container { grid-template-columns: repeat(2, 1fr); }
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 600px) {
-  .grid-container { grid-template-columns: 1fr; padding: 14px; gap: 16px; }
+  .grid-container {
+    grid-template-columns: 1fr;
+    padding: 14px;
+    gap: 16px;
+  }
 }
 
 /* ── Card automotivo ── */
@@ -260,7 +277,10 @@ header h1 a:hover {
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-card);
   overflow: hidden;
-  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition),
+    border-color var(--transition);
   border: 2px solid transparent;
   cursor: pointer;
 }
@@ -336,7 +356,9 @@ textarea {
   font-size: 1em;
   background: var(--color-white);
   color: var(--color-carbon);
-  transition: border-color var(--transition), box-shadow var(--transition);
+  transition:
+    border-color var(--transition),
+    box-shadow var(--transition);
   outline: none;
 }
 
@@ -388,24 +410,42 @@ footer p {
   font-size: 1.1em;
   color: #666;
 }
-.error-msg { color: var(--color-red); }
+.error-msg {
+  color: var(--color-red);
+}
 
 /* ══════════════════════════════════════
    UTILITÁRIOS
    ══════════════════════════════════════ */
-.mt-1 { margin-top: 0.5rem; }
-.mt-2 { margin-top: 1rem; }
-.mt-3 { margin-top: 1.5rem; }
-.mb-1 { margin-bottom: 0.5rem; }
-.mb-2 { margin-bottom: 1rem; }
-.text-center { text-align: center; }
+.mt-1 {
+  margin-top: 0.5rem;
+}
+.mt-2 {
+  margin-top: 1rem;
+}
+.mt-3 {
+  margin-top: 1.5rem;
+}
+.mb-1 {
+  margin-bottom: 0.5rem;
+}
+.mb-2 {
+  margin-bottom: 1rem;
+}
+.text-center {
+  text-align: center;
+}
 
 /* ══════════════════════════════════════
    RESPONSIVIDADE GLOBAL — MOBILE
    ══════════════════════════════════════ */
 @media (max-width: 640px) {
-  h1 { font-size: 1.3em; }
-  h2 { font-size: 1em; }
+  h1 {
+    font-size: 1.3em;
+  }
+  h2 {
+    font-size: 1em;
+  }
 
   .btn {
     font-size: 0.85em;

@@ -17,7 +17,9 @@
 
       <div class="footer-bottom">
         <p>© 2023 Chiquinho Motors® — Todos os direitos reservados.</p>
-        <p class="footer-credit">Desenvolvido por Francisco de Julio Faria · Revisado por Luiz Henrique Mota</p>
+        <p class="footer-credit">
+          Desenvolvido por Francisco de Julio Faria · Revisado por Luiz Henrique Mota
+        </p>
       </div>
     </div>
   </footer>
@@ -60,7 +62,9 @@ footer {
   color: #c0392b;
 }
 
-.red { color: #c0392b; }
+.red {
+  color: #c0392b;
+}
 
 .footer-tagline {
   font-size: 0.85em;

@@ -47,8 +47,10 @@ const query = (params) => {
 export const api = {
   // Generic methods
   get: (url, options) => pedir(url, { ...options, method: 'GET' }),
-  post: (url, body, options) => pedir(url, { ...options, method: 'POST', body: JSON.stringify(body) }),
-  put: (url, body, options) => pedir(url, { ...options, method: 'PUT', body: JSON.stringify(body) }),
+  post: (url, body, options) =>
+    pedir(url, { ...options, method: 'POST', body: JSON.stringify(body) }),
+  put: (url, body, options) =>
+    pedir(url, { ...options, method: 'PUT', body: JSON.stringify(body) }),
   delete: (url, options) => pedir(url, { ...options, method: 'DELETE' }),
 
   // Domain methods
@@ -65,6 +67,5 @@ export const api = {
   listarCategorias: (tipo) => pedir(`/categorias${tipo ? `?tipo=${tipo}` : ''}`),
   listarModelos: () => pedir('/modelos'),
 
-  enviarContato: (dados) =>
-    pedir('/contato', { method: 'POST', body: JSON.stringify(dados) }),
+  enviarContato: (dados) => pedir('/contato', { method: 'POST', body: JSON.stringify(dados) }),
 };
