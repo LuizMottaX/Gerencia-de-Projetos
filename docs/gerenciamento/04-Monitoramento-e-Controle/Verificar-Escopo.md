@@ -71,6 +71,17 @@ no GitHub (Settings → Branches → exigir os checks `backend` e `frontend`).
 
 **Aceite:** Equipe · 12/10/2026.
 
+### E5 — Serviços e agendamento (F4) — ✅ ACEITA
+
+| Critério | Verificação | Resultado |
+|----------|-------------|:---------:|
+| Visitante escolhe serviço, vê horários **realmente livres** e reserva | Teste de API + execução manual pelo proxy do Vite | ✅ |
+| Dois agendamentos não ocupam o mesmo horário | 5 reservas simultâneas do mesmo horário → 1 aceita, 4 recusadas (teste) | ✅ |
+| Tela de confirmação mostra o código | `GET /api/agendamentos/:codigo` + `/agendamento/:codigo` | ✅ |
+| Horários no fuso da oficina, independente do servidor | Testes rodados com TZ=UTC, Asia/Tokyo e America/Sao_Paulo | ✅ |
+
+**Aceite:** Equipe · 12/10/2026. E-mail de confirmação (opcional) não implementado.
+
 ### E6 — Painel administrativo (F5) — ⏳ EM VERIFICAÇÃO (incremento: autenticação)
 
 | Critério | Verificação | Resultado |
@@ -97,7 +108,7 @@ no GitHub (Settings → Branches → exigir os checks `backend` e `frontend`).
 | E2 Persistência | ✅ aceita |
 | E3 Peças e acessórios | ✅ aceita |
 | E4 Carrinho | ✅ aceita |
-| E5 Agendamento | ⬜ |
+| E5 Agendamento | ✅ aceita |
 | E6 Admin | ⏳ em verificação |
 | E7 Publicação | ⬜ |
 | E8 Documentação | ✅ (Integração + Escopo) |

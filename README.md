@@ -113,7 +113,10 @@ O GitHub Actions (`.github/workflows/ci.yml`) roda lint, formatação, testes e 
 | POST   | `/api/pedidos`           | Cria um pedido (`{ cliente, itens: [{ produto, quantidade }] }`); 409 se faltar estoque |
 | GET    | `/api/pedidos/:codigo`   | Acompanhamento do pedido pelo código                  |
 | POST   | `/api/admin/auth/login`  | Login do painel administrativo (JWT)                  |
-| GET    | `/api/servicos`          | Serviços de manutenção (planejado — F4)               |
+| GET    | `/api/servicos`          | Serviços de manutenção (`/:id` para o detalhe)        |
+| GET    | `/api/agendamentos/disponibilidade` | Horários livres: `?servico=<slug>&data=AAAA-MM-DD` |
+| POST   | `/api/agendamentos`      | Reserva um horário; 409 se já estiver ocupado         |
+| GET    | `/api/agendamentos/:codigo` | Consulta do agendamento pelo código                |
 
 ---
 

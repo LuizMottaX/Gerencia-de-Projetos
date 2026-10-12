@@ -1,10 +1,11 @@
-const crypto = require('node:crypto');
 const { Router } = require('express');
 const { z } = require('zod');
 const rateLimit = require('express-rate-limit');
 const prisma = require('../lib/prisma');
 const { pedidoView } = require('../lib/pedidoView');
 const { ErroHttp } = require('../middleware/errors');
+const { gerarCodigo } = require('../lib/codigo');
+const { schemaCliente } = require('../lib/schemas');
 
 const router = Router();
 
@@ -19,11 +20,7 @@ const limitador = rateLimit({
 });
 
 const schemaPedido = z.object({
-  cliente: z.object({
-    nome: z.string().trim().min(2, 'Informe seu nome.').max(120),
-    email: z.string().trim().toLowerCase().email('E-mail inválido.').max(160),
-    telefone: z.string().trim().min(8, 'Telefone inválido.').max(30),
-  }),
+  cliente: schemaCliente,
   itens: z
     .array(
       z.object({
@@ -36,13 +33,6 @@ const schemaPedido = z.object({
 });
 
 const pedidoInclude = { cliente: true, itens: { include: { produto: true } } };
-
-// Sem 0/O/1/I para o código ser fácil de ditar por telefone.
-const ALFABETO = '23456789ABCDEFGHJKLMNPQRSTUVWXYZ';
-function gerarCodigo() {
-  const bytes = crypto.randomBytes(6);
-  return 'CM-' + Array.from(bytes, (b) => ALFABETO[b % ALFABETO.length]).join('');
-}
 
 /** Soma quantidades de itens repetidos: [{produto:'a',quantidade:1},{produto:'a',quantidade:2}] → a: 3. */
 function agruparItens(itens) {
@@ -110,7 +100,7 @@ router.post('/', limitador, async (req, res, next) => {
       const totalCentavos = linhas.reduce((s, l) => s + l.precoUnitCentavos * l.quantidade, 0);
 
       return tx.pedido.create({
-        data: { codigo: gerarCodigo(), totalCentavos, clienteId, itens: { create: linhas } },
+        data: { codigo: gerarCodigo('CM'), totalCentavos, clienteId, itens: { create: linhas } },
         include: pedidoInclude,
       });
     });
