@@ -58,14 +58,27 @@ encerramento do projeto**, a ser preenchido em dezembro/2026.
 
 ---
 
-## Parte B — Checklist de encerramento do projeto (a preencher em 12/2026)
+## Parte B — Checklist de encerramento do projeto (a concluir em 12/2026)
 
 - [ ] Todas as entregas E1–E7 aceitas (ver [Verificar o Escopo](../04-Monitoramento-e-Controle/Verificar-Escopo.md)).
 - [ ] Sistema publicado em URL pública e entregue ao patrocinador.
-- [ ] Senhas padrão trocadas e segredos fora do código.
-- [ ] README final permite subir o projeto do zero.
+- [x] Segredos fora do código (`JWT_SECRET` obrigatório, admin via `admin:criar`) — falta trocar a senha antiga do admin no banco do Coolify.
+- [x] README final permite subir o projeto do zero.
 - [ ] Todas as mudanças (CR) fechadas — aprovadas implementadas ou rejeitadas.
-- [ ] Dívidas técnicas remanescentes documentadas.
+- [x] Dívidas técnicas remanescentes documentadas (`plan.md`).
 - [ ] Lições aprendidas consolidadas de todas as fases.
 - [ ] Repositório arquivado com a tag `v1.0.0`.
 - [ ] Termo de encerramento assinado pela equipe e pelo patrocinador.
+
+---
+
+## Parte C — Lições aprendidas do desenvolvimento (F3–F6)
+
+| # | O que aconteceu | Lição | Aplicar em |
+|---|-----------------|-------|-----------|
+| L7 | Com testes e CI prontos (ação A1), F3, F4 e F5 saíram semanas antes do previsto | Rede de segurança no começo **acelera**, não atrasa | Próximos projetos |
+| L8 | Testes com 5 requisições simultâneas comprovaram que estoque e agenda não aceitam venda/reserva duplicada | Regras de negócio críticas precisam de teste com requisições simultâneas, não só sequenciais | Qualquer recurso disputado |
+| L9 | A trava única da agenda permitia sobreposição e travava horários cancelados (CR-08) | Revisar o modelo de dados contra casos de borda antes de codar | Modelagem |
+| L10 | Fontes e um menu "no limite" da largura causavam a página "pular" (CLS) só no Chrome completo | Medir com a mesma ferramenta do critério de aceite (Lighthouse), não só "no olho" | Qualidade de front |
+| L11 | Screenshots automáticas (Playwright) revelaram problemas que os testes de API não viam | Verificação visual faz parte da verificação do escopo | Aceite de telas |
+

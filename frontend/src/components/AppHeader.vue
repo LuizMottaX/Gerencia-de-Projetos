@@ -20,6 +20,18 @@
             {{ carrinho.quantidadeTotal > 99 ? '99+' : carrinho.quantidadeTotal }}
           </span>
         </RouterLink>
+        <RouterLink
+          :to="auth.isAuthenticated ? '/admin' : '/admin/login'"
+          class="icone-topo"
+          :class="{ 'icone-topo--ativo': auth.isAuthenticated }"
+          :aria-label="
+            auth.isAuthenticated ? 'Painel administrativo' : 'Entrar no painel administrativo'
+          "
+          :title="auth.isAuthenticated ? 'Painel admin' : 'Área administrativa'"
+          @click="fecharMenu"
+        >
+          <UserCog :size="22" :stroke-width="2.25" />
+        </RouterLink>
         <!-- Botão hambúrguer (mobile) -->
         <button
           class="hamburger"
@@ -75,17 +87,6 @@
       <RouterLink to="/sobre" class="nav-link" title="Quem Somos?" @click="fecharMenu">
         Quem Somos?
       </RouterLink>
-
-      <!-- Link dinâmico para o admin -->
-      <RouterLink
-        :to="auth.isAuthenticated ? '/admin' : '/admin/login'"
-        class="nav-link nav-link--admin"
-        title="Painel Administrativo"
-        @click="fecharMenu"
-      >
-        <UserCog :size="15" :stroke-width="2.5" />
-        {{ auth.isAuthenticated ? 'Painel Admin' : 'Admin' }}
-      </RouterLink>
     </nav>
   </header>
 </template>
@@ -133,7 +134,8 @@ function fecharMenu() {
   gap: 0.75rem;
 }
 
-.mini-carrinho {
+.mini-carrinho,
+.icone-topo {
   position: relative;
   display: inline-flex;
   padding: 0.4rem;
@@ -143,7 +145,9 @@ function fecharMenu() {
 }
 
 .mini-carrinho:hover,
-.mini-carrinho.router-link-active {
+.mini-carrinho.router-link-active,
+.icone-topo:hover,
+.icone-topo--ativo {
   color: #e74c3c;
 }
 
@@ -183,7 +187,9 @@ nav {
   align-items: center;
   justify-content: center;
   gap: 0.4em;
-  padding: 0.45em 1em;
+  /* 0.8em (não 1em) deixa folga para o menu caber numa linha mesmo antes da
+     Roboto carregar — senão ele quebra e a página "pula" (CLS). */
+  padding: 0.45em 0.8em;
   color: #c0c4cc;
   font-size: 0.88em;
   font-weight: 500;
@@ -283,23 +289,6 @@ nav {
     text-align: center;
     font-size: 0.9em;
     padding: 0.65em 1em;
-  }
-}
-
-.nav-link--admin {
-  background-color: var(--color-surface);
-  border-color: var(--color-mid);
-  margin-left: auto; /* Empurra pro final se houver espaço */
-}
-
-.nav-link--admin:hover {
-  background-color: var(--color-mid);
-  color: var(--color-light);
-}
-
-@media (max-width: 650px) {
-  .nav-link--admin {
-    margin-left: 0;
   }
 }
 </style>

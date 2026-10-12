@@ -57,6 +57,7 @@ flowchart TD
 | CR-07 | 12/10/2026 | Contingência: se o prazo apertar, entregar **F4 como protótipo de tela** e usar **Prisma Studio** no lugar do CRUD completo da F5 | Risco R1 (prazo do semestre) | Alto — reduz escopo de E5 e E6 | ⛔ Encerrada sem uso — F4 e F5 entregues completas em 12/10 |
 | CR-08 | 12/10/2026 | Agenda: grade de horários de cada serviço avança pela **duração do serviço** (08:00, 09:00… para 60 min) em vez de slots fixos de 30 min; fuso fixo de Sinop–MT (UTC-4) | Com slots de 30 min, a trava `@@unique([servicoId, dataHora])` permitiria sobreposição (60 min às 08:00 + outro às 08:30) | Baixo — pacotes 1.5.1–1.5.3, sem efeito no prazo | ✅ Aprovada ² |
 | CR-09 | 12/10/2026 | Painel: rotas de status em `/api/admin/pedidos/:codigo/status` e `/api/admin/agendamentos/:codigo/status` (o plano previa `/api/pedidos/...`); uploads gravados em `backend/uploads` em vez de `frontend/public/uploads` | Um só prefixo protegido para o painel; backend não escreve na pasta do frontend | Baixo — pacotes 1.6.2 e 1.6.3 | ✅ Aprovada ³ |
+| CR-10 | 12/10/2026 | Hospedar API e site no **Coolify** (Docker), onde o banco já está, em vez de Vercel + Railway/Render | Volume persistente para as fotos do painel sem custo extra; sem *cold start*; um só painel. `vercel.json` mantido como alternativa | Baixo — pacote 1.7.3, sem efeito no prazo | ⏳ Proposta — decisão do GP ⁴ |
 
 ¹ **Condições do CR-05:** (a) a F3 continua sendo a próxima prioridade de
 produto; (b) o trabalho de autenticação entra na `main` via PR revisado;
@@ -71,6 +72,9 @@ liberando o horário sem apagar o histórico.
 proteção por JWT) e as imagens ficam no backend (`backend/uploads`, servidas
 em `/uploads`), respeitando a separação frontend/backend do `AGENTS.md`.
 
+⁴ **CR-10:** as duas opções estão documentadas em `docs/DEPLOY.md`; a escolha
+depende de quem tem acesso a cada conta.
+
 ## 5. Linhas de base atualizadas por mudanças
 
 | Mudança | Documento atualizado |
@@ -81,3 +85,4 @@ em `/uploads`), respeitando a separação frontend/backend do `AGENTS.md`.
 | CR-06 | EAP (1.6.1), Dicionário da EAP |
 | CR-08 | Controlar o Escopo (análise de variação), `plan.md` (F4) |
 | CR-09 | `plan.md` (F5), README (endpoints) |
+| CR-10 | `plan.md` (F6), `docs/DEPLOY.md` |

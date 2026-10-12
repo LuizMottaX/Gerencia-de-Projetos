@@ -6,13 +6,21 @@ const routes = [
     path: '/',
     name: 'home',
     component: HomeView,
-    meta: { title: 'Chiquinho Motors®' },
+    meta: {
+      description:
+        'Concessionária em Sinop–MT: veículos revisados, auto-peças, acessórios e agendamento de revisão online.',
+      title: 'Chiquinho Motors®',
+    },
   },
   {
     path: '/carros',
     name: 'carros',
     component: () => import('../views/CarrosView.vue'),
-    meta: { title: 'Carros Disponíveis — Chiquinho Motors®' },
+    meta: {
+      description:
+        'Carros seminovos à venda em Sinop–MT, com fotos, ficha técnica e formas de pagamento.',
+      title: 'Carros Disponíveis — Chiquinho Motors®',
+    },
   },
   {
     path: '/carros/:id',
@@ -24,7 +32,10 @@ const routes = [
     path: '/pecas',
     name: 'pecas',
     component: () => import('../views/PecasView.vue'),
-    meta: { title: 'Auto-peças — Chiquinho Motors®' },
+    meta: {
+      description: 'Auto-peças com filtro por modelo do seu carro: compre só o que é compatível.',
+      title: 'Auto-peças — Chiquinho Motors®',
+    },
   },
   {
     path: '/pecas/:id',
@@ -36,7 +47,10 @@ const routes = [
     path: '/acessorios',
     name: 'acessorios',
     component: () => import('../views/AcessoriosView.vue'),
-    meta: { title: 'Acessórios — Chiquinho Motors®' },
+    meta: {
+      description: 'Acessórios automotivos: som, estética, conforto, rodas e pneus.',
+      title: 'Acessórios — Chiquinho Motors®',
+    },
   },
   {
     path: '/acessorios/:id',
@@ -60,13 +74,20 @@ const routes = [
     path: '/contato',
     name: 'contato',
     component: () => import('../views/ContatoView.vue'),
-    meta: { title: 'Contato — Chiquinho Motors®' },
+    meta: {
+      description: 'Fale com a Chiquinho Motors pelo formulário, WhatsApp ou e-mail.',
+      title: 'Contato — Chiquinho Motors®',
+    },
   },
   {
     path: '/servicos',
     name: 'servicos',
     component: () => import('../views/ServicosView.vue'),
-    meta: { title: 'Serviços — Chiquinho Motors®' },
+    meta: {
+      description:
+        'Troca de óleo, alinhamento, freios, ar-condicionado e revisão completa — agende online.',
+      title: 'Serviços — Chiquinho Motors®',
+    },
   },
   {
     path: '/agendar/:servicoSlug',
@@ -218,8 +239,16 @@ router.beforeEach((to) => {
   return token ? true : { name: 'admin-login' };
 });
 
+const DESCRICAO_PADRAO = document
+  .querySelector('meta[name="description"]')
+  ?.getAttribute('content');
+
 router.afterEach((to) => {
   document.title = to.meta.title || 'Chiquinho Motors®';
+  // A descrição acompanha a rota (usada por buscadores que executam JS).
+  document
+    .querySelector('meta[name="description"]')
+    ?.setAttribute('content', to.meta.description || DESCRICAO_PADRAO);
 });
 
 export default router;

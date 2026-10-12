@@ -3,8 +3,14 @@
     <!-- Hero -->
     <section class="hero">
       <div class="hero-overlay"></div>
+      <!-- Foto: Renato Araújo/Agência Brasil. Servida localmente em WebP (era hotlink de 519 KB). -->
       <img
-        src="https://www.istoedinheiro.com.br/wp-content/uploads/sites/17/2019/04/concessionaria_090926_renatoaraujo-abr_.jpg"
+        src="/home/hero-1600.webp"
+        srcset="/home/hero-800.webp 800w, /home/hero-1600.webp 1600w"
+        sizes="100vw"
+        width="1600"
+        height="1050"
+        fetchpriority="high"
         alt="Concessionária Chiquinho Motors"
         class="hero-img"
       />
@@ -27,7 +33,7 @@
     <section class="diferenciais">
       <div v-for="item in diferenciais" :key="item.titulo" class="card-diff">
         <component :is="item.icon" class="diff-icon" :size="34" :stroke-width="1.75" />
-        <h3>{{ item.titulo }}</h3>
+        <h2>{{ item.titulo }}</h2>
         <p>{{ item.desc }}</p>
       </div>
     </section>
@@ -190,7 +196,7 @@ const diferenciais = [
   color: #c0392b;
 }
 
-.card-diff h3 {
+.card-diff h2 {
   font-size: 1em;
   font-weight: 700;
   color: #111;

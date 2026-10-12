@@ -259,12 +259,12 @@ input[type='date'] {
 
 .dica {
   font-size: 0.8em;
-  color: #888;
+  color: #666;
   margin-bottom: 1.25rem;
 }
 
 .vazio {
-  color: #888;
+  color: #666;
   font-size: 0.9em;
   padding: 1rem 0;
 }

@@ -17,7 +17,7 @@ entregas pendentes**, com critérios de aceitação e dependências.
 | **F3** Carrinho e checkout | ✅ concluída (12/10/2026) |
 | **F4** Serviços e agendamento | ✅ concluída (12/10/2026) |
 | **F5** Área administrativa | ✅ concluída (12/10/2026) |
-| **F6** Qualidade e publicação | ⬜ não iniciada |
+| **F6** Qualidade e publicação | 🟡 tudo pronto exceto a publicação (depende das contas da equipe) |
 
 Já implementado da F0: estrutura em `backend/src/`, `.env.example`,
 `helmet` + `express-rate-limit`, validação com `zod`, rota 404 (JSON no
@@ -422,24 +422,24 @@ apresentação. **Depende de:** tudo. **Estimativa:** ~1 semana.
 
 ### Entregas
 
-- [ ] Testes E2E com Playwright cobrindo os fluxos principais:
+- [x] Testes E2E com Playwright cobrindo os fluxos principais (desktop e celular):
   - catálogo → carrinho → checkout → pedido criado;
   - escolher serviço → agendar → confirmação;
   - login admin → editar um produto.
-- [ ] Auditoria Lighthouse: acessibilidade e performance ≥ 90. Corrigir
+- [x] Auditoria Lighthouse: acessibilidade e performance ≥ 90. Corrigir
       `alt` de imagens, foco visível, contraste, `lang`, ordem de headings.
-- [ ] `loading="lazy"` nas imagens de card; dimensões explícitas para
+- [x] `loading="lazy"` nas imagens de card; dimensões explícitas para
       evitar layout shift.
-- [ ] Meta tags / Open Graph por rota; `sitemap.xml` e `robots.txt`.
-- [ ] `GET /health` já existe — adicionar logs estruturados e um
-      `GET /api/version`.
-- [ ] Deploy:
+- [x] Meta tags / Open Graph por rota; `sitemap.xml` e `robots.txt`.
+- [x] `GET /health` (agora confere o banco), logs estruturados e `GET /api/version`.
+- [ ] Deploy — **configuração pronta** (Dockerfiles, nginx, `vercel.json`,
+      `docs/DEPLOY.md`); falta publicar com as contas da equipe. Recomendado: Coolify (CR-10).
   - Frontend → Vercel ou Netlify (build do Vite, variável de API se
     separar domínios).
   - Backend → Railway ou Render; rodar `prisma migrate deploy` no deploy.
   - Banco → o PostgreSQL do Coolify já existe (porta 5433).
   - Configurar CORS do backend para o domínio real do frontend.
-- [ ] README reescrito refletindo o sistema final; instruções de deploy.
+- [x] README reescrito refletindo o sistema final; instruções de deploy.
 
 ### Pronto quando
 
@@ -463,9 +463,13 @@ apresentação. **Depende de:** tudo. **Estimativa:** ~1 semana.
       Prisma 7 (hoje só emite aviso).
 - [ ] `npm audit`: 3 "high" em `deepmerge-ts`, dependência apenas da CLI
       do Prisma (devDependency) — reavaliar quando o Prisma corrigir.
-- [ ] Footer com "© 2023" — usar o ano corrente.
+- [x] Footer com "© 2023" — usar o ano corrente.
 - [ ] WhatsApp e Instagram no código são de conta pessoal — trocar por
       dados oficiais da concessionária (ou deixar claro que é fictício).
+- [ ] `SobreNosView` usa duas imagens externas (hotlink), uma de banco pago
+      (Shutterstock) — trocar por fotos próprias ou de licença livre.
+- [ ] Excluir veículo/produto no painel não apaga o arquivo da foto em
+      `backend/uploads` (arquivos órfãos).
 - [ ] `combustivel` e `cambio` do `Carro` são `String` — podem virar
       `enum` como o `status`.
 

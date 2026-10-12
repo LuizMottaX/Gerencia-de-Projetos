@@ -1,172 +1,155 @@
 # 🚗 Chiquinho Motors®
 
-Site da concessionária **Chiquinho Motors®**, desenvolvido com **Vue 3 + Vite** no frontend e **Node.js + Express** no backend, utilizando banco de dados **PostgreSQL**.
+Sistema da concessionária **Chiquinho Motors®** (Sinop–MT): site público com
+catálogo, carrinho e agendamento online, e painel administrativo para a loja
+gerenciar tudo sem mexer em código.
 
-O sistema atua como um ecossistema completo abrangendo:
-- 🚗 **Veículos**
-- ⚙️ **Auto-peças**
-- 🏎️ **Acessórios**
-- 🔧 **Serviços de Manutenção**
+| Módulo | O cliente… | A loja (painel `/admin`)… |
+|--------|-----------|---------------------------|
+| 🚗 **Veículos** | vê fotos, ficha técnica e preço | cadastra veículos com fotos e status |
+| ⚙️ **Auto-peças** | filtra pelo **modelo do próprio carro** e compra | controla preço, estoque e compatibilidade |
+| 🏎️ **Acessórios** | busca, filtra e compra | idem |
+| 🔧 **Serviços** | escolhe o serviço e **agenda um horário livre** | vê a agenda, confirma, conclui ou cancela |
+
+Também: pedidos com código de acompanhamento (sem pagamento online — a loja
+entra em contato), mensagens de contato e dashboard com indicadores.
+
+> 📚 Projeto da disciplina de Gerência de Projetos — artefatos PMBOK em
+> [`docs/gerenciamento/`](docs/gerenciamento/README.md); plano de entregas em
+> [`plan.md`](plan.md); histórico em [`CHANGELOG.md`](CHANGELOG.md).
 
 ---
 
-## 📁 Estrutura do Projeto
+## 🧱 Arquitetura
 
 ```
-INVENTARIO-CONCESSIONARIA/
-├── backend/                  # API REST Node.js
-│   ├── prisma/               # Schema do banco (schema.prisma), migrations e seed
-│   ├── src/lib/              # Cliente Prisma e serializadores
-│   ├── server.js             # Servidor Express
-│   ├── .env                  # DATABASE_URL (não versionado)
-│   └── package.json
-└── frontend/                 # SPA Vue 3
-    ├── src/
-│   │   ├── api/              # Cliente HTTP da API
-│   │   ├── assets/           # CSS global
-│   │   ├── components/       # Componentes reutilizáveis
-│   │   ├── composables/      # Lógica reutilizável (useProdutos…)
-│   │   ├── router/           # Vue Router
-│   │   ├── stores/           # Estado global (Pinia)
-│   │   └── views/            # Páginas da aplicação
-    ├── vite.config.js
-    └── package.json
+frontend/  Vue 3 + Vite + Pinia (SPA)  ──/api──►  backend/  Node.js + Express  ──►  PostgreSQL (Prisma)
+```
+
+| Camada | Tecnologias |
+|--------|-------------|
+| Frontend | Vue 3 (`<script setup>`), Vite, Vue Router, Pinia, ícones Lucide, CSS vanilla (tema *Carbon & Racing Red*) |
+| Backend | Node.js 22, Express, Prisma ORM, Zod, Helmet, rate limit, JWT + bcrypt, Multer |
+| Banco | PostgreSQL 16+ (produção: Coolify/Hetzner) |
+| Qualidade | ESLint, Prettier, Vitest, Supertest, Playwright, GitHub Actions |
+
+```
+backend/
+  app.js · server.js         app Express (sem listen) · inicialização
+  prisma/                    schema, migrations e seed
+  src/routes/                rotas públicas  ·  src/routes/admin/  rotas do painel (JWT)
+  src/lib/                   serializers, regras da agenda, Prisma
+  scripts/criar-admin.js     cria/reativa um administrador
+  tests/                     Vitest + Supertest (banco de teste isolado)
+frontend/
+  src/views/ · src/views/admin/   páginas do site e do painel
+  src/stores/                     Pinia: carrinho, auth, catálogo
+  src/api/index.js                cliente HTTP (injeta o token nas rotas /admin)
+  tests/                          Vitest + @vue/test-utils
+e2e/                         Playwright: fluxos completos em desktop e celular
+docs/                        gerência do projeto (PMBOK) e guia de deploy
 ```
 
 ---
 
-## ✅ Pré-requisitos
+## 🚀 Rodando localmente
 
-- [Node.js](https://nodejs.org/) v18 ou superior
-- npm v9 ou superior
-- [PostgreSQL](https://www.postgresql.org/) v14 ou superior
-
----
-
-## 🚀 Como iniciar
-
-O projeto possui **dois servidores** que devem rodar simultaneamente: o backend (API) e o frontend (Vue).
-
-### 1. Backend — API REST (porta 3001)
+**Pré-requisitos:** Node.js 22+, npm 10+ e um PostgreSQL (local ou o do Coolify).
 
 ```bash
+# 1. Backend — API na porta 3001
 cd backend
 npm install
+cp .env.example .env            # preencha DATABASE_URL e JWT_SECRET
+npx prisma migrate dev          # cria as tabelas
+npm run db:seed                 # catálogo inicial (veículos, peças, acessórios, serviços)
+ADMIN_SENHA='uma-senha-forte' npm run admin:criar -- voce@exemplo.com "Seu Nome"
+npm run dev
 
-# Configure o banco: copie o exemplo e ajuste a DATABASE_URL
-cp .env.example .env
-
-# Cria as tabelas e popula o catálogo inicial de veículos
-npx prisma migrate dev
-npx prisma db seed          # (migrate dev já roda o seed na 1ª vez)
-
-npm start
-```
-
-> A API estará disponível em: `http://localhost:3001`
-> Para inspecionar o banco visualmente: `npm run db:studio`
-
-### 2. Frontend — Vue 3 (porta 5173)
-
-Abra um **novo terminal** e execute:
-
-```bash
+# 2. Frontend — site na porta 5173 (outro terminal)
 cd frontend
 npm install
 npm run dev
 ```
 
-> O site estará disponível em: `http://localhost:5173`
+Abra `http://localhost:5173` (site) e `http://localhost:5173/admin` (painel).
+O proxy do Vite repassa `/api` e `/uploads` para a porta 3001 — não há CORS em dev.
 
-### 3. Qualidade — lint e testes
+> ⚠️ No Coolify o PostgreSQL está na **porta 5433** (a 5432 do mesmo host é um MariaDB).
+
+### Testes
+
+Os testes de backend e E2E usam um **banco separado** — nunca o do `.env`.
+O jeito mais simples é um container:
 
 ```bash
-# Backend: os testes usam um PostgreSQL SEPARADO (nunca o do .env de dev)
-cd backend
-cp .env.test.example .env.test   # ajuste a DATABASE_URL de teste
-npm run db:test:setup            # aplica migrations + seed no banco de teste
-npm run lint && npm test
+podman run -d --name chiquinho-test-db -e POSTGRES_PASSWORD=postgres \
+  -e POSTGRES_DB=chiquinho_test -p 55432:5432 postgres:16-alpine   # ou docker
 
-# Frontend
-cd frontend
-npm run lint && npm test
+cd backend  && cp .env.test.example .env.test && npm run db:test:setup
+npm run lint && npm test                       # 64 testes de API
+cd ../frontend && npm run lint && npm test     # 20 testes de componentes/stores
+cd ../e2e && npm install && npx playwright install chromium
+npm test                                       # 10 testes E2E (5 fluxos × desktop/celular)
 ```
 
-O GitHub Actions (`.github/workflows/ci.yml`) roda lint, formatação, testes e build em cada push e Pull Request.
+O CI (`.github/workflows/ci.yml`) roda lint, formatação, testes, build e E2E em
+cada push e Pull Request.
 
 ---
 
-## 🌐 Endpoints da API
+## 🌐 API
 
-| Método | Rota                     | Descrição                                              |
-|--------|--------------------------|-------------------------------------------------------|
-| GET    | `/api/carros`            | Lista todos os veículos                               |
-| GET    | `/api/carros/:id`        | Detalhes de um veículo (por slug)                     |
-| GET    | `/api/carros/:id/pecas`  | Peças compatíveis com o modelo do veículo             |
-| GET    | `/api/pecas`             | Catálogo de peças. Filtros: `categoria`, `modelo`, `busca`, `precoMin`, `precoMax`, `ordenar` |
-| GET    | `/api/pecas/:id`         | Detalhes de uma peça (por slug)                       |
-| GET    | `/api/acessorios`        | Catálogo de acessórios (mesmos filtros de `/api/pecas`) |
-| GET    | `/api/acessorios/:id`    | Detalhes de um acessório (por slug)                   |
-| GET    | `/api/categorias`        | Categorias do catálogo (`?tipo=peca` \| `acessorio`) |
-| GET    | `/api/modelos`           | Modelos de veículo (para o filtro de compatibilidade) |
-| POST   | `/api/contato`           | Registra uma mensagem do formulário de contato        |
-| POST   | `/api/pedidos`           | Cria um pedido (`{ cliente, itens: [{ produto, quantidade }] }`); 409 se faltar estoque |
-| GET    | `/api/pedidos/:codigo`   | Acompanhamento do pedido pelo código                  |
-| POST   | `/api/admin/auth/login`  | Login do painel administrativo (JWT)                  |
-
-**Painel (`/api/admin/*`, exige `Authorization: Bearer <token>`)**
+**Pública**
 
 | Método | Rota | Descrição |
 |--------|------|-----------|
-| GET/POST/PUT/DELETE | `/api/admin/carros`, `/produtos`, `/servicos`, `/categorias`, `/marcas`, `/modelos` | Cadastros (ids numéricos; `PUT`/`DELETE` em `/:id`) |
-| POST   | `/api/admin/uploads` | Envia imagem (campo `imagem`, JPG/PNG/WebP até 5 MB); devolve `{ url }` |
-| GET    | `/api/admin/pedidos?status=` | Fila de pedidos com dados do cliente |
-| PATCH  | `/api/admin/pedidos/:codigo/status` | Muda o status; `CANCELADO` devolve o estoque |
-| GET    | `/api/admin/agendamentos?de=&ate=&status=` | Agenda da oficina |
-| PATCH  | `/api/admin/agendamentos/:codigo/status` | Muda o status; `CANCELADO` libera o horário |
-| GET/PATCH | `/api/admin/mensagens` | Mensagens de contato (`?lida=false`; `PATCH /:id { lida }`) |
-| GET    | `/api/admin/resumo` | Indicadores do dashboard |
+| GET | `/api/carros` · `/api/carros/:id` | Veículos (`:id` = slug) |
+| GET | `/api/carros/:id/pecas` | Peças compatíveis com o veículo |
+| GET | `/api/pecas` · `/api/acessorios` (+ `/:id`) | Catálogo. Filtros: `categoria`, `modelo`, `busca`, `precoMin`, `precoMax`, `ordenar` |
+| GET | `/api/categorias` · `/api/modelos` | Dados para os filtros |
+| POST | `/api/pedidos` | `{ cliente, itens: [{ produto, quantidade }] }` → código `CM-…`; 409 se faltar estoque |
+| GET | `/api/pedidos/:codigo` | Acompanhamento do pedido |
+| GET | `/api/servicos` (+ `/:id`) | Serviços de manutenção |
+| GET | `/api/agendamentos/disponibilidade?servico=&data=AAAA-MM-DD` | Horários livres do dia |
+| POST | `/api/agendamentos` | Reserva → código `AG-…`; 409 se o horário foi tomado |
+| GET | `/api/agendamentos/:codigo` | Consulta do agendamento |
+| POST | `/api/contato` | Mensagem do formulário de contato |
+| POST | `/api/admin/auth/login` | Login do painel (devolve o JWT) |
+| GET | `/api/version` · `/health` | Versão publicada · saúde (confere o banco) |
 
-Para criar um administrador: `ADMIN_SENHA='senha-forte' npm run admin:criar -- email@loja.com.br "Nome"` (no `backend/`).
-| GET    | `/api/servicos`          | Serviços de manutenção (`/:id` para o detalhe)        |
-| GET    | `/api/agendamentos/disponibilidade` | Horários livres: `?servico=<slug>&data=AAAA-MM-DD` |
-| POST   | `/api/agendamentos`      | Reserva um horário; 409 se já estiver ocupado         |
-| GET    | `/api/agendamentos/:codigo` | Consulta do agendamento pelo código                |
+**Painel** — `/api/admin/*`, exige `Authorization: Bearer <token>`
+
+| Método | Rota | Descrição |
+|--------|------|-----------|
+| GET/POST/PUT/DELETE | `carros`, `produtos`, `servicos`, `categorias`, `marcas`, `modelos` | Cadastros (`PUT`/`DELETE` em `/:id`) |
+| POST | `uploads` | Imagem (campo `imagem`, JPG/PNG/WebP até 5 MB) → `{ url }` |
+| GET · PATCH | `pedidos` · `pedidos/:codigo/status` | Fila de pedidos; cancelar devolve o estoque |
+| GET · PATCH | `agendamentos` · `agendamentos/:codigo/status` | Agenda; cancelar libera o horário |
+| GET · PATCH | `mensagens` · `mensagens/:id` | Caixa de entrada (`?lida=false`) |
+| GET | `resumo` | Indicadores do dashboard |
+
+Erros seguem `{ erro, detalhes?: [{ campo, mensagem }] }` (400 validação · 401
+sem token · 404 · 409 conflito).
 
 ---
 
-## 🛠️ Tecnologias Recomendadas e Utilizadas
+## ☁️ Publicação
 
-| Camada    | Tecnologia               |
-|-----------|--------------------------|
-| Frontend  | Vue 3, Vite, Vue Router, Pinia |
-| Backend   | Node.js, Express, Zod, Helmet |
-| Banco     | PostgreSQL + Prisma ORM   |
-| Estilo    | CSS Vanilla, Google Fonts|
-
----
-
-## 📋 Plano de Implementação e Evolução
-
-O projeto está expandindo de um simples inventário para uma solução robusta de gestão automotiva:
-
-1. **Estruturação Base (Concluída):** SPA isolada em camadas claras (`frontend` e `backend`).
-2. **Expansão de Domínio (Em Andamento):** Inclusão de novas entidades de negócios. O sistema não listará apenas veículos, mas também auto-peças, acessórios e a possibilidade de visualizar e agendar serviços de manutenção.
-3. **Migração para PostgreSQL (Em Andamento):**
-   - Feito: veículos, marcas e imagens agora vivem no PostgreSQL via **Prisma ORM** (`backend/prisma/schema.prisma`). O mock em memória (`backend/data/`) foi removido.
-   - A seguir: modelar peças, acessórios e serviços, com as relações de compatibilidade (quais peças servem em quais modelos).
-4. **Refinamento da Interface (Planejado):** Construção de novas views no Vue 3 focadas em carrinho de compras para peças e painel de agendamento de serviços.
+Dockerfiles prontos para a API e o site (nginx), e `vercel.json` como
+alternativa. Passo a passo, variáveis de ambiente e checklist em
+**[`docs/DEPLOY.md`](docs/DEPLOY.md)**.
 
 ---
 
 ## 📝 Observações
 
-- **🤖 Para Agentes de IA:** Leia obrigatoriamente o arquivo `AGENTS.md` na raiz do repositório antes de propor ou realizar qualquer modificação no código.
-- O frontend usa o **proxy do Vite** para redirecionar chamadas `/api/*` ao backend em desenvolvimento, evitando a necessidade de configuração manual de CORS.
-- O catálogo de veículos é servido do PostgreSQL. A `DATABASE_URL` fica em `backend/.env` (veja `backend/.env.example`) e o catálogo inicial é carregado por `npx prisma db seed`.
+- **🤖 Agentes de IA:** leiam o [`AGENTS.md`](AGENTS.md) antes de qualquer mudança.
+- Dinheiro é guardado em **centavos** (`*Centavos Int`); a formatação em R$ fica nos serializers.
+- Imagens novas do catálogo vão para `frontend/public/` (não fazer hotlink); fotos enviadas pelo painel ficam em `backend/uploads/` (volume persistente em produção).
+- A Chiquinho Motors é uma concessionária fictícia; os dados do catálogo são ilustrativos. Foto da Home: Renato Araújo/Agência Brasil. Fonte Roboto sob licença OFL (`frontend/public/fonts/OFL.txt`).
 
 ---
 
-Desenvolvido por **Francisco de Julio Faria**
-Revisado por **Luiz Henrique Mota**
-Revisado por **Alex Pablo de Oliveira Moraes**
+Desenvolvido por **Francisco de Julio Faria** ·
+Revisado por **Luiz Henrique Mota** e **Alex Pablo de Oliveira Moraes** — licença [MIT](LICENSE)

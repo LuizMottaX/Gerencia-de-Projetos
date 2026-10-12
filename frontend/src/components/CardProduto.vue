@@ -2,7 +2,15 @@
   <div class="card produto-card">
     <RouterLink :to="rota" class="card-link">
       <div class="card-img-wrapper">
-        <img v-if="produto.imagemUrl" :src="produto.imagemUrl" :alt="produto.nome" />
+        <img
+          v-if="produto.imagemUrl"
+          :src="produto.imagemUrl"
+          :alt="produto.nome"
+          width="640"
+          height="480"
+          loading="lazy"
+          decoding="async"
+        />
         <div v-else class="card-img-placeholder" aria-hidden="true">
           <component :is="tipoIcone" :size="52" :stroke-width="1.5" />
         </div>
@@ -187,7 +195,7 @@ function adicionarAoCarrinho() {
 
 .produto-compat {
   font-size: 0.76em;
-  color: #777;
+  color: #666;
   line-height: 1.45;
 }
 </style>

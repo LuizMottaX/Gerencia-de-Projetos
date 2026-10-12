@@ -1,0 +1,22 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "rewrites": [
+    {
+      "source": "/api/:caminho*",
+      "destination": "https://SUBSTITUA-PELA-URL-DO-BACKEND/api/:caminho*"
+    },
+    {
+      "source": "/uploads/:caminho*",
+      "destination": "https://SUBSTITUA-PELA-URL-DO-BACKEND/uploads/:caminho*"
+    },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ],
+  "headers": [
+    {
+      "source": "/(assets|fonts)/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+    }
+  ]
+}

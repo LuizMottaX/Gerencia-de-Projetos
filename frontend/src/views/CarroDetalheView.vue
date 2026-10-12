@@ -19,6 +19,8 @@
             :key="i"
             :src="img"
             :alt="`${carro.nome} — foto ${i + 1}`"
+            :loading="i === 0 ? 'eager' : 'lazy'"
+            decoding="async"
             :class="{ 'img-principal': i === 0 }"
           />
         </div>

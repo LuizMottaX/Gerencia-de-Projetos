@@ -9,7 +9,7 @@
       <div v-for="noticia in noticias" :key="noticia.url" class="card noticia-card">
         <a :href="noticia.url" target="_blank" rel="noopener noreferrer" class="card-link">
           <div class="card-img-wrapper">
-            <img :src="noticia.imagem" :alt="noticia.titulo" />
+            <img :src="noticia.imagem" :alt="noticia.titulo" loading="lazy" decoding="async" />
             <span class="card-badge">Leia mais <ArrowRight :size="13" /></span>
           </div>
           <div class="card-body text-item">
