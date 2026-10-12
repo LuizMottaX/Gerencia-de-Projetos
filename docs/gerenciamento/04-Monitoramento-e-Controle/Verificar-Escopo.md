@@ -1,0 +1,89 @@
+# Verificar (Validar) o Escopo
+
+> **Processo PMBOK:** 5.5 Verificar / Validar o escopo
+> **Área:** Gerenciamento do Escopo · **Grupo:** Monitoramento e Controle
+> **Versão:** 1.0 · 12/10/2026
+
+Verificar o escopo é obter a **aceitação formal** das entregas concluídas.
+Uma entrega só é aceita quando seus critérios ("Pronto quando") são
+demonstrados — não basta o código existir.
+
+---
+
+## 1. Procedimento de verificação
+
+1. O responsável abre o PR e marca o pacote como "pronto para verificação".
+2. Outro integrante **inspeciona** o código e **demonstra** a entrega rodando
+   o sistema (backend 3001 + frontend 5173).
+3. Cada critério de aceitação é marcado como atendido ou não.
+4. Se todos forem atendidos → **entrega aceita**, registrada abaixo.
+   Se não → volta para execução com a lista do que falta.
+5. Entregas de fase são apresentadas ao patrocinador (Professor/a) nas
+   apresentações.
+
+## 2. Registro de aceitação
+
+### E2 — Banco PostgreSQL + catálogo de veículos (F1) — ✅ ACEITA
+
+| Critério | Verificação | Resultado |
+|----------|-------------|:---------:|
+| Nenhum dado de veículo em memória/arquivo | `backend/data/` removido; rotas consultam Prisma | ✅ |
+| Migrations aplicadas | `20260828010219_init` | ✅ |
+| Seed idempotente | `upsert` por slug em `prisma/seed.js` | ✅ |
+| `GET /api/carros` e `/api/carros/:id` funcionando | Demonstração na tela de carros | ✅ |
+
+**Aceite:** Equipe · 27/08/2026 · demonstrado ao patrocinador na 1ª apresentação (14/09/2026).
+
+### E3 — Catálogo de peças e acessórios (F2) — ✅ ACEITA
+
+| Critério | Verificação | Resultado |
+|----------|-------------|:---------:|
+| Selecionar um modelo mostra só itens compatíveis | Filtro `?modelo=` em `/api/pecas` e na tela | ✅ |
+| Peças e acessórios com filtros de categoria, preço e busca | `PecasView`, `AcessoriosView` | ✅ |
+| Página do veículo lista peças compatíveis | `GET /api/carros/:id/pecas` | ✅ |
+| Relação N:N no banco | `ProdutoCompatibilidade` com FKs | ✅ |
+
+**Aceite:** Equipe · 27/08/2026 · demonstrado na 1ª apresentação (14/09/2026).
+
+### E1 — Fundação técnica (F0) — 🟡 ACEITE PARCIAL
+
+| Critério | Verificação | Resultado |
+|----------|-------------|:---------:|
+| Estrutura separada front/back | Pastas `frontend/` e `backend/` | ✅ |
+| Segurança e validação | Helmet, rate limit, Zod, `tratarErro` | ✅ |
+| `npm run lint` passa | Não configurado | ❌ |
+| `npm test` passa | Não configurado | ❌ |
+| CI bloqueia PR com falha | Workflow inexistente | ❌ |
+
+**Situação:** aceite **parcial** — pendências viram a ação corretiva A1.
+
+### E6 — Painel administrativo (F5) — ⏳ EM VERIFICAÇÃO (incremento: autenticação)
+
+| Critério | Verificação | Resultado |
+|----------|-------------|:---------:|
+| Login com credenciais válidas gera token | `POST /api/admin/auth/login` | ⏳ a demonstrar |
+| Credenciais inválidas → 401 | Mesmo endpoint | ⏳ |
+| Rotas protegidas → 401 sem token | `GET /api/admin/auth/me` sem header | ⏳ |
+| Admin cadastra veículo e ele aparece no site | CRUD não implementado | ❌ |
+
+### E8 — Documentação PMBOK — ✅ ACEITA (Integração e Escopo)
+
+| Critério | Resultado |
+|----------|:---------:|
+| TAP, plano de gerenciamento, execução, monitoramento, controle de mudanças, encerramento | ✅ |
+| Requisitos, escopo, EAP, verificação e controle do escopo | ✅ |
+
+**Aceite:** a ser formalizado pelo patrocinador na 2ª apresentação.
+
+## 3. Resumo
+
+| Entrega | Situação |
+|---------|:--------:|
+| E1 Fundação | 🟡 parcial |
+| E2 Persistência | ✅ aceita |
+| E3 Peças e acessórios | ✅ aceita |
+| E4 Carrinho | ⬜ |
+| E5 Agendamento | ⬜ |
+| E6 Admin | ⏳ em verificação |
+| E7 Publicação | ⬜ |
+| E8 Documentação | ✅ (Integração + Escopo) |

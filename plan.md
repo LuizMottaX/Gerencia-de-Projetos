@@ -484,8 +484,12 @@ processos do PMBOK. Falta o conteúdo real do projeto:
 | Monitoramento e Controle | Critérios de aceitação, controle de mudanças, progresso | blocos "Pronto quando"; % de entregas concluídas por fase |
 | Encerramento | Termo de encerramento, lições aprendidas | F6 (deploy + README) é a entrega formal |
 
-Recomendação: substituir cada `docs/gerenciamento/*/README.md` pelo
-artefato correspondente, preenchido com os dados deste plano.
+**Atualização 12/10/2026:** artefatos de **Integração** (TAP, plano de
+gerenciamento, execução, monitoramento, controle de mudanças,
+encerramento de fase) e **Escopo** (requisitos, declaração de escopo, EAP,
+verificar e controlar o escopo) preenchidos — índice em
+`docs/gerenciamento/README.md`. Faltam cronograma detalhado, custos,
+qualidade, riscos e partes interessadas como documentos próprios.
 
 ---
 

@@ -5,3 +5,6 @@ Este grupo de processos é realizado para definir um novo projeto ou uma nova fa
 ## Mapeamento das Áreas de Conhecimento
 - **Gerenciamento da Integração**: Desenvolver o Termo de Abertura do Projeto (Project Charter).
 - **Gerenciamento das Partes Interessadas**: Identificar as partes interessadas (Stakeholders).
+
+## Artefatos do projeto
+- [Termo de Abertura do Projeto (TAP)](Termo-de-Abertura.md) — *4.1 Desenvolver o termo de abertura*
