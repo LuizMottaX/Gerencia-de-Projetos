@@ -9,7 +9,7 @@
       <div v-for="noticia in noticias" :key="noticia.url" class="card noticia-card">
         <a :href="noticia.url" target="_blank" rel="noopener noreferrer" class="card-link">
           <div class="card-img-wrapper">
-            <img :src="noticia.imagem" :alt="noticia.titulo" />
+            <img :src="noticia.imagem" :alt="noticia.titulo" loading="lazy" decoding="async" />
             <span class="card-badge">Leia mais <ArrowRight :size="13" /></span>
           </div>
           <div class="card-body text-item">
@@ -28,39 +28,49 @@ import { Newspaper, ArrowRight } from 'lucide-vue-next';
 const noticias = [
   {
     titulo: 'Chevrolet Silverado chega em outubro e será picape mais potente do Brasil',
-    imagem: 'https://quatrorodas.abril.com.br/wp-content/uploads/2023/04/chevrolet_silverado_high_country_crew_cab_85.jpeg?quality=70&strip=info&w=600&h=400&crop=1',
+    imagem:
+      'https://quatrorodas.abril.com.br/wp-content/uploads/2023/04/chevrolet_silverado_high_country_crew_cab_85.jpeg?quality=70&strip=info&w=600&h=400&crop=1',
     url: 'https://quatrorodas.abril.com.br/segredo/chevrolet-silverado-chega-em-outubro-e-sera-picape-mais-potente-do-brasil/',
   },
   {
     titulo: 'Do óleo aos pneus: os defeitos do Jeep Compass 1.3 turbo após 50.000 km',
-    imagem: 'https://quatrorodas.abril.com.br/wp-content/uploads/2020/05/DSCF7385-e1632080390238.jpg?quality=70&strip=info&w=1280&h=720&crop=1',
+    imagem:
+      'https://quatrorodas.abril.com.br/wp-content/uploads/2020/05/DSCF7385-e1632080390238.jpg?quality=70&strip=info&w=1280&h=720&crop=1',
     url: 'https://quatrorodas.abril.com.br/testes/longa-duracao/do-oleo-aos-pneus-os-defeitos-do-jeep-compass-1-3-turbo-apos-50-000-km/',
   },
   {
     titulo: 'Vai viajar? Confira orientações da PRF para prevenir acidentes nas estradas',
-    imagem: 'https://s2.glbimg.com/wjS54ipeU6rUZgOneKxA0kcCwcw=/810x456/top/smart/filters:max_age(3600)/https://s01.video.glbimg.com/deo/vi/18/27/11282718',
+    imagem:
+      'https://s2.glbimg.com/wjS54ipeU6rUZgOneKxA0kcCwcw=/810x456/top/smart/filters:max_age(3600)/https://s01.video.glbimg.com/deo/vi/18/27/11282718',
     url: 'https://g1.globo.com/es/espirito-santo/noticia/2023/01/16/vai-viajar-confira-orientacoes-da-prf-para-prevenir-acidentes-nas-estradas.ghtml',
   },
   {
     titulo: 'Jeep Renegade tem reajustes de até R$ 3 mil em menos de dois meses; veja os preços',
-    imagem: 'https://s2.glbimg.com/OfiyNtHkXh3PsslG1yTFCoe2ndo=/0x0:1400x788/924x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_cf9d035bf26b4646b105bd958f32089d/internal_photos/bs/2022/O/L/vBKo3BRueUboejHibgrA/jeep-renegade-longitude-.jpg',
+    imagem:
+      'https://s2.glbimg.com/OfiyNtHkXh3PsslG1yTFCoe2ndo=/0x0:1400x788/924x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_cf9d035bf26b4646b105bd958f32089d/internal_photos/bs/2022/O/L/vBKo3BRueUboejHibgrA/jeep-renegade-longitude-.jpg',
     url: 'https://autoesporte.globo.com/seu-bolso/noticia/2023/04/jeep-renegade-tem-reajustes-de-ate-r-3-mil-em-menos-de-dois-meses-veja-os-precos.ghtml',
   },
   {
     titulo: 'Toyota Hilux GR-Sport é a melhor versão da picape, mas cobra (muito) caro por isso',
-    imagem: 'https://s2.glbimg.com/CHoJQv9d0nZ2SEZk83wdLm4Pk5c=/0x0:1500x879/924x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_cf9d035bf26b4646b105bd958f32089d/internal_photos/bs/2023/i/i/8dkBRAREA0eBUqonms1w/toyotahiluxgrs1.jpg',
+    imagem:
+      'https://s2.glbimg.com/CHoJQv9d0nZ2SEZk83wdLm4Pk5c=/0x0:1500x879/924x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_cf9d035bf26b4646b105bd958f32089d/internal_photos/bs/2023/i/i/8dkBRAREA0eBUqonms1w/toyotahiluxgrs1.jpg',
     url: 'https://autoesporte.globo.com/testes/review/2023/04/toyota-hilux-gr-sport-e-a-melhor-versao-da-picape-mas-cobra-muito-caro-por-isso-teste.ghtml',
   },
   {
-    titulo: 'Suzuki Jimny Sierra 2024 tem nova versão e se mantém como o carro 4x4 mais barato do Brasil',
-    imagem: 'https://s2.glbimg.com/1KVJsl5z4GllaGZl5v7DB_NfOBU=/0x0:1600x1067/924x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_cf9d035bf26b4646b105bd958f32089d/internal_photos/bs/2023/t/y/4VOaniTwW0w3v68ACXww/4expedition-2-.jpg',
+    titulo:
+      'Suzuki Jimny Sierra 2024 tem nova versão e se mantém como o carro 4x4 mais barato do Brasil',
+    imagem:
+      'https://s2.glbimg.com/1KVJsl5z4GllaGZl5v7DB_NfOBU=/0x0:1600x1067/924x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_cf9d035bf26b4646b105bd958f32089d/internal_photos/bs/2023/t/y/4VOaniTwW0w3v68ACXww/4expedition-2-.jpg',
     url: 'https://autoesporte.globo.com/lancamentos/noticia/2023/05/suzuki-jimny-sierra-2024-tem-nova-versao-e-se-mantem-como-o-carro-4x4-mais-barato-do-brasil.ghtml',
   },
 ];
 </script>
 
 <style scoped>
-.noticias-page { display: flex; flex-direction: column; }
+.noticias-page {
+  display: flex;
+  flex-direction: column;
+}
 
 .banner-sub {
   color: #b0b4bc;
@@ -94,11 +104,13 @@ const noticias = [
 
 .card-badge {
   position: absolute;
-  bottom: 0; left: 0; right: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   display: flex;
   align-items: center;
   gap: 0.3rem;
-  background: linear-gradient(0deg, rgba(192,57,43,0.9) 0%, transparent 100%);
+  background: linear-gradient(0deg, rgba(192, 57, 43, 0.9) 0%, transparent 100%);
   color: #fff;
   font-size: 0.8em;
   font-weight: 700;
@@ -107,7 +119,9 @@ const noticias = [
   padding: 1rem 0.8rem 0.5rem;
   opacity: 0;
   transform: translateY(4px);
-  transition: opacity 0.3s, transform 0.3s;
+  transition:
+    opacity 0.3s,
+    transform 0.3s;
 }
 
 .noticia-card:hover .card-badge {
@@ -137,6 +151,8 @@ const noticias = [
 }
 
 @media (max-width: 640px) {
-  .card-img-wrapper { height: 150px; }
+  .card-img-wrapper {
+    height: 150px;
+  }
 }
 </style>

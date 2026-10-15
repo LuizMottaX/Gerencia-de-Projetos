@@ -1,6 +1,8 @@
 // Schema do banco — Chiquinho Motors®
 // F1: núcleo de veículos (Marca, Carro, CarroImagem).
 // F2: catálogo de peças e acessórios (Produto unificado + compatibilidade por modelo).
+// F3: carrinho e checkout (Cliente, Pedido, PedidoItem).
+// F4: serviços de manutenção e agendamento (Servico, Agendamento).
 
 generator client {
   provider = "prisma-client-js"
@@ -32,26 +34,26 @@ enum StatusCarro {
 
 /// Veículo à venda.
 model Carro {
-  id            Int         @id @default(autoincrement())
+  id              Int         @id @default(autoincrement())
   /// Identificador estável usado nas URLs do site (ex.: "celta").
-  slug          String      @unique
-  nome          String
-  modelo        String
-  ano           Int
+  slug            String      @unique
+  nome            String
+  modelo          String
+  ano             Int
   /// Preço em centavos — evita imprecisão de ponto flutuante com dinheiro.
-  precoCentavos Int
+  precoCentavos   Int
   /// Quilometragem em km, como número.
-  quilometragem Int
-  cor           String
+  quilometragem   Int
+  cor             String
   /// Valor de exibição ("Flex", "Gasolina", "Álcool"...). Pode virar enum depois.
-  combustivel   String
-  portas        Int
+  combustivel     String
+  portas          Int
   /// Valor de exibição ("Manual", "Automático"...).
-  cambio        String
-  carroceria    String
-  finalPlaca    Int?
-  localizacao   String
-  status        StatusCarro @default(DISPONIVEL)
+  cambio          String
+  carroceria      String
+  finalPlaca      Int?
+  localizacao     String
+  status          StatusCarro @default(DISPONIVEL)
   /// Formas de pagamento aceitas para este veículo.
   formasPagamento String[]
 
@@ -136,6 +138,7 @@ model Produto {
   categoriaId Int
 
   compatibilidades ProdutoCompatibilidade[]
+  itensPedido      PedidoItem[]
 
   criadoEm     DateTime @default(now())
   atualizadoEm DateTime @updatedAt
@@ -156,6 +159,117 @@ model ProdutoCompatibilidade {
   @@index([modeloVeiculoId])
 }
 
+// ─────────────────────────────  Pedidos  ─────────────────────────────
+
+/// Cliente identificado pelo e-mail — não há cadastro com senha (fora do escopo).
+model Cliente {
+  id           Int           @id @default(autoincrement())
+  nome         String
+  email        String        @unique
+  telefone     String
+  pedidos      Pedido[]
+  agendamentos Agendamento[]
+  criadoEm     DateTime      @default(now())
+}
+
+enum StatusPedido {
+  RECEBIDO
+  EM_SEPARACAO
+  PRONTO
+  ENTREGUE
+  CANCELADO
+}
+
+/// Pedido de peças/acessórios. Sem pagamento online: a loja entra em contato.
+model Pedido {
+  id            Int          @id @default(autoincrement())
+  /// Código curto que o cliente usa para acompanhar o pedido (ex.: "CM-7K2QXP").
+  codigo        String       @unique
+  status        StatusPedido @default(RECEBIDO)
+  /// Calculado no servidor a partir dos preços do banco — nunca vem do cliente.
+  totalCentavos Int
+
+  cliente   Cliente @relation(fields: [clienteId], references: [id])
+  clienteId Int
+
+  itens PedidoItem[]
+
+  criadoEm     DateTime @default(now())
+  atualizadoEm DateTime @updatedAt
+
+  @@index([clienteId])
+  @@index([status])
+}
+
+model PedidoItem {
+  id                Int     @id @default(autoincrement())
+  pedido            Pedido  @relation(fields: [pedidoId], references: [id], onDelete: Cascade)
+  pedidoId          Int
+  produto           Produto @relation(fields: [produtoId], references: [id])
+  produtoId         Int
+  quantidade        Int
+  /// Preço congelado no momento da compra — mudanças futuras de preço não afetam o pedido.
+  precoUnitCentavos Int
+
+  @@index([pedidoId])
+  @@index([produtoId])
+}
+
+// ─────────────────────────  Serviços e agendamento  ─────────────────────────
+
+/// Serviço de manutenção oferecido pela oficina.
+model Servico {
+  id                Int     @id @default(autoincrement())
+  slug              String  @unique
+  nome              String
+  descricao         String
+  /// Preço a partir de — o valor final depende do veículo.
+  precoBaseCentavos Int
+  /// Duração em minutos; também é o passo da grade de horários do serviço.
+  duracaoMin        Int
+  ativo             Boolean @default(true)
+
+  agendamentos Agendamento[]
+
+  criadoEm     DateTime @default(now())
+  atualizadoEm DateTime @updatedAt
+}
+
+enum StatusAgendamento {
+  SOLICITADO
+  CONFIRMADO
+  CONCLUIDO
+  CANCELADO
+}
+
+model Agendamento {
+  id               Int               @id @default(autoincrement())
+  /// Código curto para o cliente acompanhar (ex.: "AG-7K2QXP").
+  codigo           String            @unique
+  servico          Servico           @relation(fields: [servicoId], references: [id])
+  servicoId        Int
+  cliente          Cliente           @relation(fields: [clienteId], references: [id])
+  clienteId        Int
+  /// Texto livre: "Gol 2020, placa ABC-1234".
+  veiculoDescricao String
+  dataHora         DateTime
+  /// Igual a `dataHora` enquanto o agendamento ocupa a agenda; NULL quando
+  /// cancelado. A trava única fica nesta coluna (o Postgres aceita vários
+  /// NULL), então cancelar libera o horário sem perder o histórico.
+  horarioAtivo     DateTime?
+  status           StatusAgendamento @default(SOLICITADO)
+
+  criadoEm     DateTime @default(now())
+  atualizadoEm DateTime @updatedAt
+
+  /// Trava de horário: dois agendamentos ativos do mesmo serviço nunca no
+  /// mesmo início. Como a grade de cada serviço avança pela própria duração,
+  /// isso também impede sobreposição.
+  @@unique([servicoId, horarioAtivo])
+  @@index([clienteId])
+  @@index([dataHora])
+}
+
 // ─────────────────────────────  Contato  ─────────────────────────────
 
 /// Mensagem enviada pelo formulário de contato do site.
@@ -169,4 +283,17 @@ model MensagemContato {
   criadoEm DateTime @default(now())
 
   @@index([lida])
+}
+
+// ─────────────────────────────  Administração  ─────────────────────────────
+
+/// Usuário com acesso ao painel administrativo.
+model Administrador {
+  id           Int      @id @default(autoincrement())
+  nome         String
+  email        String   @unique
+  senha        String // Hash da senha
+  ativo        Boolean  @default(true)
+  criadoEm     DateTime @default(now())
+  atualizadoEm DateTime @updatedAt
 }

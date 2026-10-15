@@ -13,7 +13,14 @@
       <div v-for="carro in carros" :key="carro.id" class="card">
         <RouterLink :to="`/carros/${carro.id}`" class="card-link">
           <div class="card-img-wrapper">
-            <img :src="carro.imagemCapa" :alt="carro.nome" />
+            <img
+              :src="carro.imagemCapa"
+              :alt="carro.nome"
+              width="640"
+              height="480"
+              loading="lazy"
+              decoding="async"
+            />
             <span class="card-badge">Ver Detalhes <ArrowRight :size="14" /></span>
           </div>
           <div class="card-body text-item">
@@ -101,7 +108,9 @@ onMounted(async () => {
   padding: 1rem 1rem 0.5rem;
   opacity: 0;
   transform: translateY(6px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
 }
 
 .card:hover .card-badge {

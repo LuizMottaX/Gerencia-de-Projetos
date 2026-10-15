@@ -16,8 +16,10 @@
       </div>
 
       <div class="footer-bottom">
-        <p>© 2023 Chiquinho Motors® — Todos os direitos reservados.</p>
-        <p class="footer-credit">Desenvolvido por Francisco de Julio Faria · Revisado por Luiz Henrique Mota</p>
+        <p>© {{ ano }} Chiquinho Motors® — Todos os direitos reservados.</p>
+        <p class="footer-credit">
+          Desenvolvido por Francisco de Julio Faria · Revisado por Luiz Henrique Mota
+        </p>
       </div>
     </div>
   </footer>
@@ -25,6 +27,8 @@
 
 <script setup>
 import { Car } from 'lucide-vue-next';
+
+const ano = new Date().getFullYear();
 </script>
 
 <style scoped>
@@ -60,7 +64,9 @@ footer {
   color: #c0392b;
 }
 
-.red { color: #c0392b; }
+.red {
+  color: #c0392b;
+}
 
 .footer-tagline {
   font-size: 0.85em;
@@ -96,13 +102,13 @@ footer {
 
 .footer-bottom p {
   font-size: 0.8em;
-  color: #666;
+  color: #9a9ea6;
   line-height: 1.6;
 }
 
 .footer-credit {
   font-size: 0.75em !important;
-  color: #4a4d52 !important;
+  color: #8a8e96 !important;
   margin-top: 0.25rem;
 }
 </style>

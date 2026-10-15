@@ -12,6 +12,7 @@ frontend/.vite/
 # Variáveis de ambiente
 .env
 .env.local
+.env.test
 .env.*.local
 
 # Editor
@@ -25,3 +26,10 @@ frontend/.vite/
 # Sistema Operacional
 .DS_Store
 Thumbs.db
+
+# Imagens enviadas pelo painel admin
+backend/uploads/
+
+# Playwright
+e2e/playwright-report/
+e2e/test-results/

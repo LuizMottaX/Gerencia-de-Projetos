@@ -19,27 +19,48 @@
             :key="i"
             :src="img"
             :alt="`${carro.nome} — foto ${i + 1}`"
+            :loading="i === 0 ? 'eager' : 'lazy'"
+            decoding="async"
             :class="{ 'img-principal': i === 0 }"
           />
         </div>
 
         <!-- Painel de informações -->
         <aside class="painel">
-
           <!-- Ficha técnica -->
           <div class="ficha">
             <h2>Ficha Técnica</h2>
             <ul class="ficha-lista">
-              <li><span class="ficha-label">Modelo</span><span>{{ carro.modelo }}</span></li>
-              <li><span class="ficha-label">Carroceria</span><span>{{ carro.carroceria }}</span></li>
-              <li><span class="ficha-label">Ano</span><span>{{ carro.ano }}</span></li>
-              <li><span class="ficha-label">Km</span><span>{{ carro.quilometragem }}</span></li>
-              <li><span class="ficha-label">Cor</span><span>{{ carro.cor }}</span></li>
-              <li><span class="ficha-label">Combustível</span><span>{{ carro.combustivel }}</span></li>
-              <li><span class="ficha-label">Câmbio</span><span>{{ carro.cambio }}</span></li>
-              <li><span class="ficha-label">Portas</span><span>{{ carro.portas }}</span></li>
-              <li><span class="ficha-label">Final placa</span><span>{{ carro.finalPlaca }}</span></li>
-              <li><span class="ficha-label">Localização</span><span>{{ carro.localizacao }}</span></li>
+              <li>
+                <span class="ficha-label">Modelo</span><span>{{ carro.modelo }}</span>
+              </li>
+              <li>
+                <span class="ficha-label">Carroceria</span><span>{{ carro.carroceria }}</span>
+              </li>
+              <li>
+                <span class="ficha-label">Ano</span><span>{{ carro.ano }}</span>
+              </li>
+              <li>
+                <span class="ficha-label">Km</span><span>{{ carro.quilometragem }}</span>
+              </li>
+              <li>
+                <span class="ficha-label">Cor</span><span>{{ carro.cor }}</span>
+              </li>
+              <li>
+                <span class="ficha-label">Combustível</span><span>{{ carro.combustivel }}</span>
+              </li>
+              <li>
+                <span class="ficha-label">Câmbio</span><span>{{ carro.cambio }}</span>
+              </li>
+              <li>
+                <span class="ficha-label">Portas</span><span>{{ carro.portas }}</span>
+              </li>
+              <li>
+                <span class="ficha-label">Final placa</span><span>{{ carro.finalPlaca }}</span>
+              </li>
+              <li>
+                <span class="ficha-label">Localização</span><span>{{ carro.localizacao }}</span>
+              </li>
             </ul>
           </div>
 
@@ -68,7 +89,6 @@
               Formulário de Contato
             </RouterLink>
           </div>
-
         </aside>
       </div>
 
@@ -78,7 +98,7 @@
         <div class="pecas-grid">
           <CardProduto v-for="p in pecas" :key="p.id" :produto="p" />
         </div>
-        <RouterLink :to="`/pecas?modelo=${modeloSlug}`" v-if="modeloSlug" class="ver-todas">
+        <RouterLink v-if="modeloSlug" :to="`/pecas?modelo=${modeloSlug}`" class="ver-todas">
           Ver todas as peças para este modelo <ArrowRight :size="14" />
         </RouterLink>
       </div>
@@ -127,7 +147,10 @@ async function buscarPecas(id) {
 }
 
 onMounted(() => buscarCarro(route.params.id));
-watch(() => route.params.id, (novoId) => buscarCarro(novoId));
+watch(
+  () => route.params.id,
+  (novoId) => buscarCarro(novoId),
+);
 </script>
 
 <style scoped>
@@ -158,7 +181,9 @@ watch(() => route.params.id, (novoId) => buscarCarro(novoId));
   transition: color 0.2s;
 }
 
-.voltar-link:hover { color: #e74c3c; }
+.voltar-link:hover {
+  color: #e74c3c;
+}
 
 .veiculo-banner h1 {
   color: #fff;
@@ -196,11 +221,13 @@ watch(() => route.params.id, (novoId) => buscarCarro(novoId));
   width: 100%;
   border-radius: 10px;
   display: block;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
 }
 
-.galeria img:hover { transform: scale(1.015); }
+.galeria img:hover {
+  transform: scale(1.015);
+}
 
 /* ── Painel lateral ── */
 .painel {
@@ -215,7 +242,7 @@ watch(() => route.params.id, (novoId) => buscarCarro(novoId));
   background: #fff;
   border-radius: 10px;
   padding: 1.2rem 1.4rem;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   border-top: 3px solid #c0392b;
 }
 
@@ -244,7 +271,9 @@ watch(() => route.params.id, (novoId) => buscarCarro(novoId));
   color: #333;
 }
 
-.ficha-lista li:last-child { border-bottom: none; }
+.ficha-lista li:last-child {
+  border-bottom: none;
+}
 
 .ficha-label {
   color: #888;
@@ -294,7 +323,8 @@ watch(() => route.params.id, (novoId) => buscarCarro(novoId));
   letter-spacing: 0.05em;
 }
 
-.cta-wa, .cta-email {
+.cta-wa,
+.cta-email {
   text-align: center;
   font-size: 0.92em;
 }
@@ -346,17 +376,31 @@ watch(() => route.params.id, (novoId) => buscarCarro(novoId));
     gap: 1.2rem;
   }
 
-  .painel { position: static; }
+  .painel {
+    position: static;
+  }
 
-  .veiculo-banner { padding: 1.2rem 1rem; }
-  .veiculo-banner h1 { font-size: 1.2em; }
-  .veiculo-preco { font-size: 1.2em; }
+  .veiculo-banner {
+    padding: 1.2rem 1rem;
+  }
+  .veiculo-banner h1 {
+    font-size: 1.2em;
+  }
+  .veiculo-preco {
+    font-size: 1.2em;
+  }
 
-  .pecas-compat { padding: 0 1rem 1.5rem; }
-  .pecas-grid { grid-template-columns: 1fr; }
+  .pecas-compat {
+    padding: 0 1rem 1.5rem;
+  }
+  .pecas-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 1100px) and (min-width: 801px) {
-  .pecas-grid { grid-template-columns: repeat(2, 1fr); }
+  .pecas-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 </style>

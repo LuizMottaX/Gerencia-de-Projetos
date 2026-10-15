@@ -11,13 +11,13 @@ entregas pendentes**, com critérios de aceitação e dependências.
 
 | Fase | Status |
 |------|--------|
-| **F0** Fundação técnica | 🟡 parcial (falta lint, testes e CI) |
+| **F0** Fundação técnica | ✅ concluída (12/10/2026) |
 | **F1** Persistência — PostgreSQL + Prisma | ✅ concluída |
 | **F2** Catálogo de peças e acessórios | ✅ concluída |
-| **F3** Carrinho e checkout | ⬜ não iniciada |
-| **F4** Serviços e agendamento | ⬜ não iniciada |
-| **F5** Área administrativa | ⬜ não iniciada |
-| **F6** Qualidade e publicação | ⬜ não iniciada |
+| **F3** Carrinho e checkout | ✅ concluída (12/10/2026) |
+| **F4** Serviços e agendamento | ✅ concluída (12/10/2026) |
+| **F5** Área administrativa | ✅ concluída (12/10/2026) |
+| **F6** Qualidade e publicação | 🟡 tudo pronto exceto a publicação (depende das contas da equipe) |
 
 Já implementado da F0: estrutura em `backend/src/`, `.env.example`,
 `helmet` + `express-rate-limit`, validação com `zod`, rota 404 (JSON no
@@ -183,21 +183,21 @@ public/carros/  public/produtos/   imagens locais
 
 ### Entregas
 
-- [ ] ESLint + Prettier + `.editorconfig` nos dois pacotes; script
+- [x] ESLint + Prettier + `.editorconfig` nos dois pacotes; script
       `npm run lint` (e `lint:fix`).
-- [ ] Backend: Vitest + Supertest. Testes mínimos:
+- [x] Backend: Vitest + Supertest. Testes mínimos:
   - `GET /api/carros` retorna 200 e uma lista.
   - `GET /api/carros/:id` retorna 404 para slug inexistente.
   - `GET /api/pecas?modelo=<slug>` filtra por compatibilidade.
   - `POST /api/contato` com corpo inválido retorna 400 com `detalhes`.
-- [ ] Frontend: Vitest + `@vue/test-utils`. Testes mínimos:
+- [x] Frontend: Vitest + `@vue/test-utils`. Testes mínimos:
   - `CardProduto` renderiza nome, preço e a rota correta por `tipo`.
   - `useProdutos` chama o fetcher e popula `itens`.
-- [ ] Banco de teste isolado para o backend (outra `DATABASE_URL` ou
+- [x] Banco de teste isolado para o backend (outra `DATABASE_URL` ou
       schema `test`); script `db:test:reset`.
-- [ ] GitHub Actions: workflow que roda `lint`, `test` e `build` em cada
+- [x] GitHub Actions: workflow que roda `lint`, `test` e `build` em cada
       push e PR. Serviço `postgres` no runner para os testes de integração.
-- [ ] `LICENSE` (MIT) e `CHANGELOG.md`.
+- [x] `LICENSE` (MIT) e `CHANGELOG.md`.
 
 ### Pronto quando
 
@@ -247,7 +247,7 @@ enum StatusPedido { RECEBIDO EM_SEPARACAO PRONTO ENTREGUE CANCELADO }
 
 ### Backend
 
-- [ ] `POST /api/pedidos` — corpo: `{ cliente: {...}, itens: [{ produtoId, quantidade }] }`.
+- [x] `POST /api/pedidos` — corpo: `{ cliente: {...}, itens: [{ produto: <slug>, quantidade }] }`.
   - Valida com `zod`.
   - `upsert` do `Cliente` por e-mail.
   - Em **uma transação** (`prisma.$transaction`): confere estoque de cada
@@ -255,26 +255,26 @@ enum StatusPedido { RECEBIDO EM_SEPARACAO PRONTO ENTREGUE CANCELADO }
     (nunca confia no preço enviado), cria `Pedido` + `PedidoItem`,
     decrementa `Produto.estoque`.
   - Retorna `{ codigo }`.
-- [ ] `GET /api/pedidos/:codigo` — pedido + itens (para a tela de
+- [x] `GET /api/pedidos/:codigo` — pedido + itens (para a tela de
       acompanhamento).
-- [ ] Estoque insuficiente → 409 com mensagem clara (qual item, quanto há).
+- [x] Estoque insuficiente → 409 com mensagem clara (qual item, quanto há).
 
 ### Frontend
 
-- [ ] Store Pinia `carrinho`: `adicionar`, `remover`, `alterarQuantidade`,
+- [x] Store Pinia `carrinho`: `adicionar`, `remover`, `alterarQuantidade`,
       getters `subtotal` e `quantidadeTotal`. Persistência em
       `localStorage` (try/catch).
-- [ ] Botão "Adicionar ao carrinho" em `CardProduto` e `ProdutoDetalheView`
+- [x] Botão "Adicionar ao carrinho" em `CardProduto` e `ProdutoDetalheView`
       (desabilitado quando `!disponivel`).
-- [ ] Mini-carrinho no `AppHeader` (ícone `ShoppingCart` do lucide +
+- [x] Mini-carrinho no `AppHeader` (ícone `ShoppingCart` do lucide +
       contador).
-- [ ] `CarrinhoView` (`/carrinho`): lista, ajuste de quantidade, subtotal,
+- [x] `CarrinhoView` (`/carrinho`): lista, ajuste de quantidade, subtotal,
       botão "Finalizar".
-- [ ] `CheckoutView` (`/checkout`): formulário de cliente (nome, e-mail,
+- [x] `CheckoutView` (`/checkout`): formulário de cliente (nome, e-mail,
       telefone) + revisão; ao enviar chama `POST /api/pedidos`.
-- [ ] `PedidoView` (`/pedido/:codigo`): confirmação + status + itens +
+- [x] `PedidoView` (`/pedido/:codigo`): confirmação + status + itens +
       botão WhatsApp com o resumo.
-- [ ] Limpar o carrinho após pedido criado.
+- [x] Limpar o carrinho após pedido criado.
 
 ### Pronto quando
 
@@ -328,27 +328,27 @@ funcionamento (ex.: seg–sex 08:00–18:00), granularidade de 30 min.
 
 ### Backend
 
-- [ ] `GET /api/servicos` e `GET /api/servicos/:slug`.
-- [ ] `GET /api/agendamentos/disponibilidade?servico=<slug>&data=<YYYY-MM-DD>`
+- [x] `GET /api/servicos` e `GET /api/servicos/:slug`.
+- [x] `GET /api/agendamentos/disponibilidade?servico=<slug>&data=<YYYY-MM-DD>`
       — gera os slots do dia a partir do horário de funcionamento e da
       `duracaoMin`, remove os já ocupados, retorna os livres.
-- [ ] `POST /api/agendamentos` — `zod` + `upsert` do cliente + criação
+- [x] `POST /api/agendamentos` — `zod` + `upsert` do cliente + criação
       dentro de transação; a constraint `@@unique([servicoId, dataHora])`
       garante que dois não peguem o mesmo horário (capturar o erro P2002 →
       409 "horário indisponível").
-- [ ] `GET /api/agendamentos/:codigo`.
-- [ ] (Opcional) e-mail de confirmação com `nodemailer` — se não der,
-      deixar só o registro para o painel da F5.
+- [x] `GET /api/agendamentos/:codigo`.
+- [ ] (Opcional) e-mail de confirmação com `nodemailer` — **não feito**:
+      fica só o registro para o painel da F5 + botão de WhatsApp na confirmação.
 
 ### Frontend
 
-- [ ] `ServicosView` (`/servicos`) — cards de serviço com preço e duração.
-- [ ] `AgendamentoView` (`/agendar/:servicoSlug`): escolher data →
+- [x] `ServicosView` (`/servicos`) — cards de serviço com preço e duração.
+- [x] `AgendamentoView` (`/agendar/:servicoSlug`): escolher data →
       carregar slots → escolher horário → dados do cliente + veículo →
       confirmar.
-- [ ] `AgendamentoConfirmadoView` (`/agendamento/:codigo`).
-- [ ] Links no `AppHeader` e na Home.
-- [ ] Seed com ~5 serviços (troca de óleo, alinhamento, revisão dos
+- [x] `AgendamentoConfirmadoView` (`/agendamento/:codigo`).
+- [x] Links no `AppHeader` e na Home.
+- [x] Seed com ~5 serviços (troca de óleo, alinhamento, revisão dos
       freios, ar-condicionado, revisão completa).
 
 ### Pronto quando
@@ -381,28 +381,28 @@ enum PapelUsuario { ADMIN }
 
 ### Backend
 
-- [ ] Auth: `POST /api/auth/login` (bcrypt + JWT), middleware
-      `requireAdmin` que valida o `Authorization: Bearer`.
-- [ ] Script `create-admin` (cria o primeiro usuário via CLI/prompt).
-- [ ] CRUD **protegido** (POST/PUT/DELETE) para: `carros` (+ imagens),
+- [x] Auth: `POST /api/admin/auth/login` (bcrypt + JWT), middleware
+      `verificarAdmin` que valida o `Authorization: Bearer`.
+- [x] Script `create-admin` → `ADMIN_SENHA=... npm run admin:criar -- <email> [nome]`.
+- [x] CRUD **protegido** em `/api/admin/*` para: `carros` (+ imagens),
       `marcas`, `modelos`, `produtos` (peças/acessórios), `categorias`,
       `servicos`.
-- [ ] `PATCH /api/pedidos/:codigo/status` e
-      `PATCH /api/agendamentos/:codigo/status`.
-- [ ] `GET /api/admin/mensagens` (lista `MensagemContato`, marcar como lida).
-- [ ] Upload de imagem: `multer` gravando em `frontend/public/uploads/`
-      (ou storage externo depois); endpoint devolve a URL.
+- [x] `PATCH /api/admin/pedidos/:codigo/status` (cancelar devolve o estoque) e
+      `PATCH /api/admin/agendamentos/:codigo/status` (cancelar libera o horário).
+- [x] `GET /api/admin/mensagens` (lista `MensagemContato`, marcar como lida).
+- [x] Upload de imagem: `multer` gravando em `backend/uploads/` (ou `UPLOAD_DIR`),
+      servido em `/uploads`; endpoint devolve a URL.
 
 ### Frontend
 
-- [ ] Layout `/admin` com guard de rota (checa token no `localStorage`).
-- [ ] `AdminLoginView`.
-- [ ] Telas de lista + formulário para cada entidade.
-- [ ] Fila de pedidos (com troca de status) e agenda de serviços.
-- [ ] Caixa de entrada de mensagens de contato.
-- [ ] `AdminDashboard`: nº de veículos disponíveis, pedidos do mês,
+- [x] Layout `/admin` com guard de rota (checa token no `localStorage`).
+- [x] `AdminLoginView`.
+- [x] Telas de lista + formulário para cada entidade.
+- [x] Fila de pedidos (com troca de status) e agenda de serviços.
+- [x] Caixa de entrada de mensagens de contato.
+- [x] `AdminDashboard`: nº de veículos disponíveis, pedidos do mês,
       próximos agendamentos, itens com estoque baixo.
-- [ ] Store Pinia `auth` (token, usuário, `login`, `logout`); interceptor
+- [x] Store Pinia `auth` (token, usuário, `login`, `logout`); interceptor
       no cliente `src/api` que injeta o `Bearer` e trata 401 → redireciona
       para o login.
 
@@ -422,24 +422,24 @@ apresentação. **Depende de:** tudo. **Estimativa:** ~1 semana.
 
 ### Entregas
 
-- [ ] Testes E2E com Playwright cobrindo os fluxos principais:
+- [x] Testes E2E com Playwright cobrindo os fluxos principais (desktop e celular):
   - catálogo → carrinho → checkout → pedido criado;
   - escolher serviço → agendar → confirmação;
   - login admin → editar um produto.
-- [ ] Auditoria Lighthouse: acessibilidade e performance ≥ 90. Corrigir
+- [x] Auditoria Lighthouse: acessibilidade e performance ≥ 90. Corrigir
       `alt` de imagens, foco visível, contraste, `lang`, ordem de headings.
-- [ ] `loading="lazy"` nas imagens de card; dimensões explícitas para
+- [x] `loading="lazy"` nas imagens de card; dimensões explícitas para
       evitar layout shift.
-- [ ] Meta tags / Open Graph por rota; `sitemap.xml` e `robots.txt`.
-- [ ] `GET /health` já existe — adicionar logs estruturados e um
-      `GET /api/version`.
-- [ ] Deploy:
+- [x] Meta tags / Open Graph por rota; `sitemap.xml` e `robots.txt`.
+- [x] `GET /health` (agora confere o banco), logs estruturados e `GET /api/version`.
+- [ ] Deploy — **configuração pronta** (Dockerfiles, nginx, `vercel.json`,
+      `docs/DEPLOY.md`); falta publicar com as contas da equipe. Recomendado: Coolify (CR-10).
   - Frontend → Vercel ou Netlify (build do Vite, variável de API se
     separar domínios).
   - Backend → Railway ou Render; rodar `prisma migrate deploy` no deploy.
   - Banco → o PostgreSQL do Coolify já existe (porta 5433).
   - Configurar CORS do backend para o domínio real do frontend.
-- [ ] README reescrito refletindo o sistema final; instruções de deploy.
+- [x] README reescrito refletindo o sistema final; instruções de deploy.
 
 ### Pronto quando
 
@@ -463,9 +463,13 @@ apresentação. **Depende de:** tudo. **Estimativa:** ~1 semana.
       Prisma 7 (hoje só emite aviso).
 - [ ] `npm audit`: 3 "high" em `deepmerge-ts`, dependência apenas da CLI
       do Prisma (devDependency) — reavaliar quando o Prisma corrigir.
-- [ ] Footer com "© 2023" — usar o ano corrente.
+- [x] Footer com "© 2023" — usar o ano corrente.
 - [ ] WhatsApp e Instagram no código são de conta pessoal — trocar por
       dados oficiais da concessionária (ou deixar claro que é fictício).
+- [ ] `SobreNosView` usa duas imagens externas (hotlink), uma de banco pago
+      (Shutterstock) — trocar por fotos próprias ou de licença livre.
+- [ ] Excluir veículo/produto no painel não apaga o arquivo da foto em
+      `backend/uploads` (arquivos órfãos).
 - [ ] `combustivel` e `cambio` do `Carro` são `String` — podem virar
       `enum` como o `status`.
 
@@ -484,8 +488,12 @@ processos do PMBOK. Falta o conteúdo real do projeto:
 | Monitoramento e Controle | Critérios de aceitação, controle de mudanças, progresso | blocos "Pronto quando"; % de entregas concluídas por fase |
 | Encerramento | Termo de encerramento, lições aprendidas | F6 (deploy + README) é a entrega formal |
 
-Recomendação: substituir cada `docs/gerenciamento/*/README.md` pelo
-artefato correspondente, preenchido com os dados deste plano.
+**Atualização 12/10/2026:** artefatos de **Integração** (TAP, plano de
+gerenciamento, execução, monitoramento, controle de mudanças,
+encerramento de fase) e **Escopo** (requisitos, declaração de escopo, EAP,
+verificar e controlar o escopo) preenchidos — índice em
+`docs/gerenciamento/README.md`. Faltam cronograma detalhado, custos,
+qualidade, riscos e partes interessadas como documentos próprios.
 
 ---
 

@@ -10,3 +10,6 @@ Este grupo de processos é realizado para concluir o trabalho definido no plano 
 - **Riscos**: Implementar respostas aos riscos.
 - **Aquisições**: Conduzir as aquisições.
 - **Partes Interessadas**: Gerenciar o engajamento das partes interessadas.
+
+## Artefatos do projeto
+- [Orientar e Gerenciar a Execução](Orientar-e-Gerenciar-Execucao.md) — *4.3 Orientar e gerenciar o trabalho* (log de entregas e de problemas)

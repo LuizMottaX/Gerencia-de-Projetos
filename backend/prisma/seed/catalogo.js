@@ -17,7 +17,8 @@ const pecas = [
   {
     slug: 'pastilha-freio-dianteira',
     nome: 'Pastilha de Freio Dianteira',
-    descricao: 'Jogo de pastilhas dianteiras com composto cerâmico, baixo ruído e menor geração de pó.',
+    descricao:
+      'Jogo de pastilhas dianteiras com composto cerâmico, baixo ruído e menor geração de pó.',
     preco: 189.9,
     estoque: 24,
     sku: 'FR-PD-001',
@@ -37,7 +38,8 @@ const pecas = [
   {
     slug: 'kit-embreagem',
     nome: 'Kit de Embreagem',
-    descricao: 'Kit completo: platô, disco e rolamento. Acionamento suave e durabilidade reforçada.',
+    descricao:
+      'Kit completo: platô, disco e rolamento. Acionamento suave e durabilidade reforçada.',
     preco: 689.9,
     estoque: 6,
     sku: 'MT-EMB-010',
@@ -77,7 +79,8 @@ const pecas = [
   {
     slug: 'amortecedor-dianteiro',
     nome: 'Amortecedor Dianteiro (par)',
-    descricao: 'Par de amortecedores pressurizados a gás. Estabilidade e conforto em piso irregular.',
+    descricao:
+      'Par de amortecedores pressurizados a gás. Estabilidade e conforto em piso irregular.',
     preco: 528.0,
     estoque: 10,
     sku: 'SU-AD-020',

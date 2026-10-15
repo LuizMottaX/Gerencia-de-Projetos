@@ -17,9 +17,7 @@ router.get('/categorias', async (req, res, next) => {
       orderBy: { nome: 'asc' },
     });
 
-    res.json(
-      categorias.map((c) => ({ slug: c.slug, nome: c.nome, tipo: c.tipo.toLowerCase() })),
-    );
+    res.json(categorias.map((c) => ({ slug: c.slug, nome: c.nome, tipo: c.tipo.toLowerCase() })));
   } catch (err) {
     next(err);
   }
@@ -31,9 +29,7 @@ router.get('/modelos', async (req, res, next) => {
     const modelos = await prisma.modeloVeiculo.findMany({
       orderBy: [{ marca: 'asc' }, { modelo: 'asc' }],
     });
-    res.json(
-      modelos.map((m) => ({ slug: m.slug, nome: `${m.marca} ${m.modelo}` })),
-    );
+    res.json(modelos.map((m) => ({ slug: m.slug, nome: `${m.marca} ${m.modelo}` })));
   } catch (err) {
     next(err);
   }

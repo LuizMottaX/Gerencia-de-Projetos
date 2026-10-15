@@ -2,7 +2,15 @@
   <div class="card produto-card">
     <RouterLink :to="rota" class="card-link">
       <div class="card-img-wrapper">
-        <img v-if="produto.imagemUrl" :src="produto.imagemUrl" :alt="produto.nome" />
+        <img
+          v-if="produto.imagemUrl"
+          :src="produto.imagemUrl"
+          :alt="produto.nome"
+          width="640"
+          height="480"
+          loading="lazy"
+          decoding="async"
+        />
         <div v-else class="card-img-placeholder" aria-hidden="true">
           <component :is="tipoIcone" :size="52" :stroke-width="1.5" />
         </div>
@@ -18,12 +26,24 @@
         </p>
       </div>
     </RouterLink>
+    <div class="card-acoes">
+      <button
+        type="button"
+        class="btn btn-red btn-carrinho"
+        :disabled="!produto.disponivel"
+        @click="adicionarAoCarrinho"
+      >
+        <component :is="adicionado ? Check : ShoppingCart" :size="16" />
+        {{ rotuloBotao }}
+      </button>
+    </div>
   </div>
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import { ArrowRight, Headphones, Wrench } from 'lucide-vue-next';
+import { computed, ref } from 'vue';
+import { ArrowRight, Check, Headphones, ShoppingCart, Wrench } from 'lucide-vue-next';
+import { useCarrinhoStore } from '../stores/carrinho';
 
 const props = defineProps({
   produto: { type: Object, required: true },
@@ -35,6 +55,22 @@ const rota = computed(() => {
 });
 
 const tipoIcone = computed(() => (props.produto.tipo === 'acessorio' ? Headphones : Wrench));
+
+const carrinho = useCarrinhoStore();
+const adicionado = ref(false);
+let timer = null;
+
+const rotuloBotao = computed(() => {
+  if (!props.produto.disponivel) return 'Esgotado';
+  return adicionado.value ? 'Adicionado!' : 'Adicionar ao carrinho';
+});
+
+function adicionarAoCarrinho() {
+  carrinho.adicionar(props.produto);
+  adicionado.value = true;
+  clearTimeout(timer);
+  timer = setTimeout(() => (adicionado.value = false), 1500);
+}
 </script>
 
 <style scoped>
@@ -68,13 +104,7 @@ const tipoIcone = computed(() => (props.produto.tipo === 'acessorio' ? Headphone
   display: grid;
   place-items: center;
   color: #a3a3a3;
-  background: repeating-linear-gradient(
-    45deg,
-    #f0f0f0,
-    #f0f0f0 12px,
-    #e9e9e9 12px,
-    #e9e9e9 24px
-  );
+  background: repeating-linear-gradient(45deg, #f0f0f0, #f0f0f0 12px, #e9e9e9 12px, #e9e9e9 24px);
 }
 
 .card-esgotado {
@@ -108,7 +138,9 @@ const tipoIcone = computed(() => (props.produto.tipo === 'acessorio' ? Headphone
   padding: 1rem 0.9rem 0.5rem;
   opacity: 0;
   transform: translateY(6px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
 }
 
 .produto-card:hover .card-badge {
@@ -146,9 +178,24 @@ const tipoIcone = computed(() => (props.produto.tipo === 'acessorio' ? Headphone
   margin-bottom: 0.4rem;
 }
 
+.card-acoes {
+  padding: 0 16px 16px;
+}
+
+.btn-carrinho {
+  width: 100%;
+  font-size: 0.85em;
+}
+
+.btn-carrinho:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
 .produto-compat {
   font-size: 0.76em;
-  color: #777;
+  color: #666;
   line-height: 1.45;
 }
 </style>
