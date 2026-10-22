@@ -467,8 +467,8 @@ apresentação. **Depende de:** tudo. **Estimativa:** ~1 semana.
       (`proxy-addr` crítica, `qs`, `vue`) foram aplicadas em 22/10.
 - [ ] Cobertura do frontend em 9% (meta 50%) — testes de componente para
       Checkout, Agendamento e Login do painel (ação AC-01 do controle da qualidade).
-- [ ] Ativar a proteção da `main` (PR + 1 aprovação + checks) e fechar os
-      PRs #2–#6 já incorporados pelo #7 (ações AM-06 e AM-07).
+- [ ] Ativar a proteção da `main` (PR + 1 aprovação + checks) — ação AM-06.
+      (PRs #2–#6 fechados em 22/10 — AM-07.)
 - [ ] Cache dos navegadores do Playwright no CI — o job E2E passou de ~2
       para ~12 min (AM-08).
 - [x] Footer com "© 2023" — usar o ano corrente.

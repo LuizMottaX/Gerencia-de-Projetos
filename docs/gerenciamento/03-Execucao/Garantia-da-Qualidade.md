@@ -79,7 +79,7 @@ Legenda: ✅ conforme · ⚠️ conforme com observação · ❌ não conforme
 | AM-04 | Preventiva | Template de PR com a definição de pronto e o checklist de revisão (`.github/pull_request_template.md`) | AQ-01 | Luiz | ✅ 22/10 |
 | AM-05 | Corretiva | README com setup via Docker e aviso de WSL no Windows | AQ-09 | Luiz | ✅ 22/10 (`5b06e21`) |
 | AM-06 | Preventiva | **Ativar a proteção da `main`**: exigir PR, 1 aprovação e os checks `backend`, `frontend` e `e2e` | AQ-01, AQ-02 | Luiz (dono do repositório) | ⏳ |
-| AM-07 | Corretiva | Fechar os PRs #2–#6 com comentário apontando para o #7 | AQ-03 | Luiz | ⏳ |
+| AM-07 | Corretiva | Fechar os PRs #2–#6 com comentário apontando para o #7 | AQ-03 | Luiz | ✅ 22/10 |
 | AM-08 | Preventiva | Cache dos navegadores do Playwright no CI (`actions/cache` em `~/.cache/ms-playwright`) | AQ-06 | Equipe | ⏳ |
 | AM-09 | Preventiva | Daqui em diante, PRs pequenos (um pacote da EAP cada) e revisados por Francisco ou Alex | AQ-01, AQ-03 | Equipe | Contínuo |
 
@@ -94,9 +94,9 @@ foram encaminhadas como solicitações de mudança — ver CR-11 e CR-12 no
 | Conformes | 2 |
 | Conformes com observação | 3 |
 | Não conformes | 4 |
-| Ações concluídas na própria auditoria | 5 de 9 |
+| Ações concluídas na própria auditoria | 6 de 9 |
 
 A maior lacuna é de **processo, não de produto**: o código está testado e
 o CI funciona, mas a revisão por pares — o principal controle preventivo
 do plano — ainda não acontece de fato. A ação AM-06 resolve isso na raiz.
-Próxima auditoria: antes da entrega final (dezembro), conferindo AM-06 a AM-09.
+Próxima auditoria: antes da entrega final (dezembro), conferindo AM-06, AM-08 e AM-09.
