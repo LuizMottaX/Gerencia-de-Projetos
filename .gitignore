@@ -30,6 +30,9 @@ Thumbs.db
 # Imagens enviadas pelo painel admin
 backend/uploads/
 
+# Relatórios de cobertura de testes
+coverage/
+
 # Playwright
 e2e/playwright-report/
 e2e/test-results/

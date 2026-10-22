@@ -19,3 +19,4 @@ Este grupo de processos é exigido para acompanhar, revisar e regular o progress
 - [Controle Integrado de Mudanças](Controle-Integrado-de-Mudancas.md) — *4.6* (fluxo, CCM e log de mudanças)
 - [Verificar o Escopo](Verificar-Escopo.md) — *5.5* (aceite das entregas)
 - [Controlar o Escopo](Controlar-Escopo.md) — *5.6* (análise de variação)
+- [Controle da Qualidade](Controle-da-Qualidade.md) — *8.3* (medições, defeitos e não conformidades)

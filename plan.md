@@ -461,8 +461,16 @@ apresentação. **Depende de:** tudo. **Estimativa:** ~1 semana.
       fora da F2.
 - [ ] Migrar de `package.json#prisma` para `prisma.config.ts` antes do
       Prisma 7 (hoje só emite aviso).
-- [ ] `npm audit`: 3 "high" em `deepmerge-ts`, dependência apenas da CLI
-      do Prisma (devDependency) — reavaliar quando o Prisma corrigir.
+- [ ] `npm audit`: 3 "high" em `deepmerge-ts` (CLI/config do Prisma 6) —
+      só some no Prisma 7 (**CR-11**). Vite 5 / Vitest 2 do frontend com
+      vulnerabilidades de dev — **CR-12**. As correções sem major
+      (`proxy-addr` crítica, `qs`, `vue`) foram aplicadas em 22/10.
+- [ ] Cobertura do frontend em 9% (meta 50%) — testes de componente para
+      Checkout, Agendamento e Login do painel (ação AC-01 do controle da qualidade).
+- [ ] Ativar a proteção da `main` (PR + 1 aprovação + checks) e fechar os
+      PRs #2–#6 já incorporados pelo #7 (ações AM-06 e AM-07).
+- [ ] Cache dos navegadores do Playwright no CI — o job E2E passou de ~2
+      para ~12 min (AM-08).
 - [x] Footer com "© 2023" — usar o ano corrente.
 - [ ] WhatsApp e Instagram no código são de conta pessoal — trocar por
       dados oficiais da concessionária (ou deixar claro que é fictício).
@@ -494,6 +502,10 @@ encerramento de fase) e **Escopo** (requisitos, declaração de escopo, EAP,
 verificar e controlar o escopo) preenchidos — índice em
 `docs/gerenciamento/README.md`. Faltam cronograma detalhado, custos,
 qualidade, riscos e partes interessadas como documentos próprios.
+
+**Atualização 22/10/2026:** área de **Qualidade** preenchida — plano da
+qualidade (8.1), garantia/auditoria nº 1 (8.2) e controle/relatório nº 1
+(8.3). Faltam cronograma detalhado, custos, riscos e partes interessadas.
 
 ---
 

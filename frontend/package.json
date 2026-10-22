@@ -12,7 +12,8 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "lucide-vue-next": "^1.0.0",
@@ -23,6 +24,7 @@
   "devDependencies": {
     "@eslint/js": "^9.39.5",
     "@vitejs/plugin-vue": "^5.0.0",
+    "@vitest/coverage-v8": "^2.1.9",
     "@vue/test-utils": "^2.5.1",
     "eslint": "^9.39.5",
     "eslint-config-prettier": "^10.1.8",

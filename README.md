@@ -118,6 +118,10 @@ cd ../e2e && npm install && npx playwright install chromium
 npm test                                       # 10 testes E2E (5 fluxos × desktop/celular)
 ```
 
+Cobertura: `npm run test:coverage` em `backend/` ou `frontend/` (relatório HTML em `coverage/`).
+Metas e medições no [plano](docs/gerenciamento/02-Planejamento/Plano-de-Gerenciamento-da-Qualidade.md)
+e no [controle da qualidade](docs/gerenciamento/04-Monitoramento-e-Controle/Controle-da-Qualidade.md).
+
 O E2E sobe sozinho uma API (porta 3101) e o site (porta 5174) contra o banco de
 teste — não precisa deixar o `npm run dev` rodando. `npm run test:ui` (em `e2e/`)
 abre o modo visual; `npm run db:test:reset` (em `backend/`) recria o banco de teste.

@@ -9,9 +9,12 @@ Artefatos PMBOK organizados pelos 5 grupos de processos.
 | Coletar requisitos | Escopo | Planejamento | [Documentação de Requisitos](02-Planejamento/Documentacao-de-Requisitos.md) |
 | Definir o escopo | Escopo | Planejamento | [Declaração do Escopo](02-Planejamento/Declaracao-de-Escopo.md) |
 | Criar EAP | Escopo | Planejamento | [EAP](02-Planejamento/EAP.md) |
+| Planejar a qualidade | Qualidade | Planejamento | [Plano de Gerenciamento da Qualidade](02-Planejamento/Plano-de-Gerenciamento-da-Qualidade.md) |
 | Orientar e gerenciar a execução | Integração | Execução | [Execução](03-Execucao/Orientar-e-Gerenciar-Execucao.md) |
+| Realizar a garantia da qualidade | Qualidade | Execução | [Garantia da Qualidade](03-Execucao/Garantia-da-Qualidade.md) |
 | Monitorar e controlar o trabalho | Integração | Monitoramento e Controle | [Relatório de desempenho](04-Monitoramento-e-Controle/Monitorar-e-Controlar-o-Trabalho.md) |
 | Realizar o controle integrado de mudanças | Integração | Monitoramento e Controle | [Controle de Mudanças](04-Monitoramento-e-Controle/Controle-Integrado-de-Mudancas.md) |
 | Verificar o escopo | Escopo | Monitoramento e Controle | [Verificar o Escopo](04-Monitoramento-e-Controle/Verificar-Escopo.md) |
 | Controlar o escopo | Escopo | Monitoramento e Controle | [Controlar o Escopo](04-Monitoramento-e-Controle/Controlar-Escopo.md) |
+| Realizar o controle da qualidade | Qualidade | Monitoramento e Controle | [Controle da Qualidade](04-Monitoramento-e-Controle/Controle-da-Qualidade.md) |
 | Encerrar o projeto ou fase | Integração | Encerramento | [Encerramento de Fase](05-Encerramento/Encerramento-de-Fase.md) |

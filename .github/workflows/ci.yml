@@ -38,6 +38,8 @@ jobs:
       - run: npm ci
       - run: npm run lint
       - run: npm run format:check
+      - name: Vulnerabilidades em produção (métrica M06)
+        run: npm audit --omit=dev --audit-level=critical
       - run: npx prisma migrate deploy
       - run: node prisma/seed.js
       - run: npm test
@@ -58,6 +60,8 @@ jobs:
       - run: npm ci
       - run: npm run lint -- --max-warnings 0
       - run: npm run format:check
+      - name: Vulnerabilidades em produção (métrica M06)
+        run: npm audit --omit=dev --audit-level=critical
       - run: npm test
       - run: npm run build
 

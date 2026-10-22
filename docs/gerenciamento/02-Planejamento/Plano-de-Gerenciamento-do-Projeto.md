@@ -48,7 +48,7 @@ flowchart LR
 | Gerenciamento de **configuração** | §4 deste documento |
 | **Cronograma** | §5 deste documento |
 | **Custos** | §6 deste documento |
-| **Qualidade** | §7 deste documento |
+| **Qualidade** | §7 deste documento + [Plano de Gerenciamento da Qualidade](Plano-de-Gerenciamento-da-Qualidade.md) |
 | **Comunicações** | §8 deste documento |
 | **Riscos** | §9 deste documento |
 | Detalhamento técnico das entregas | [`plan.md`](../../../plan.md) |
@@ -107,6 +107,10 @@ existente e hospedagem em planos gratuitos. O recurso controlado é o
 | Integridade de dados | Chaves estrangeiras, `@@unique`, transações Prisma |
 | Testes | Vitest + Supertest (F0), Playwright E2E (F6) |
 | Acessibilidade/performance | Lighthouse ≥ 90 (F6) |
+| Dependências seguras | `npm audit` no CI, sem vulnerabilidade crítica em produção |
+
+Métricas, metas, checklists e papéis detalhados no
+[Plano de Gerenciamento da Qualidade](Plano-de-Gerenciamento-da-Qualidade.md).
 
 ## 8. Comunicações
 
