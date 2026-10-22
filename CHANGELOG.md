@@ -5,6 +5,7 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 ## [Não lançado]
 
 ### Adicionado
+- **Qualidade (PMBOK 8.1–8.3)** — plano de gerenciamento da qualidade, auditoria de processos e relatório de controle em `docs/gerenciamento/`; cobertura de testes (`npm run test:coverage`) no backend e no frontend; `npm audit` de produção no CI; template de Pull Request com a definição de pronto.
 - **F6** — Testes E2E (Playwright, desktop e celular) no CI; Lighthouse 100 em acessibilidade, SEO e boas práticas, performance 95–98 no celular; fonte Roboto local com preload e fonte reserva ajustada; imagens otimizadas (Home em WebP com `srcset`, `loading="lazy"`); favicon; Open Graph, descrição por rota, `robots.txt` e `sitemap.xml`; `GET /api/version`, `/health` com checagem do banco e logs estruturados em JSON; `TRUST_PROXY` e `CORS_ORIGIN`; Dockerfiles (API e site com nginx), `vercel.json` e `docs/DEPLOY.md`; README reescrito.
 - **F5** — Painel administrativo completo: CRUD protegido em `/api/admin/*` (veículos com fotos, peças/acessórios com compatibilidade, serviços, categorias, marcas, modelos); upload de imagens (`multer`, JPG/PNG/WebP até 5 MB, servidas em `/uploads`); fila de pedidos com troca de status (cancelar devolve o estoque); agenda da oficina (cancelar libera o horário); caixa de mensagens; dashboard com indicadores; script `npm run admin:criar`; cliente HTTP injeta o token e trata 401 voltando ao login.
 - **F4** — Serviços e agendamento: modelos `Servico` e `Agendamento` (trava `@@unique([servicoId, dataHora])`); `GET /api/servicos`, `GET /api/agendamentos/disponibilidade` (grade no passo da duração, fuso de Sinop–MT, 1h de antecedência, 60 dias à frente), `POST /api/agendamentos` (409 se o horário foi tomado) e `GET /api/agendamentos/:codigo`; seed com 5 serviços; telas Serviços, Agendar e Confirmação; link no header e na Home.
@@ -15,6 +16,9 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 - **F0** — `LICENSE` (MIT) e este `CHANGELOG.md`.
 - **F5** — Autenticação do painel admin: modelo `Administrador`, login com bcrypt + JWT, rotas protegidas, telas de login e dashboard.
 - Artefatos PMBOK de Integração e Escopo em `docs/gerenciamento/`.
+
+### Segurança
+- Dependências atualizadas sem quebra de versão: `proxy-addr` (crítica — falsificação de IP), `qs`, `body-parser`, `express` e `vue`.
 
 ### Alterado
 - Link do painel admin saiu do menu e virou ícone no topo, ao lado do carrinho.

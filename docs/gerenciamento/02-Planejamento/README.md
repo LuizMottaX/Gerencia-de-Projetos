@@ -19,3 +19,4 @@ Este grupo de processos é exigido para estabelecer o escopo do projeto, refinar
 - [Documentação de Requisitos + Matriz de Rastreabilidade](Documentacao-de-Requisitos.md) — *5.2 Coletar requisitos*
 - [Declaração do Escopo](Declaracao-de-Escopo.md) — *5.3 Definir o escopo*
 - [EAP + Dicionário da EAP](EAP.md) — *5.4 Criar a EAP*
+- [Plano de Gerenciamento da Qualidade](Plano-de-Gerenciamento-da-Qualidade.md) — *8.1 Planejar a qualidade* (métricas, checklists, papéis)

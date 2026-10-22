@@ -13,3 +13,4 @@ Este grupo de processos é realizado para concluir o trabalho definido no plano 
 
 ## Artefatos do projeto
 - [Orientar e Gerenciar a Execução](Orientar-e-Gerenciar-Execucao.md) — *4.3 Orientar e gerenciar o trabalho* (log de entregas e de problemas)
+- [Garantia da Qualidade](Garantia-da-Qualidade.md) — *8.2 Realizar a garantia da qualidade* (auditoria de processos e ações de melhoria)
