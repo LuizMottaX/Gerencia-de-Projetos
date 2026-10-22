@@ -54,16 +54,27 @@ docs/                        gerência do projeto (PMBOK) e guia de deploy
 
 ## 🚀 Rodando localmente
 
-**Pré-requisitos:** Node.js 22+, npm 10+ e um PostgreSQL (local ou o do Coolify).
+**Pré-requisitos:** Node.js 22+, npm 10+ e Docker (ou Podman) para o PostgreSQL —
+ou um PostgreSQL já existente (local ou o do Coolify).
+
+> 🪟 **Windows:** use o **WSL (Ubuntu)**. Rode todos os comandos num terminal do
+> Ubuntu (prompt `usuario@...:~$`), não no PowerShell — lá o `npm` não existe e o
+> `node_modules`/Prisma instalados no Linux não funcionam no Windows. No VS Code,
+> abra o projeto com `code .` de dentro do Ubuntu.
 
 ```bash
+# 0. Banco de desenvolvimento — PostgreSQL num container, porta 5434
+#    (5434 para não brigar com outro Postgres que já use a 5432)
+docker run -d --name chiquinho-db --restart unless-stopped \
+  -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=chiquinho \
+  -p 5434:5432 -v chiquinho-db-data:/var/lib/postgresql/data postgres:16-alpine
+
 # 1. Backend — API na porta 3001
 cd backend
 npm install
-cp .env.example .env            # preencha DATABASE_URL e JWT_SECRET
-npx prisma migrate dev          # cria as tabelas
-npm run db:seed                 # catálogo inicial (veículos, peças, acessórios, serviços)
-ADMIN_SENHA='uma-senha-forte' npm run admin:criar -- voce@exemplo.com "Seu Nome"
+cp .env.example .env            # ajuste o .env (veja abaixo)
+npx prisma migrate deploy       # cria as tabelas
+npm run db:seed                 # catálogo inicial + admin (se ADMIN_SENHA estiver no .env)
 npm run dev
 
 # 2. Frontend — site na porta 5173 (outro terminal)
@@ -71,6 +82,18 @@ cd frontend
 npm install
 npm run dev
 ```
+
+No `backend/.env`, com o container acima:
+
+```bash
+DATABASE_URL="postgresql://postgres:postgres@localhost:5434/chiquinho?sslmode=disable"
+JWT_SECRET="..."                 # node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+ADMIN_EMAIL="admin@chiquinhomotors.com.br"
+ADMIN_SENHA="sua-senha"          # login do painel, criado pelo seed
+```
+
+Outros administradores: `ADMIN_SENHA='uma-senha-forte' npm run admin:criar -- voce@exemplo.com "Seu Nome"`.
+Para criar uma migration nova ao mudar o `schema.prisma`, use `npm run db:migrate`.
 
 Abra `http://localhost:5173` (site) e `http://localhost:5173/admin` (painel).
 O proxy do Vite repassa `/api` e `/uploads` para a porta 3001 — não há CORS em dev.
@@ -80,11 +103,13 @@ O proxy do Vite repassa `/api` e `/uploads` para a porta 3001 — não há CORS 
 ### Testes
 
 Os testes de backend e E2E usam um **banco separado** — nunca o do `.env`.
-O jeito mais simples é um container:
+O jeito mais simples é um segundo container, na porta 55432 (é o que o
+`.env.test.example` e o `e2e/playwright.config.js` já esperam):
 
 ```bash
-podman run -d --name chiquinho-test-db -e POSTGRES_PASSWORD=postgres \
-  -e POSTGRES_DB=chiquinho_test -p 55432:5432 postgres:16-alpine   # ou docker
+docker run -d --name chiquinho-test-db --restart unless-stopped \
+  -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=chiquinho_test \
+  -p 55432:5432 postgres:16-alpine                # ou podman
 
 cd backend  && cp .env.test.example .env.test && npm run db:test:setup
 npm run lint && npm test                       # 64 testes de API
@@ -92,6 +117,10 @@ cd ../frontend && npm run lint && npm test     # 20 testes de componentes/stores
 cd ../e2e && npm install && npx playwright install chromium
 npm test                                       # 10 testes E2E (5 fluxos × desktop/celular)
 ```
+
+O E2E sobe sozinho uma API (porta 3101) e o site (porta 5174) contra o banco de
+teste — não precisa deixar o `npm run dev` rodando. `npm run test:ui` (em `e2e/`)
+abre o modo visual; `npm run db:test:reset` (em `backend/`) recria o banco de teste.
 
 O CI (`.github/workflows/ci.yml`) roda lint, formatação, testes, build e E2E em
 cada push e Pull Request.
