@@ -49,6 +49,7 @@ flowchart LR
 | **Cronograma** | §5 deste documento |
 | **Custos** | §6 deste documento |
 | **Qualidade** | §7 deste documento + [Plano de Gerenciamento da Qualidade](Plano-de-Gerenciamento-da-Qualidade.md) |
+| **Recursos humanos** | [Plano de Recursos Humanos](Plano-de-Recursos-Humanos.md) |
 | **Comunicações** | §8 deste documento |
 | **Riscos** | §9 deste documento |
 | Detalhamento técnico das entregas | [`plan.md`](../../../plan.md) |
@@ -131,6 +132,8 @@ Métricas, metas, checklists e papéis detalhados no
 | R4 | Credenciais padrão / segredo JWT fraco em produção | Média | Alto | **Evitar:** `JWT_SECRET` obrigatório e troca da senha seed antes do deploy |
 | R5 | Mudanças de escopo não controladas (*scope creep*) | Média | Médio | **Mitigar:** controle integrado de mudanças |
 | R6 | Imagens externas bloqueadas (hotlink) | Ocorreu | Baixo | **Resolvido:** imagens servidas localmente |
+
+Riscos de pessoal (R7–R10) estão no [Plano de Recursos Humanos](Plano-de-Recursos-Humanos.md), §6.
 
 ## 10. Linhas de base
 

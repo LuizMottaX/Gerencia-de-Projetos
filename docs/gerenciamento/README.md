@@ -10,8 +10,12 @@ Artefatos PMBOK organizados pelos 5 grupos de processos.
 | Definir o escopo | Escopo | Planejamento | [Declaração do Escopo](02-Planejamento/Declaracao-de-Escopo.md) |
 | Criar EAP | Escopo | Planejamento | [EAP](02-Planejamento/EAP.md) |
 | Planejar a qualidade | Qualidade | Planejamento | [Plano de Gerenciamento da Qualidade](02-Planejamento/Plano-de-Gerenciamento-da-Qualidade.md) |
+| Desenvolver o plano de recursos humanos | Recursos Humanos | Planejamento | [Plano de Recursos Humanos](02-Planejamento/Plano-de-Recursos-Humanos.md) |
 | Orientar e gerenciar a execução | Integração | Execução | [Execução](03-Execucao/Orientar-e-Gerenciar-Execucao.md) |
 | Realizar a garantia da qualidade | Qualidade | Execução | [Garantia da Qualidade](03-Execucao/Garantia-da-Qualidade.md) |
+| Contratar ou mobilizar a equipe | Recursos Humanos | Execução | [Mobilização da Equipe](03-Execucao/Mobilizacao-da-Equipe.md) |
+| Desenvolver a equipe | Recursos Humanos | Execução | [Desenvolvimento da Equipe](03-Execucao/Desenvolvimento-da-Equipe.md) |
+| Gerenciar a equipe | Recursos Humanos | Execução | [Gerenciamento da Equipe](03-Execucao/Gerenciamento-da-Equipe.md) |
 | Monitorar e controlar o trabalho | Integração | Monitoramento e Controle | [Relatório de desempenho](04-Monitoramento-e-Controle/Monitorar-e-Controlar-o-Trabalho.md) |
 | Realizar o controle integrado de mudanças | Integração | Monitoramento e Controle | [Controle de Mudanças](04-Monitoramento-e-Controle/Controle-Integrado-de-Mudancas.md) |
 | Verificar o escopo | Escopo | Monitoramento e Controle | [Verificar o Escopo](04-Monitoramento-e-Controle/Verificar-Escopo.md) |
