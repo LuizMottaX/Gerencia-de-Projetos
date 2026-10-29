@@ -17,3 +17,5 @@ Este grupo de processos é realizado para concluir o trabalho definido no plano 
 - [Mobilização da Equipe](Mobilizacao-da-Equipe.md) — *9.2 Contratar ou mobilizar a equipe* (designações e acessos)
 - [Desenvolvimento da Equipe](Desenvolvimento-da-Equipe.md) — *9.3 Desenvolver a equipe* (regras básicas, treinamento, avaliação nº 1)
 - [Gerenciamento da Equipe](Gerenciamento-da-Equipe.md) — *9.4 Gerenciar a equipe* (conflitos e log de questões)
+- [Distribuição das Informações](Distribuicao-das-Informacoes.md) — *10.3 Distribuir informações* (registro do que foi distribuído e aderência ao plano)
+- [Gerenciamento das Expectativas](Gerenciamento-das-Expectativas.md) — *10.4 Gerenciar as expectativas das partes interessadas* (log de questões EX)

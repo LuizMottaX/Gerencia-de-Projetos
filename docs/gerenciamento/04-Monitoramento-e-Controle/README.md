@@ -20,3 +20,4 @@ Este grupo de processos é exigido para acompanhar, revisar e regular o progress
 - [Verificar o Escopo](Verificar-Escopo.md) — *5.5* (aceite das entregas)
 - [Controlar o Escopo](Controlar-Escopo.md) — *5.6* (análise de variação)
 - [Controle da Qualidade](Controle-da-Qualidade.md) — *8.3* (medições, defeitos e não conformidades)
+- [Relatório de Desempenho](Relatorio-de-Desempenho.md) — *10.5 Relatar o desempenho* (relatório nº 3)

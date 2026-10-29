@@ -21,3 +21,4 @@ Este grupo de processos é exigido para estabelecer o escopo do projeto, refinar
 - [EAP + Dicionário da EAP](EAP.md) — *5.4 Criar a EAP*
 - [Plano de Gerenciamento da Qualidade](Plano-de-Gerenciamento-da-Qualidade.md) — *8.1 Planejar a qualidade* (métricas, checklists, papéis)
 - [Plano de Recursos Humanos](Plano-de-Recursos-Humanos.md) — *9.1 Desenvolver o plano de recursos humanos* (organograma, RACI, calendário, treinamento)
+- [Plano de Gerenciamento das Comunicações](Plano-de-Gerenciamento-das-Comunicacoes.md) — *10.2 Planejar as comunicações* (matriz de comunicação, escalonamento, armazenamento)
