@@ -50,7 +50,7 @@ flowchart LR
 | **Custos** | §6 deste documento |
 | **Qualidade** | §7 deste documento + [Plano de Gerenciamento da Qualidade](Plano-de-Gerenciamento-da-Qualidade.md) |
 | **Recursos humanos** | [Plano de Recursos Humanos](Plano-de-Recursos-Humanos.md) |
-| **Comunicações** | §8 deste documento |
+| **Comunicações** | §8 deste documento + [Plano de Gerenciamento das Comunicações](Plano-de-Gerenciamento-das-Comunicacoes.md) |
 | **Riscos** | §9 deste documento |
 | Detalhamento técnico das entregas | [`plan.md`](../../../plan.md) |
 
@@ -121,6 +121,9 @@ Métricas, metas, checklists e papéis detalhados no
 | Progresso técnico | Equipe | A cada entrega | Pull Requests no GitHub |
 | Status do projeto | GP → Professor(a) | Por apresentação | Apresentação + `docs/` |
 | Solicitações de mudança | Qualquer integrante → GP | Quando surgir | Issue no GitHub (`mudança`) |
+
+Matriz completa, escalonamento e armazenamento no
+[Plano de Gerenciamento das Comunicações](Plano-de-Gerenciamento-das-Comunicacoes.md).
 
 ## 9. Riscos
 

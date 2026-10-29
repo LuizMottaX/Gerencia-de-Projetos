@@ -97,8 +97,8 @@ ou negocia):
 | Integrante | Disponibilidade confirmada | Colaborador no GitHub | `.env` do banco | Ambiente local rodando |
 |-----------|:--------------------------:|:---------------------:|:---------------:|:----------------------:|
 | Luiz | ⏳ | ✅ (dono) | ✅ | ✅ |
-| Alex | ⏳ | ✅ (commits na `main`) | ✅ (fez a migração F1) | ⏳ |
-| Francisco | ⏳ | ⏳ | ⏳ | ⏳ |
+| Alex | ⏳ | ✅ (`AlexPablo-hub`) | ✅ (fez a migração F1) | ⏳ |
+| Francisco | ⏳ | ❌ não é colaborador (verificado em 29/10) | ⏳ | ⏳ |
 
 Legenda: ✅ confirmado · ⏳ a confirmar na reunião de 30/10
 

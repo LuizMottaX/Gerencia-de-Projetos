@@ -8,3 +8,4 @@ Este grupo de processos é realizado para definir um novo projeto ou uma nova fa
 
 ## Artefatos do projeto
 - [Termo de Abertura do Projeto (TAP)](Termo-de-Abertura.md) — *4.1 Desenvolver o termo de abertura*
+- [Registro das Partes Interessadas](Registro-das-Partes-Interessadas.md) — *10.1 Identificar as partes interessadas* (registro, poder × interesse, estratégia)
